@@ -1,0 +1,1 @@
+/var/www/html/jansport/vendor/magento/module-search/view/frontend/web/form-mini.js

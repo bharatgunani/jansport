@@ -1,0 +1,15 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Emthemes_Slideshow::css/style/masterslider.css"/>
+		<css src="Emthemes_Slideshow::css/skins/default/style.css"/>
+		<css src="Emthemes_Slideshow::css/skins/light-2/style.css"/>
+		<css src="Emthemes_Slideshow::css/skins/light-3/style.css"/>	
+		<css src="Emthemes_Slideshow::css/skins/light-4/style.css"/>
+		<css src="Emthemes_Slideshow::css/skins/light-5/style.css"/>		
+		<css src="Emthemes_Slideshow::css/skins/light-6/style.css"/>	
+		<css src="Emthemes_Slideshow::css/skins/black-1/style.css"/>	
+		<css src="Emthemes_Slideshow::css/skins/black-2/style.css"/>	
+		<css src="Emthemes_Slideshow::css/skins/contrast/style.css"/>			
+		<css src="Emthemes_Slideshow::css/skins/metro/style.css"/>		
+    </head>
+</page>

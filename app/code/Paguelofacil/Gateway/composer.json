@@ -1,0 +1,27 @@
+{
+    "name": "paguelofacil/gateway",
+    "description": "Paguelofacil Payment Gateway Integration",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Paguelofacil SA",
+            "email": "dev@paguelofacil.com",
+            "role": "Paguelofacil Developer"
+        }
+    ],
+    "version": "dev-master",
+    "license": [
+        "OSL-3.0"
+    ],
+    "require": {
+        
+    },
+    "extra": {
+        "map": [
+            [
+                "*",
+                "Paguelofacil/Gateway"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,1 @@
+/var/www/html/jansport/vendor/magento/module-product-video/view/adminhtml/web/js/video-modal.js

@@ -1,0 +1,1 @@
+/var/www/html/jansport/app/code/Emthemes/QuickShop/view/frontend/web/js/quickshop.js

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Paguelofacil_Gateway
+*
+* @category    Paguelofacil
+* @package     Paguelofacil_Gateway
+* @copyright   Suitepay (http://paguelofacil.com)
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="paguelofacil_gateway" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Paguelofacil</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Paguelofacil Disponible</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="cctypes" translate="label" type="multiselect" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Credit Card Types</label>
+                    <source_model>Paguelofacil\Gateway\Model\Source\Cctype</source_model>
+                </field>
+                <field id="cclw" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>CCLW</label>
+                </field>
+                <field id="sandbox" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sandbox</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<!--<field id="onsite" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Onsite</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>-->
+            </group>
+        </section>
+    </system>
+</config>

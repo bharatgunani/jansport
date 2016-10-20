@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Paguelofacil_Gateway
+*
+* @category    Paguelofacil
+* @package     Paguelofacil_Gateway
+* @copyright   Paguelofacil (https://paguelofacil.com)
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <paguelofacil_gateway>
+                <active>0</active>
+                <model>Paguelofacil\Gateway\Model\Payment</model>
+                <payment_action>authorize_capture</payment_action>
+                <title>Paguelofacil</title>
+                <cctypes>VI,MC</cctypes>
+                <allowspecific>0</allowspecific>
+            </paguelofacil_gateway>
+        </payment>
+    </default>
+</config>

@@ -1,0 +1,34 @@
+<h1 class="insta_main_heading">SHARE YOUR JANSPORT #LIFEUNZIPPED</h1>
+<p class="insta_sub_heading">WE'RE ABOUT THE JOURNEY, THE DISCOVERY OF FUN, FREEDOM, AND ADVENTURE.</p>
+<p class="insta_sub_heading">SHOW US YOUR #LIFEUNZIPPED</p>
+
+<?php
+		// Supply a user id and an access token
+		/*$userid = "193376795";
+		$accessToken = "193376795.67d0505.97ccfb862a3c4669a1021502f135d554";*/
+		$userid = "3289872745";
+		$accessToken = "3289872745.1df5848.ea8456130e3d4786af9a5f0ca9f44515";
+
+		// Gets our data
+		function fetchData($url){
+		     $ch = curl_init();
+		     curl_setopt($ch, CURLOPT_URL, $url);
+		     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		     curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+		     $result = curl_exec($ch);
+		     curl_close($ch); 
+		     return $result;
+		}
+
+		// Pulls and parses data.
+		$result = fetchData("https://api.instagram.com/v1/users/{$userid}/media/recent/?access_token={$accessToken}");
+		$result = json_decode($result);
+		
+	?>
+
+<div class="col-md-24" style="margin:20px auto; float:none;">
+	<?php foreach ($result->data as $post): ?>
+		<!-- Renders images. @Options (thumbnail,low_resoulution, high_resolution) -->
+		<div class="insta_img_container"><a class="group" rel="group1" href="<?= $post->images->standard_resolution->url ?>"><img src="<?= $post->images->low_resolution->url ?>"></a></div>
+	<?php endforeach; ?>
+	</div>

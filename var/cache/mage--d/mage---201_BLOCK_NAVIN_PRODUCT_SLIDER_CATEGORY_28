@@ -1,0 +1,474 @@
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1476943244;s:6:"expire";i:1477029644;s:4:"tags";s:43:"201_CATALOG_PRODUCT,201_BLOCK_HTML,201_MAGE";}
+					<div class="block widget block-products-list grid">
+					<div class="block-title"><strong>Best Saller</strong></div>
+			</div>
+		
+		<p class="info"></p>
+
+		<div class="block-content best-seller">
+			<div class="products-grid grid">
+                <ol class="product-items slider-style02 widget-product-grid">
+                    					<div class="em-slider owl-carousel" id="navin-product-slider-df4e0c9a6a5c1116c3c5169701da38bb">
+											<div class="item">
+						<li class="product-item product-slider">							<div class="product-item-info">
+                            <a href="http://45.33.122.66/jansport/sprite-yoga-strap-6-foot.html" class="product-item-photo">
+                                
+<span class="product-image-container "
+      style="width:240px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: 125%;">
+        <img class="product-image-photo"
+                          src="http://45.33.122.66/jansport/pub/static/frontend/Emthemes/everything_glass/en_US/Magento_Catalog/images/product/placeholder/small_image.jpg"
+             width="135"
+             height="135"
+             alt="Sprite Yoga Strap 6 foot"/></span>
+</span>
+
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a title="Sprite Yoga Strap 6 foot"
+									   href="http://45.33.122.66/jansport/sprite-yoga-strap-6-foot.html"
+									   class="product-item-link">
+                                        Sprite Yoga Strap 6 foot                                    </a>
+                                </strong>
+								<div class="price-box price-final_price" data-role="priceBox" data-product-id="1">
+    
+
+<span class="price-container price-final_price tax weee"
+        >
+        <span  id="old-price-1-widget-product-grid"                data-price-amount="14"
+        data-price-type="finalPrice"
+        class="price-wrapper "
+        >
+        <span class="price">$14.00</span>    </span>
+        </span>
+
+</div>
+																									
+																	<div class="product-item-actions">
+                                        											<div class="actions-primary">
+                                                																																									<button class="action tocart primary"
+																data-post='{"action":"http:\/\/45.33.122.66\/jansport\/checkout\/cart\/add\/uenc\/aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,\/product\/1\/","data":{"product":"1","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+																type="button" title="Add to Cart">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+																									                                            </div>
+																															<div class="actions-secondary" data-role="add-to-links">
+                                                													<a href="#"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/wishlist\/index\/add\/","data":{"product":"1","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   class="action towishlist" data-action="add-to-wishlist"
+													   title="Wish List">
+                                                        <span>Wish List</span>
+                                                    </a>
+																																																		<a href="#" class="action tocompare"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/catalog\/product_compare\/add\/","data":{"product":"1","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   title="Compare">
+                                                        <span>Compare</span>
+                                                    </a>
+												                                            </div>
+										                                    </div>
+								                            </div>
+                        </div>
+						</div>
+																	<div class="item">
+						</li><li class="product-item product-slider">							<div class="product-item-info">
+                            <a href="http://45.33.122.66/jansport/sprite-yoga-strap-8-foot.html" class="product-item-photo">
+                                
+<span class="product-image-container "
+      style="width:240px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: 125%;">
+        <img class="product-image-photo"
+                          src="http://45.33.122.66/jansport/pub/static/frontend/Emthemes/everything_glass/en_US/Magento_Catalog/images/product/placeholder/small_image.jpg"
+             width="135"
+             height="135"
+             alt="Sprite Yoga Strap 8 foot"/></span>
+</span>
+
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a title="Sprite Yoga Strap 8 foot"
+									   href="http://45.33.122.66/jansport/sprite-yoga-strap-8-foot.html"
+									   class="product-item-link">
+                                        Sprite Yoga Strap 8 foot                                    </a>
+                                </strong>
+								<div class="price-box price-final_price" data-role="priceBox" data-product-id="2">
+    
+
+<span class="price-container price-final_price tax weee"
+        >
+        <span  id="old-price-2-widget-product-grid"                data-price-amount="17"
+        data-price-type="finalPrice"
+        class="price-wrapper "
+        >
+        <span class="price">$17.00</span>    </span>
+        </span>
+
+</div>
+																									
+																	<div class="product-item-actions">
+                                        											<div class="actions-primary">
+                                                																																									<button class="action tocart primary"
+																data-post='{"action":"http:\/\/45.33.122.66\/jansport\/checkout\/cart\/add\/uenc\/aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,\/product\/2\/","data":{"product":"2","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+																type="button" title="Add to Cart">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+																									                                            </div>
+																															<div class="actions-secondary" data-role="add-to-links">
+                                                													<a href="#"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/wishlist\/index\/add\/","data":{"product":"2","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   class="action towishlist" data-action="add-to-wishlist"
+													   title="Wish List">
+                                                        <span>Wish List</span>
+                                                    </a>
+																																																		<a href="#" class="action tocompare"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/catalog\/product_compare\/add\/","data":{"product":"2","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   title="Compare">
+                                                        <span>Compare</span>
+                                                    </a>
+												                                            </div>
+										                                    </div>
+								                            </div>
+                        </div>
+						</div>
+																	<div class="item">
+						</li><li class="product-item product-slider">							<div class="product-item-info">
+                            <a href="http://45.33.122.66/jansport/sprite-yoga-strap-10-foot.html" class="product-item-photo">
+                                
+<span class="product-image-container "
+      style="width:240px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: 125%;">
+        <img class="product-image-photo"
+                          src="http://45.33.122.66/jansport/pub/static/frontend/Emthemes/everything_glass/en_US/Magento_Catalog/images/product/placeholder/small_image.jpg"
+             width="135"
+             height="135"
+             alt="Sprite Yoga Strap 10 foot"/></span>
+</span>
+
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a title="Sprite Yoga Strap 10 foot"
+									   href="http://45.33.122.66/jansport/sprite-yoga-strap-10-foot.html"
+									   class="product-item-link">
+                                        Sprite Yoga Strap 10 foot                                    </a>
+                                </strong>
+								<div class="price-box price-final_price" data-role="priceBox" data-product-id="3">
+    
+
+<span class="price-container price-final_price tax weee"
+        >
+        <span  id="old-price-3-widget-product-grid"                data-price-amount="21"
+        data-price-type="finalPrice"
+        class="price-wrapper "
+        >
+        <span class="price">$21.00</span>    </span>
+        </span>
+
+</div>
+																									
+																	<div class="product-item-actions">
+                                        											<div class="actions-primary">
+                                                																																									<button class="action tocart primary"
+																data-post='{"action":"http:\/\/45.33.122.66\/jansport\/checkout\/cart\/add\/uenc\/aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,\/product\/3\/","data":{"product":"3","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+																type="button" title="Add to Cart">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+																									                                            </div>
+																															<div class="actions-secondary" data-role="add-to-links">
+                                                													<a href="#"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/wishlist\/index\/add\/","data":{"product":"3","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   class="action towishlist" data-action="add-to-wishlist"
+													   title="Wish List">
+                                                        <span>Wish List</span>
+                                                    </a>
+																																																		<a href="#" class="action tocompare"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/catalog\/product_compare\/add\/","data":{"product":"3","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   title="Compare">
+                                                        <span>Compare</span>
+                                                    </a>
+												                                            </div>
+										                                    </div>
+								                            </div>
+                        </div>
+						</div>
+																	<div class="item">
+						</li><li class="product-item product-slider">							<div class="product-item-info">
+                            <a href="http://45.33.122.66/jansport/set-of-sprite-yoga-straps.html" class="product-item-photo">
+                                
+<span class="product-image-container "
+      style="width:240px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: 125%;">
+        <img class="product-image-photo"
+                          src="http://45.33.122.66/jansport/pub/static/frontend/Emthemes/everything_glass/en_US/Magento_Catalog/images/product/placeholder/small_image.jpg"
+             width="135"
+             height="135"
+             alt="Set of Sprite Yoga Straps"/></span>
+</span>
+
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a title="Set of Sprite Yoga Straps"
+									   href="http://45.33.122.66/jansport/set-of-sprite-yoga-straps.html"
+									   class="product-item-link">
+                                        Set of Sprite Yoga Straps                                    </a>
+                                </strong>
+								<div class="price-box price-final_price" data-role="priceBox" data-product-id="4"><div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <p class="minimal-price">
+        <span class="price-label">Starting at</span>
+
+<span class="price-container tax weee"
+        >
+        <span                 data-price-amount="14"
+        data-price-type=""
+        class="price-wrapper "
+        >
+        <span class="price">$14.00</span>    </span>
+        </span>
+    </p>
+    </div>
+</div>
+																									
+																	<div class="product-item-actions">
+                                        											<div class="actions-primary">
+                                                																																									<button class="action tocart primary"
+																data-post='{"action":"http:\/\/45.33.122.66\/jansport\/checkout\/cart\/add\/uenc\/aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,\/product\/4\/","data":{"product":"4","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+																type="button" title="Add to Cart">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+																									                                            </div>
+																															<div class="actions-secondary" data-role="add-to-links">
+                                                													<a href="#"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/wishlist\/index\/add\/","data":{"product":"4","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   class="action towishlist" data-action="add-to-wishlist"
+													   title="Wish List">
+                                                        <span>Wish List</span>
+                                                    </a>
+																																																		<a href="#" class="action tocompare"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/catalog\/product_compare\/add\/","data":{"product":"4","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   title="Compare">
+                                                        <span>Compare</span>
+                                                    </a>
+												                                            </div>
+										                                    </div>
+								                            </div>
+                        </div>
+						</div>
+																	<div class="item">
+						</li><li class="product-item product-slider">							<div class="product-item-info">
+                            <a href="http://45.33.122.66/jansport/sprite-yoga-strap2.html" class="product-item-photo">
+                                
+<span class="product-image-container "
+      style="width:240px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: 125%;">
+        <img class="product-image-photo"
+                          src="http://45.33.122.66/jansport/pub/static/frontend/Emthemes/everything_glass/en_US/Magento_Catalog/images/product/placeholder/small_image.jpg"
+             width="135"
+             height="135"
+             alt="Sprite Yoga Strap Dynamic Bundle"/></span>
+</span>
+
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a title="Sprite Yoga Strap Dynamic Bundle"
+									   href="http://45.33.122.66/jansport/sprite-yoga-strap2.html"
+									   class="product-item-link">
+                                        Sprite Yoga Strap Dynamic Bundle                                    </a>
+                                </strong>
+								<div class="price-box price-final_price" data-role="priceBox" data-product-id="5">
+            <p class="price-from">
+            
+
+<span class="price-container price-final_price tax weee"
+        >
+            <span class="price-label">From</span>
+        <span  id="old-price-5-widget-product-grid"                data-price-amount="14"
+        data-price-type="minPrice"
+        class="price-wrapper "
+        >
+        <span class="price">$14.00</span>    </span>
+        </span>
+                    </p>
+        <p class="price-to">
+            
+
+<span class="price-container price-final_price tax weee"
+        >
+            <span class="price-label">To</span>
+        <span  id="old-price-5-widget-product-grid"                data-price-amount="17"
+        data-price-type="maxPrice"
+        class="price-wrapper "
+        >
+        <span class="price">$17.00</span>    </span>
+        </span>
+                    </p>
+    </div>
+																									
+																	<div class="product-item-actions">
+                                        											<div class="actions-primary">
+                                                																											<button class="action tocart primary"
+																data-mage-init='{"redirectUrl":{"url":"http://45.33.122.66/jansport/sprite-yoga-strap2.html?options=cart"}}'
+																type="button" title="Add to Cart">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+																									                                            </div>
+																															<div class="actions-secondary" data-role="add-to-links">
+                                                													<a href="#"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/wishlist\/index\/add\/","data":{"product":"5","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   class="action towishlist" data-action="add-to-wishlist"
+													   title="Wish List">
+                                                        <span>Wish List</span>
+                                                    </a>
+																																																		<a href="#" class="action tocompare"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/catalog\/product_compare\/add\/","data":{"product":"5","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   title="Compare">
+                                                        <span>Compare</span>
+                                                    </a>
+												                                            </div>
+										                                    </div>
+								                            </div>
+                        </div>
+						</div>
+																	<div class="item">
+						</li><li class="product-item product-slider">							<div class="product-item-info">
+                            <a href="http://45.33.122.66/jansport/sprite-yoga-strap3.html" class="product-item-photo">
+                                
+<span class="product-image-container "
+      style="width:240px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: 125%;">
+        <img class="product-image-photo"
+                          src="http://45.33.122.66/jansport/pub/static/frontend/Emthemes/everything_glass/en_US/Magento_Catalog/images/product/placeholder/small_image.jpg"
+             width="135"
+             height="135"
+             alt="Sprite Yoga Strap Fixed Bundle"/></span>
+</span>
+
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a title="Sprite Yoga Strap Fixed Bundle"
+									   href="http://45.33.122.66/jansport/sprite-yoga-strap3.html"
+									   class="product-item-link">
+                                        Sprite Yoga Strap Fixed Bundle                                    </a>
+                                </strong>
+								<div class="price-box price-final_price" data-role="priceBox" data-product-id="6">
+            
+
+<span class="price-container price-final_price tax weee"
+        >
+        <span  id="old-price-6-widget-product-grid"                data-price-amount="14"
+        data-price-type=""
+        class="price-wrapper "
+        >
+        <span class="price">$14.00</span>    </span>
+        </span>
+            </div>
+																									
+																	<div class="product-item-actions">
+                                        											<div class="actions-primary">
+                                                																											<button class="action tocart primary"
+																data-mage-init='{"redirectUrl":{"url":"http://45.33.122.66/jansport/sprite-yoga-strap3.html?options=cart"}}'
+																type="button" title="Add to Cart">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+																									                                            </div>
+																															<div class="actions-secondary" data-role="add-to-links">
+                                                													<a href="#"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/wishlist\/index\/add\/","data":{"product":"6","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   class="action towishlist" data-action="add-to-wishlist"
+													   title="Wish List">
+                                                        <span>Wish List</span>
+                                                    </a>
+																																																		<a href="#" class="action tocompare"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/catalog\/product_compare\/add\/","data":{"product":"6","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   title="Compare">
+                                                        <span>Compare</span>
+                                                    </a>
+												                                            </div>
+										                                    </div>
+								                            </div>
+                        </div>
+						</div>
+																	<div class="item">
+						</li><li class="product-item product-slider">							<div class="product-item-info">
+                            <a href="http://45.33.122.66/jansport/test-payment.html" class="product-item-photo">
+                                
+<span class="product-image-container "
+      style="width:240px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: 125%;">
+        <img class="product-image-photo"
+                          src="http://45.33.122.66/jansport/pub/static/frontend/Emthemes/everything_glass/en_US/Magento_Catalog/images/product/placeholder/small_image.jpg"
+             width="135"
+             height="135"
+             alt="Test Payment "/></span>
+</span>
+
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a title="Test Payment "
+									   href="http://45.33.122.66/jansport/test-payment.html"
+									   class="product-item-link">
+                                        Test Payment                                     </a>
+                                </strong>
+								<div class="price-box price-final_price" data-role="priceBox" data-product-id="7">
+    
+
+<span class="price-container price-final_price tax weee"
+        >
+        <span  id="old-price-7-widget-product-grid"                data-price-amount="1"
+        data-price-type="finalPrice"
+        class="price-wrapper "
+        >
+        <span class="price">$1.00</span>    </span>
+        </span>
+
+</div>
+																									
+																	<div class="product-item-actions">
+                                        											<div class="actions-primary">
+                                                																																									<button class="action tocart primary"
+																data-post='{"action":"http:\/\/45.33.122.66\/jansport\/checkout\/cart\/add\/uenc\/aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,\/product\/7\/","data":{"product":"7","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+																type="button" title="Add to Cart">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+																									                                            </div>
+																															<div class="actions-secondary" data-role="add-to-links">
+                                                													<a href="#"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/wishlist\/index\/add\/","data":{"product":"7","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   class="action towishlist" data-action="add-to-wishlist"
+													   title="Wish List">
+                                                        <span>Wish List</span>
+                                                    </a>
+																																																		<a href="#" class="action tocompare"
+													   data-post='{"action":"http:\/\/45.33.122.66\/jansport\/catalog\/product_compare\/add\/","data":{"product":"7","uenc":"aHR0cDovLzQ1LjMzLjEyMi42Ni9qYW5zcG9ydC8,"}}'
+													   title="Compare">
+                                                        <span>Compare</span>
+                                                    </a>
+												                                            </div>
+										                                    </div>
+								                            </div>
+                        </div>
+						</div>
+						</li>										</div>
+                </ol>
+            </div>
+			        </div>
+		<script>
+	require([
+		'jquery',
+		'Navin_Bestseller/js/owl.carousel',
+		'Navin_Bestseller/js/owl.carousel.min'
+	], function ($) {
+		$('#navin-product-slider-df4e0c9a6a5c1116c3c5169701da38bb').owlCarousel({is_enabled:1,loop:1,responsive:{ 0:{ items:1},600:{ items:3},1000:{ items:5}},number_items_slider_screen_size_0:1,number_items_slider_screen_size_600:3,number_items_slider_screen_size_1000:5,margin:10,autoWidth:0,nav:1,navText:['next','prev'],dots:0,lazyLoad:1,autoplay:0,});
+	});
+</script>

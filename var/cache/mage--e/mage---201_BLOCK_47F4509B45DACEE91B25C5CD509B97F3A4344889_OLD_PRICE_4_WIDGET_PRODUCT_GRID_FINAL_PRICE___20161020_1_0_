@@ -1,0 +1,16 @@
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1476943244;s:6:"expire";i:1476946844;s:4:"tags";s:65:"201_BLOCK_HTML,201_CATALOG_PRODUCT_4,201_CATALOG_PRODUCT,201_MAGE";}
+<div class="price-box price-final_price" data-role="priceBox" data-product-id="4"><div class="price-box" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <p class="minimal-price">
+        <span class="price-label">Starting at</span>
+
+<span class="price-container tax weee"
+        >
+        <span                 data-price-amount="14"
+        data-price-type=""
+        class="price-wrapper "
+        >
+        <span class="price">$14.00</span>    </span>
+        </span>
+    </p>
+    </div>
+</div>

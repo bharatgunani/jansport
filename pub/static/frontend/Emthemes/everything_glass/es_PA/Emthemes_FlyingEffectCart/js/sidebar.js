@@ -1,0 +1,1 @@
+/var/www/html/jansport/app/code/Emthemes/FlyingEffectCart/view/frontend/web/js/sidebar.js
