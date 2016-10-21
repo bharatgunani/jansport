@@ -1,0 +1,141 @@
+<?php
+$rating = $_helper->getRatingSummary($_product);
+?>
+<?php if ($rating): ?>
+    <div class="rating-summary" style="width: 280px;margin: auto;">
+        <div class="rating-result" title="<?php echo $reviewRatingNames[$_helper->convertRatingToPoints($rating, true)] ?>">
+            <span style="width:<?php echo $rating; ?>%"><!--span><?php //echo __('%1 out of 5 stars', $reviewRatingNames[$_helper->convertRatingToPoints($rating)]) ?></span--></span>
+        </div>
+        <div class="rating-mark" >
+		<span style="border: 1px solid #e1e1e1;margin-right: 10px;padding: 2px 6px;;"><?php echo $_helper->convertRatingToPoints($rating); ?></span>
+            <span><?php echo __('(Based on %1 reviews)', count($_items)) ?></span>
+            <!--span><?php //echo $reviewRatingNames[$_helper->convertRatingToPoints($rating, true)] ?></span-->
+			
+        </div>
+        <div class="rating-stat">
+		
+        </div>
+    </div>
+	<div style="width:100%;text-align:center; margin-bottom: 29px;">
+	
+	<p style="width: 325px;overflow: hidden;font-size: 16px;text-align: left;display: inline-block;">
+		<span style="font-size: 36px;float: left; line-height: 46px; font-weight: bold; margin-right: 10px;"><?php echo $_helper->getRecommendedPercentage($_reviewsCollection); ?>%</span> of respondents would recommend this to a friend.
+	</p>
+	</div>
+	
+    <div class="rating-results">
+        <div class="rating-mark-box">
+			<div class="block-title" style="text-transform:uppercase">
+				<strong><?php echo __('Ratings Distribution') ?></strong>
+			</div>
+            <?php $detailedRating = $_helper->getDetailedRating($_reviewsCollection); ?>
+            <?php foreach ($detailedRating as $star => $singleRating): ?>
+                <?php $percent = $_helper->calculateSingleRating(array_sum($detailedRating), $singleRating); ?>
+                <div class="rate-wrapper">
+                    <div class="rating-bar-label">
+                        <?php if($star > 1): ?>
+                            <?php echo __('%1 stars', $star) ?>
+                        <?php else: ?>
+                            <?php echo __('%1 star', $star) ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="rating-bar-wrapper">
+                        <?php if($percent > 0): ?>
+                        <a href="?rating=<?php echo $star ?>#reviews">
+                            <?php endif; ?>
+                            <div class="rating-bar">
+                                <div style="width: <?php echo $percent ?>%;" class="rating-bar-filling"></div>
+                            </div>
+                            <?php if($percent > 0): ?>
+                        </a>
+                    <?php endif; ?>
+                    </div>
+                    <div class="rating-percents">
+                        <?php echo $percent ?>%
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+		<?php $prosCons = $_helper->getProsCons($_reviewsCollection);  ?>
+	<div class="product_pros">
+		<div class="block-title" style="text-transform:uppercase">
+			<strong><?php echo __('Pros') ?></strong>
+		</div>
+	<?php
+		foreach($prosCons['pros'] as $pros=>$cnt)
+		{
+			if($cnt > 0)
+			{
+				echo $pros.' ('.$cnt.')<br>';
+			}			
+		}
+	?>
+	</div>
+	<div class="product_cons">
+		<div class="block-title" style="text-transform:uppercase">
+			<strong><?php echo __('Cons') ?></strong>
+		</div>
+	<?php
+		foreach($prosCons['cons'] as $cons=>$cnt)
+		{
+			if($cnt > 0)
+			{
+				echo $cons.' ('.$cnt.')<br>';
+			}			
+		}
+	?>
+	</div>
+        <div class="review-button" style="line-height: 70px;">
+            <div class="rb-title"><?php echo __('Share your thoughts with others') ?></div>
+            <div class="actions-toolbar review-form-actions">
+                <div class="primary actions-primary">
+                    <button type="submit" class="action submit primary write-action"><span><?php echo __('Write Review') ?></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<?php endif; ?>
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $(function () {
+            $('.review-list .review-form-actions button.write-action').click(function (event) {
+                event.preventDefault();
+                var acnchor = 'review-form';
+				if($(".product.data.items [data-role='content']").length > 0)
+				{
+					$(".product.data.items [data-role='content']").each(function(index){
+						if (this.id == 'reviews') {
+							$('.product.data.items').tabs('activate', index);
+							$('html, body').animate({
+								scrollTop: $('#' + acnchor).offset().top - 50
+							}, 300);
+						}					
+					});
+				}
+				else
+				{
+					$('html, body').animate({
+						scrollTop: $("#review-form").offset().top-100
+					}, 2000);
+				}	
+                
+            });
+        });
+		
+		$(".reviews-actions .add").click(function(){
+			$('html, body').animate({
+				scrollTop: $("#review-form").offset().top-250
+			}, 2000);
+		});
+		$(".reviews-actions .view").click(function(){
+			$('html, body').animate({
+				scrollTop: $("#customer-reviews").offset().top-250
+			}, 2000);
+		});
+    });
+	
+</script>

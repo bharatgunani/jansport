@@ -1,1 +1,8 @@
-/var/www/html/jansport/vendor/magento/module-weee/view/adminhtml/web/styles.css
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+.weee_hidden input {
+    display: none;
+}

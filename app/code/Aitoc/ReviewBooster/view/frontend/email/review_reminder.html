@@ -1,0 +1,16 @@
+<!--@subject Review reminder from {{var store.getFrontendName()}} @-->
+<!--@vars {
+"var customer_name":"Customer Name",
+"var order_products":"Order Products"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p class="greeting">{{trans "%customer_name," customer_name=$customer_name}}</p>
+<p>{{trans "Thank you for stopping by %store_name and considering us for your purchase." store_name=$store.getFrontendName()}}</p>
+<p>{{trans "We would really appreciate if you wrote a small review for the ordered products."}}</p>
+<p>{{var order_products|nl2rb}}</p>
+<p>{{trans "Please let us know if you had any issues or concerns. We are asking for feedback from you and other customers to make your experience at %store_name better." store_name=$store.getFrontendName()}}</p>
+<p>{{trans "Once again, thank you for your time and consideration in helping us improve our website."}}</p>
+
+{{template config_path="design/email/footer_template"}}

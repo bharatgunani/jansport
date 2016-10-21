@@ -1,0 +1,75 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @see \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+$_call = $block->getAtCall();
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$manager = $om->get('Magento\Store\Model\StoreManagerInterface');
+$stId = $manager->getStore()->getId();
+//echo $block->getStore()->getId();
+if(($block->getAtCode() == 'bullet_ingles' && $stId == 4) || ($block->getAtCode() == 'bullet_ingles_spanish' && $stId == 1))
+{
+	
+}
+else
+{
+	$_code = $block->getAtCode();$_className = $block->getCssClass();
+$_attributeLabel = $block->getAtLabel();
+$_attributeType = $block->getAtType();
+$_attributeAddAttribute = $block->getAddAttribute();
+//$_settingHelper = $this->helper('Emthemes\ThemeSettings\Helper\Data');
+if ($_attributeLabel && $_attributeLabel == 'default') {
+    $_attributeLabel = $_product->getResource()->getAttribute($_code)->getFrontendLabel();
+}
+if ($_attributeType && $_attributeType == 'text') {
+    $_attributeValue = ($_helper->productAttribute($_product, $_product->$_call(), $_code)) ? $_product->getAttributeText($_code) : '';
+} else {
+    $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
+}
+?>
+
+<?php 
+      if ($_attributeValue): ?>
+	  <?php  
+	  $i = 0;
+	  $options = explode('/',$_attributeValue);
+	  $cnt = ceil(count($options)/2);
+	  foreach($options as $opt)
+	  {
+		  if($i++%$cnt == 0)
+		  {
+			  ?>
+			  <ul style="width:34%; float:left;">
+			  <?php
+		  }
+		  ?>
+		<li>
+		  <?php 
+			echo $opt;
+		?>
+		</li>
+		<?php
+		if ($i%$cnt==0 || $i==count($options)){
+			?>
+		</ul>
+		<?php
+		}
+	  }
+	  ?>
+      <?php endif; ?>
+<?php //endif;
+} ?>
+

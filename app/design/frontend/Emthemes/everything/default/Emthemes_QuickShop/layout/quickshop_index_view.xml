@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">	
     <update handle="empty" />
 	<update handle="catalog_product_opengraph" />
@@ -8,19 +9,7 @@
 			<block class="Magento\Framework\View\Element\Js\Components" name="head.components" as="quickshop_components" template="Magento_Theme::js/components.phtml" before="-">
 				<block class="Magento\Framework\View\Element\Js\Components" name="checkout_page_head_components" template="Magento_Catalog::js/components.phtml" />
 			</block>
-		      <container name="quickshop_title" htmlTag="div" htmlClass="quickshop-title">
-	                  <block class="Magento\Theme\Block\Html\Title" name="page.main.title" template="html/title.phtml" />
-				<referenceBlock name="page.main.title">
-					<arguments>
-						<argument name="css_class" xsi:type="string">product quickshop-title</argument>
-						<argument name="add_base_attribute" xsi:type="string">itemprop="name"</argument>
-					</arguments>
-				</referenceBlock>
-				<container name="em-review-email" htmlTag="div" htmlClass="em-review-email" after="-">
-      				<block class="Magento\Catalog\Block\Product\View" name="product.info.review" template="product/view/review.phtml" before="-" />						
-					<block class="Magento\Catalog\Block\Product\View" name="product.info.mailto" template="product/view/mailto.phtml"/>
-				</container>
-		      </container>
+		      
 			<!--BEGIN QUICKSHOP MEDIA-->
 			<container name="quickshop_media" htmlTag="div" htmlClass="quickshop-media product media" before="quickshop_tabs_area">
 				<block class="Magento\Catalog\Block\Product\View\Gallery" name="product.info.media.image" template="Emthemes_QuickShop::product/view/gallery.phtml"/>
@@ -33,11 +22,19 @@
 					<!--MAIN-->
 					<block name="product.info.main" class="Emthemes\QuickShop\Block\QuickShop" template="quickshop.content.phtml" group="quickshop_tabs">
 						<arguments>
-							<argument translate="true" name="title" xsi:type="string">Main</argument>
+							
 							<argument name="html_id" xsi:type="string">quickshop-info-main</argument>
 							<argument name="html_class" xsi:type="string">product-info-main</argument>
 						</arguments>
-																
+						<container name="quickshop_title" htmlTag="div" htmlClass="quickshop-title" />
+			                  <block class="Magento\Theme\Block\Html\Title" name="page.main.title" template="html/title.phtml" />
+						<referenceBlock name="page.main.title">
+							<arguments>
+								<argument name="css_class" xsi:type="string">product quickshop-title</argument>
+								<argument name="add_base_attribute" xsi:type="string">itemprop="name"</argument>
+							</arguments>
+						</referenceBlock>
+													
 					
 						<container name="product.info.price" label="Product info auxiliary container" htmlTag="div" htmlClass="product-info-price" after="product.info.review">
 							<block class="Magento\Catalog\Pricing\Render" name="product.price.final" before="product.info.sku">

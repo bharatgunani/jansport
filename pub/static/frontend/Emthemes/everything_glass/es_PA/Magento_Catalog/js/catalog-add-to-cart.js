@@ -55,6 +55,7 @@ define([
         },
 
         ajaxSubmit: function(form) {
+			
             var self = this;
             $(self.options.minicartSelector).trigger('contentLoading');
             self.disableAddToCartButton(form);
@@ -66,6 +67,7 @@ define([
                 dataType: 'json',
                 beforeSend: function() {
                     if (self.isLoaderEnabled()) {
+						
                         $('body').trigger(self.options.processStart);
                     }
                 },
@@ -85,7 +87,9 @@ define([
 
                     if (res.minicart) {                                                
                         $(self.options.minicartSelector).replaceWith(res.minicart);                        
-                        $(self.options.minicartSelector).trigger('contentUpdated');                                            
+                        $(self.options.minicartSelector).trigger('contentUpdated'); 
+                        console.log('trigger');                      
+                        
                     }
                     if (res.product && res.product.statusText) {
                         $(self.options.productStatusSelector)
@@ -94,6 +98,7 @@ define([
                             .find('span')
                             .html(res.product.statusText);
                     }                    
+					
                     self.enableAddToCartButton(form);
                 }
             });            
@@ -118,10 +123,15 @@ define([
                 addToCartButton.removeClass(self.options.addToCartButtonDisabledClass);
                 addToCartButton.find('span').text(self.options.addToCartButtonTextDefault);
                 addToCartButton.attr('title', self.options.addToCartButtonTextDefault);
-                $(self.options.minicartSelector).trigger('cartAdded'); 
+				$("#quickshop").find('.qs-content').html('');
+				$("#quickshop").closest('.modal-popup').removeClass('_show');
+				$(".qs-modal").find('.modals-overlay').remove();
+				$("body").removeClass("_has-modal");
+				$.sidr('open','sidr');
             }, 1000);
             setTimeout(function() {
                 addToCartButton.removeClass('added');  
+				
             },5000);
         }
     });

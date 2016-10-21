@@ -36,6 +36,19 @@
 .price{
 	.lib-css(color, @em-body-price__text-color);
 }
+.old-price {
+	.price-label
+	{
+		display: none;
+	}
+	.price {
+		text-decoration: line-through;
+	}
+}
+.special-price {
+    float: left;
+    width: 100%;
+}
 .product {
     &-items {
         &:extend(.abs-reset-list all);
@@ -128,7 +141,19 @@
                 font-weight: normal;
             }
         }
-
+		.old-price {
+			.price-label
+			{
+				display: none;
+			}
+			.price {
+				text-decoration: line-through;
+			}
+		}
+		.special-price {
+			float: left;
+			width: 100%;
+		}
         .minimal-price {
             .price-container {
                 display: block;
@@ -449,3 +474,7 @@
 	
 }
 
+.owl-item .product-item-name a
+{
+	font-size:16px !important;
+}

@@ -421,6 +421,28 @@ var config = {
 };
 require.config(config);
 })();
+(function() {
+
+var config = {
+    map: {
+        '*': {
+            magiczoomplus: 'MagicToolbox_MagicZoomPlus/js/script'
+        }
+    }
+};
+
+require.config(config);
+})();
+(function() {
+var config = {
+    map: {
+        '*': {
+            jscolor: 'Plumrocket_Base/js/jscolor'
+        }
+    }
+};
+require.config(config);
+})();
 
 
 

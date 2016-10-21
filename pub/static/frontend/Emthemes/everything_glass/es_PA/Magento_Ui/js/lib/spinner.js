@@ -1,1 +1,26 @@
-/var/www/html/jansport/vendor/magento/module-ui/view/base/web/js/lib/spinner.js
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+define([
+    'jquery'
+], function ($) {
+    'use strict';
+
+    var selector = '[data-role="spinner"]',
+        spinner = $(selector);
+
+    return {
+        show: function () {
+            spinner.show();
+        },
+
+        hide: function () {
+            spinner.hide();
+        },
+
+        get: function (id) {
+            return $(selector + '[data-component="' + id + '"]');
+        }
+    };
+});

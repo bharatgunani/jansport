@@ -106,10 +106,8 @@ body p
 	text-align:left;
 }
 #footer_mobile_acc .collapsble_footer {
-    padding: 10px;
-    margin: 8px 0;
+    margin: 8px 0; 
     font-size: 18px;
-    border-bottom: 1px solid #e5e5e5;
     font-weight: bold;
 	cursor:pointer;
 }

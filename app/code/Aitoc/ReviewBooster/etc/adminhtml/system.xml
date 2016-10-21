@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <tab id="aitoc_extensions" translate="label" sortOrder="1000000">
+            <label>Aitoc Extensions</label>
+        </tab>
+        <section id="review_booster" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Review Booster</label>
+            <tab>aitoc_extensions</tab>
+            <resource>Magento_Backend::review_booster</resource>
+            <group id="general_settings" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General Settings</label>
+                <field id="email_sender" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <comment>Review reminders will appear as coming from this sender.</comment>
+                </field>
+                <field id="send_emails_automatically" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Send Emails Automatically</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If this is set to "No", review reminders will be generated, but won't be sent automatically via cron.</comment>
+                </field>
+                <field id="delay_period" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Delay Period (days)</label>
+                    <comment>Specify a delay period after which review reminders should be sent.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

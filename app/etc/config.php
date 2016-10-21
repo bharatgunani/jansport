@@ -2,6 +2,7 @@
 return array (
   'modules' => 
   array (
+    'Aitoc_ReviewBooster' => 1,
     'Emthemes_Em0144settings' => 1,
     'Magento_Store' => 1,
     'Magento_Directory' => 1,
@@ -111,7 +112,12 @@ return array (
     'Magento_Weee' => 1,
     'Emthemes_FlyingEffectCart' => 1,
     'Magento_Wishlist' => 1,
+    'Magestore_OneStepCheckout' => 1,
+    'MagicToolbox_MagicZoomPlus' => 1,
     'Navin_Bestseller' => 1,
     'Paguelofacil_Gateway' => 1,
+    'Plumrocket_Base' => 1,
+    'Plumrocket_SocialLoginFree' => 1,
+    'Webinc_Review' => 1,
   ),
 );

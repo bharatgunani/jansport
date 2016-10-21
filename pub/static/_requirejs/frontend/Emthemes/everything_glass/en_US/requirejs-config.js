@@ -433,21 +433,6 @@ require.config(config);
 var config = {
     map: {
         '*': {
-            transparent:            'Magento_Payment/transparent'
-        }
-    }
-};
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-var config = {
-    map: {
-        '*': {
             orderReview:            'Magento_Paypal/order-review',
             paypalCheckout:         'Magento_Paypal/js/paypal-checkout'
         }
@@ -462,6 +447,21 @@ var config = {
     }
 };
 
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+var config = {
+    map: {
+        '*': {
+            transparent:            'Magento_Payment/transparent'
+        }
+    }
+};
 require.config(config);
 })();
 (function() {
@@ -641,6 +641,20 @@ var config = {
 require.config(config);
 })();
 (function() {
+
+var config = {
+    map: {
+        '*': {
+            magicToolboxThumbSwitcher: 'MagicToolbox_MagicZoomPlus/js/thumb-switcher',
+            configurable:              'MagicToolbox_MagicZoomPlus/js/configurable',
+            swatchRenderer:            'MagicToolbox_MagicZoomPlus/js/SwatchRenderer'
+        }
+    }
+};
+
+require.config(config);
+})();
+(function() {
 var config = {
     map: {
         '*' : {
@@ -659,6 +673,32 @@ var config = {
               'Paguelofacil_Gateway/template/payment/cc-form.html'
         }
   }
+};
+require.config(config);
+})();
+(function() {
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_SocialLoginFree
+ * @copyright   Copyright (c) 2016 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+var config = {
+    map: {
+        '*': {
+        	'pslogin': 'Plumrocket_SocialLoginFree/js/pslogin'
+        }
+    }
 };
 require.config(config);
 })();

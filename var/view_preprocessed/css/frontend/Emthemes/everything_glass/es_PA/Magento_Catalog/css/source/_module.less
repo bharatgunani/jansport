@@ -588,6 +588,10 @@
         .page-title-wrapper {
             h1 {
                 .lib-css(margin-bottom, @product-h1-margin-bottom-desktop);
+				text-transform: uppercase;
+				font-weight: bold;
+				letter-spacing: 6px;
+				font-size: 36px;
             }
         }
         .product-add-form {
@@ -623,6 +627,19 @@
                     line-height: 16px;
                 }
             }
+			.old-price {
+				.price-label
+				{
+					display: none;
+				}
+				.price {
+					text-decoration: line-through;
+				}
+			}
+			.special-price {
+				float: left;
+				width: 100%;
+			}
         }
     }
 

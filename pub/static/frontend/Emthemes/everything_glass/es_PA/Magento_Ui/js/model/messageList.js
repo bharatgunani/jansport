@@ -1,1 +1,12 @@
-/var/www/html/jansport/vendor/magento/module-ui/view/frontend/web/js/model/messageList.js
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+define(
+    [
+        './messages'
+    ], function (Messages) {
+        'use strict';
+        return new Messages();
+    }
+);
