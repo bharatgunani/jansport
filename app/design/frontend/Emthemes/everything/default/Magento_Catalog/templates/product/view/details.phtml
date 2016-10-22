@@ -15,7 +15,6 @@
         <?php $layout = $block->getLayout(); ?>
         <div class="product data items" 
         <?php //if($_settingHelper->getConfig('product_detail/detail_element/use_tabs')==1): ?>
-        data-mage-init='{"tabs":{"openedState":"active"}}'
         <?php //endif; ?>
         >
             <?php foreach ($detailedInfoGroup as $name):?>
@@ -27,19 +26,12 @@
                     $alias = $layout->getElementAlias($name);
                     $label = $block->getChildData($alias, 'title');
                 ?>
-                <div class="data item title"
-                     aria-labeledby="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title"
-                     data-role="collapsible" id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>">
-                    <a class="data switch"
-                       tabindex="-1"
-                       data-toggle="switch"
-                       href="#<?php /* @escapeNotVerified */ echo $alias; ?>"
-                       id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title">
+                <div class=" carro data item title <?php echo $alias; ?>">
                         <?php /* @escapeNotVerified */ echo $label; ?>
-                    </a>
                 </div>
-                <div class="data item content" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content">
+                <div test-texto class="data item content" >
                     <?php /* @escapeNotVerified */ echo $html; ?>
+                    <!--div class="underdetail"><p>Aqui puedo agregar mas información</p></div-->
                 </div>
             <?php endforeach;?>
         </div>

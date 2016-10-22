@@ -23,12 +23,10 @@
         </referenceContainer>
 	<move element="header.panel" destination="header.panel.wrapper" />
 	<move element="header-wrapper" destination="header.panel.wrapper" />
-
-        
-                	
+	         	
 
      <!--   <move element="store_switcher" destination="store.settings.wrapper" before="top.links" />
-        <move element="top.links" destination="store.settings.wrapper" before="top.search" />
+        <move element="top.links" destination="header.panel.wrapper" before="top.search" />
 
         <move element="logo" destination="header-wrapper-container" before="-" />
         <move element="store.settings.wrapper" destination="header-wrapper-container" after="-" />
@@ -88,6 +86,7 @@
             <referenceBlock name="footer_links" remove="true" />
         </referenceContainer>
         <move element="footer" destination="footer_bottom"/>
+		<move element="top.links" destination="header.panel.wrapper" />
         <!-- <move element="copyright" destination="footer.area.1" after="-" /> -->
 		
     </body>

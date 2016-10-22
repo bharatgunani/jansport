@@ -1,0 +1,6 @@
+var/
+pub/static/frontend/
+pub/media/catalog/
+backup/
+pub/media/import/
+pub/media/blog/

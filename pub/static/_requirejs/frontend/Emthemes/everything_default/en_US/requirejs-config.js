@@ -256,6 +256,22 @@ require.config(config);
 var config = {
     map: {
         '*': {
+            giftMessage:    'Magento_Sales/gift-message',
+            ordersReturns:  'Magento_Sales/orders-returns'
+        }
+    }
+};
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+var config = {
+    map: {
+        '*': {
             requireCookie: 'Magento_Cookie/js/require-cookie',
             cookieNotices: 'Magento_Cookie/js/notices'
         }
@@ -291,22 +307,6 @@ var config = {
     map: {
         '*': {
             downloadable: 'Magento_Downloadable/downloadable'
-        }
-    }
-};
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-var config = {
-    map: {
-        '*': {
-            giftMessage:    'Magento_Sales/gift-message',
-            ordersReturns:  'Magento_Sales/orders-returns'
         }
     }
 };
@@ -385,21 +385,6 @@ require.config(config);
 var config = {
     map: {
         '*': {
-            configurable: 'Magento_ConfigurableProduct/js/configurable'
-        }
-    }
-};
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-var config = {
-    map: {
-        '*': {
             multiShipping: 'Magento_Multishipping/js/multi-shipping',
             orderOverview: 'Magento_Multishipping/js/overview',
             payment: 'Magento_Multishipping/js/payment'
@@ -417,7 +402,55 @@ require.config(config);
 var config = {
     map: {
         '*': {
+            configurable: 'Magento_ConfigurableProduct/js/configurable'
+        }
+    }
+};
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+var config = {
+    map: {
+        '*': {
             pageCache:  'Magento_PageCache/js/page-cache'
+        }
+    }
+};
+
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+var config = {
+    map: {
+        '*': {
+            transparent: 'Magento_Payment/transparent'
+        }
+    }
+};
+
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/*eslint no-unused-vars: 0*/
+var config = {
+    map: {
+        '*': {
+            loadPlayer: 'Magento_ProductVideo/js/load-player',
+            fotoramaVideoEvents: 'Magento_ProductVideo/js/fotorama-add-video-events'
         }
     }
 };
@@ -469,43 +502,11 @@ require.config(config);
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-/*eslint no-unused-vars: 0*/
-var config = {
-    map: {
-        '*': {
-            loadPlayer: 'Magento_ProductVideo/js/load-player',
-            fotoramaVideoEvents: 'Magento_ProductVideo/js/fotorama-add-video-events'
-        }
-    }
-};
-
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
 
 var config = {
     map: {
         '*': {
             recentlyViewedProducts: 'Magento_Reports/js/recently-viewed'
-        }
-    }
-};
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-var config = {
-    map: {
-        '*': {
-            captcha: 'Magento_Captcha/captcha'
         }
     }
 };
@@ -535,10 +536,7 @@ require.config(config);
 var config = {
     map: {
         '*': {
-            bundleOption:   'Magento_Bundle/bundle',
-            priceBundle:    'Magento_Bundle/js/price-bundle',
-            slide:          'Magento_Bundle/js/slide',
-            productSummary: 'Magento_Bundle/js/product-summary'
+            captcha: 'Magento_Captcha/captcha'
         }
     }
 };
@@ -553,11 +551,13 @@ require.config(config);
 var config = {
     map: {
         '*': {
-            transparent: 'Magento_Payment/transparent'
+            bundleOption:   'Magento_Bundle/bundle',
+            priceBundle:    'Magento_Bundle/js/price-bundle',
+            slide:          'Magento_Bundle/js/slide',
+            productSummary: 'Magento_Bundle/js/product-summary'
         }
     }
 };
-
 require.config(config);
 })();
 (function() {

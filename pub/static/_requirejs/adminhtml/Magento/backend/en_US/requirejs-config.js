@@ -159,22 +159,6 @@ require.config(config);
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-/*eslint no-unused-vars: 0*/
-var config = {
-    map: {
-        '*': {
-            'mediaUploader':  'Magento_Backend/js/media-uploader'
-        }
-    }
-};
-
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
 
 var config = {
     map: {
@@ -184,6 +168,22 @@ var config = {
         }
     }
 };
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/*eslint no-unused-vars: 0*/
+var config = {
+    map: {
+        '*': {
+            'mediaUploader':  'Magento_Backend/js/media-uploader'
+        }
+    }
+};
+
 require.config(config);
 })();
 (function() {
@@ -248,9 +248,9 @@ require.config(config);
 var config = {
     map: {
         '*': {
-            requireCookie: 'Magento_Cookie/js/require-cookie'
+            orderEditDialog: 'Magento_Sales/order/edit/message'
         }
-    } 
+    }
 };
 require.config(config);
 })();
@@ -263,9 +263,9 @@ require.config(config);
 var config = {
     map: {
         '*': {
-            orderEditDialog: 'Magento_Sales/order/edit/message'
+            requireCookie: 'Magento_Cookie/js/require-cookie'
         }
-    }
+    } 
 };
 require.config(config);
 })();
@@ -347,21 +347,6 @@ require.config(config);
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-var config = {
-    map: {
-        '*': {
-            transparent:            'Magento_Payment/transparent'
-        }
-    }
-};
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
 /*eslint no-unused-vars: 0*/
 var config = {
     map: {
@@ -372,6 +357,21 @@ var config = {
     }
 };
 
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+var config = {
+    map: {
+        '*': {
+            transparent:            'Magento_Payment/transparent'
+        }
+    }
+};
 require.config(config);
 })();
 (function() {
