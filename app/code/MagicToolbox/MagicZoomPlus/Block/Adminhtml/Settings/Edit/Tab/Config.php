@@ -122,6 +122,7 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic
                 switch ($type) {
                     case 'num':
                         $type = 'text';
+                        // no break
                     case 'text':
                         break;
                     case 'array':
@@ -131,6 +132,7 @@ class Config extends \Magento\Backend\Block\Widget\Form\Generic
                                     $type = 'select';
                                     break;
                                 }
+                                // no break
                             case 'radio':
                                 $type = 'radios';
                                 break;

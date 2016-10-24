@@ -27,16 +27,28 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
     public $toolObj = null;
 
     /**
+     * @var \MagicToolbox\MagicZoomPlus\Helper\Image
+     */
+    protected $_imageHelper;
+
+    /**
      * Rendered gallery HTML
      * @var array
      */
     protected $renderedGalleryHtml = [];
 
     /**
+     * ID of the current product
+     * @var integer
+     */
+    protected $currentProductId = null;
+
+    /**
      * @param \Magento\Catalog\Block\Product\Context $context
      * @param \Magento\Framework\Stdlib\ArrayUtils $arrayUtils
      * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
      * @param \MagicToolbox\MagicZoomPlus\Helper\Data $magicToolboxHelper
+     * @param \MagicToolbox\MagicZoomPlus\Helper\Image $imageHelper
      * @param array $data
      */
     public function __construct(
@@ -44,11 +56,13 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
         \Magento\Framework\Stdlib\ArrayUtils $arrayUtils,
         \Magento\Framework\Json\EncoderInterface $jsonEncoder,
         \MagicToolbox\MagicZoomPlus\Helper\Data $magicToolboxHelper,
+        \MagicToolbox\MagicZoomPlus\Helper\Image $imageHelper,
         array $data = []
     ) {
         $this->magicToolboxHelper = $magicToolboxHelper;
         $this->toolObj = $this->magicToolboxHelper->getToolObj();
         parent::__construct($context, $arrayUtils, $jsonEncoder, $data);
+        $this->_imageHelper = $imageHelper;
     }
 
     /**
@@ -79,7 +93,9 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
             if ($images[$id] instanceof \Magento\Framework\Data\Collection) {
                 foreach ($images[$id] as $image) {
                     /* @var \Magento\Framework\DataObject $image */
-                    if ($image->getMediaType() != 'image') {
+
+                    $mediaType = $image->getMediaType();
+                    if ($mediaType != 'image' && $mediaType != 'external-video') {
                         continue;
                     }
 
@@ -89,20 +105,22 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
 
                     $originalSizeArray = $this->_imageHelper->getOriginalSizeArray();
 
-                    if ($this->toolObj->params->checkValue('square-images', 'Yes')) {
-                        $bigImageSize = ($originalSizeArray[0] > $originalSizeArray[1]) ? $originalSizeArray[0] : $originalSizeArray[1];
-                        $img = $this->_imageHelper->init($product, 'product_page_image_large')
-                                ->setImageFile($image->getFile())
-                                ->resize($bigImageSize)
-                                ->getUrl();
-                    }
-                    $image->setData('large_image_url', $img);
+                    if ($mediaType == 'image') {
+                        if ($this->toolObj->params->checkValue('square-images', 'Yes')) {
+                            $bigImageSize = ($originalSizeArray[0] > $originalSizeArray[1]) ? $originalSizeArray[0] : $originalSizeArray[1];
+                            $img = $this->_imageHelper->init($product, 'product_page_image_large')
+                                    ->setImageFile($image->getFile())
+                                    ->resize($bigImageSize)
+                                    ->getUrl();
+                        }
+                        $image->setData('large_image_url', $img);
 
-                    list($w, $h) = $this->magicToolboxHelper->magicToolboxGetSizes('thumb', $originalSizeArray);
-                    $medium = $this->_imageHelper->init($product, 'product_page_image_medium', ['width' => $w, 'height' => $h])
-                            ->setImageFile($image->getFile())
-                            ->getUrl();
-                    $image->setData('medium_image_url', $medium);
+                        list($w, $h) = $this->magicToolboxHelper->magicToolboxGetSizes('thumb', $originalSizeArray);
+                        $medium = $this->_imageHelper->init($product, 'product_page_image_medium', ['width' => $w, 'height' => $h])
+                                ->setImageFile($image->getFile())
+                                ->getUrl();
+                        $image->setData('medium_image_url', $medium);
+                    }
 
                     list($w, $h) = $this->magicToolboxHelper->magicToolboxGetSizes('selector', $originalSizeArray);
                     $thumb = $this->_imageHelper->init($product, 'product_page_image_small', ['width' => $w, 'height' => $h])
@@ -166,22 +184,24 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
     /**
      * Get thumb switcher initialization attribute
      *
+     * @param integer $id
      * @return string
      */
-    public function getThumbSwitcherInitAttribute()
+    public function getThumbSwitcherInitAttribute($id = null)
     {
         static $html = null;
         if ($html === null) {
-            $html = '';
-            if ($this->isCooperativeModeAllowed()) {
-                $id = $this->getProduct()->getId();
-                $tool = 'magiczoomplus';
-                $switchMethod = $this->toolObj->params->getValue('selectorTrigger');
-                if ($switchMethod == 'hover') {
-                    $switchMethod = 'mouseover';
-                }
-                $html = ' data-mage-init=\'{"magicToolboxThumbSwitcher": {"tool": "'.$tool.'", "productId": "'.$id.'", "switchMethod": "'.$switchMethod.'"}}\'';
+            if (is_null($id)) {
+                $id = $this->currentProductId;
             }
+            $settings = $this->magicToolboxHelper->getVideoSettings();
+            $settings['tool'] = 'magiczoomplus';
+            $settings['switchMethod'] = $this->toolObj->params->getValue('selectorTrigger');
+            if ($settings['switchMethod'] == 'hover') {
+                $settings['switchMethod'] = 'mouseover';
+            }
+            $settings['productId'] = $id;
+            $html = ' data-mage-init=\'{"magicToolboxThumbSwitcher": '.json_encode($settings).'}\'';
         }
         return $html;
     }
@@ -224,12 +244,18 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
         if (is_null($product)) {
             $product = $this->getProduct();
         }
-        $id = $product->getId();
+        $this->currentProductId = $id = $product->getId();
         if (!isset($this->renderedGalleryHtml[$id])) {
             $this->toolObj->params->setProfile('product');
             $name = $product->getName();
             $productImage = $product->getImage();
-            $mainImageHTML = '';
+            $mainHTML = '';
+            $defaultContainerId = 'mtImageContainer';
+            $containersData = [
+                'mtImageContainer' => '',
+                'mt360Container' => '',
+                'mtVideoContainer' => '',
+            ];
             $selectorsArray = [];
 
             $images = $this->getGalleryImagesCollection($product);
@@ -241,58 +267,92 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
                 return $this;
             }
 
+            $selectorIndex = 0;
+            $baseIndex = 0;
             foreach ($images as $image) {
 
-                if ($image->getMediaType() != 'image') {
+                $mediaType = $image->getMediaType();
+                $isImage = $mediaType == 'image';
+                $isVideo = $mediaType == 'external-video';
+
+                if (!$isImage && !$isVideo) {
                     continue;
                 }
 
-                $label = $image->getLabel();
+                $label = $isImage ? $image->getLabel() : $image->getVideoTitle();
                 if (empty($label)) {
                     $label = $name;
                 }
 
-                if (empty($mainImageHTML) || $productImage == $image->getFile()) {
-                    $mainImageHTML = $this->toolObj->getMainTemplate([
-                        'id' => $id,
+                if ($isImage) {
+                    if (empty($containersData['mtImageContainer']) || $productImage == $image->getFile()) {
+                        $containersData['mtImageContainer'] = $this->toolObj->getMainTemplate([
+                            'id' => '-product-'.$id,
+                            'img' => $image->getData('large_image_url'),
+                            'thumb' => $image->getData('medium_image_url'),
+                            'title' => $label,
+                            'alt' => $label,
+                        ]);
+                        $containersData['mtImageContainer'] = '<div>'.$containersData['mtImageContainer'].'</div>';
+                        $baseIndex = $selectorIndex;
+                    }
+                    $selectorsArray[] = $this->toolObj->getSelectorTemplate([
+                        'id' => '-product-'.$id,
+                        'group' => 'product-page',
                         'img' => $image->getData('large_image_url'),
-                        'thumb' => $image->getData('medium_image_url'),
-                        'title' => $name,
-                        'alt' => $name,
+                        'thumb' => $image->getData('small_image_url'),
+                        'medium' => $image->getData('medium_image_url'),
+                        'title' => $label,
+                        'alt' => $label
                     ]);
+                } else {
+                    if ($productImage == $image->getFile()) {
+                        $defaultContainerId = 'mtVideoContainer';
+                        $containersData['mtVideoContainer'] = '<div class="product-video init-video" data-video="' . $image->getVideoUrl() . '"></div>';
+                        $baseIndex = $selectorIndex;
+                    }
+                    $selectorsArray[] =
+                        '<a class="video-selector" href="#" onclick="return false" data-video="'.$image->getVideoUrl().'" title="'.$label.'">'.
+                        '<img src="'.$image->getData('small_image_url').'" alt="'.$label.'" />'.
+                        '</a>';
                 }
 
-                $selectorsArray[] = $this->toolObj->getSelectorTemplate([
-                    'id' => $id,
-                    'group' => 'product-page',
-                    'img' => $image->getData('large_image_url'),
-                    'thumb' => $image->getData('small_image_url'),
-                    'medium' => $image->getData('medium_image_url'),
-                    'title' => $label,
-                    'alt' => $label
-                ]);
-
+                $selectorIndex++;
             }
 
             //NOTE: cooperative mode
             if (isset($data['magic360-html'])) {
-                $mainImageHTML =
-                    '<div id="mainImageContainer" style="display: none;"><div>'.$mainImageHTML.'</div></div>'.
-                    '<div id="magic360Container">'.$data['magic360-html'].'</div>';
+                $defaultContainerId = 'mt360Container';
+                $containersData['mtVideoContainer'] = '';
+                $containersData['mt360Container'] = $data['magic360-html'];
                 if (isset($data['magic360-icon'])) {
                     $data['magic360-icon'] =
                         '<a class="m360-selector active-selector" title="360" href="#" onclick="return false;">'.
                         '<img class="" src="'.$data['magic360-icon'].'" alt="360" />'.
                         '</a>';
                     array_unshift($selectorsArray, $data['magic360-icon']);
+                    $baseIndex = 0;
                 }
-                foreach ($selectorsArray as &$selector) {
-                    if (preg_match('#(<a\b[^>]*?\bclass=")([^"]*+")#i', $selector, $match)) {
-                        $selector = str_replace($match[0], $match[1].'zoom-with-360 '.$match[2], $selector);
-                    } else {
-                        $selector = str_replace('<a ', '<a class="zoom-with-360" ', $selector);
-                    }
+            }
+
+            foreach ($selectorsArray as $i => &$selector) {
+                $class = 'mt-thumb-switcher '.($i == $baseIndex ? 'active-selector ' : '');
+                if (preg_match('#(<a(?=\s)[^>]*?(?<=\s)class=")([^"]*+")#i', $selector, $match)) {
+                    $selector = str_replace($match[0], $match[1].$class.$match[2], $selector);
+                } else {
+                    $selector = str_replace('<a ', '<a class="'.$class.'" ', $selector);
                 }
+            }
+
+            foreach ($containersData as $containerId => $containerHTML) {
+                $displayStyle = $defaultContainerId == $containerId ? 'block' : 'none';
+                $moreStyles = '';
+                if ('mtVideoContainer' == $containerId) {
+                    $moreStyles .= 'position: relative;';
+                    $moreStyles .= 'width: '.(int)$this->toolObj->params->getValue('thumb-max-width', 'product').'px;';
+                    $moreStyles .= 'height: '.(int)$this->toolObj->params->getValue('thumb-max-height', 'product').'px;';
+                }
+                $mainHTML .= "<div id=\"{$containerId}\" style=\"display: {$displayStyle};{$moreStyles}\">{$containerHTML}</div>";
             }
 
             if (empty($selectorsArray)) {
@@ -314,19 +374,17 @@ class Gallery extends \Magento\Catalog\Block\Product\View\Gallery
 
                 $scrollOptions = $scroll->params->serialize(false, '', 'magiczoomplus-magicscroll-product');
 
-                if ($this->isCooperativeModeAllowed()) {
-                    //NOTE: disable MagicScroll on page load to start manually
-                    $scrollOptions = 'autostart:false;'.$scrollOptions;
-                }
+                //NOTE: disable MagicScroll on page load to start manually
+                $scrollOptions = 'autostart:false;'.$scrollOptions;
 
                 if (!empty($scrollOptions)) {
                     $scrollOptions = " data-options=\"{$scrollOptions}\"";
                 }
             }
             $selectorMaxWidth = (int)$this->toolObj->params->getValue('selector-max-width');
-            $thumbSwitcher = '';
-            if (!$isAssociatedProduct && $this->isCooperativeModeAllowed()) {
-                $thumbSwitcher = $this->getThumbSwitcherInitAttribute();
+            $thumbSwitcherOptions = '';
+            if (!$isAssociatedProduct) {
+                $thumbSwitcherOptions = $this->getThumbSwitcherInitAttribute();
             }
 
             $layout = $this->toolObj->params->getValue('template');

@@ -1,0 +1,33 @@
+Country,Country
+Currency,Currency
+Url,Url
+"--Please Select--","--Please Select--"
+"All URLs","All URLs"
+"Specified URLs","Specified URLs"
+"All Except Specified URLs","All Except Specified URLs"
+"Redirect From Home Page Only","Redirect From Home Page Only"
+"GeoIp Redirect","GeoIp Redirect"
+General,General
+"Enable GeoIP Redirect","Enable GeoIP Redirect"
+"General setting affecting all rules","General setting affecting all rules"
+Restriction,Restriction
+"Apply Logic To","Apply Logic To"
+"Accepted URLs","Accepted URLs"
+"Please specify relative URLs (like /about-us/). Each URL on a separate line.","Please specify relative URLs (like /about-us/). Each URL on a separate line."
+"Excepted URLs","Excepted URLs"
+"User Agents to Ignore","User Agents to Ignore"
+"Restriction by Ip","Restriction by Ip"
+"Each IP on a separate line.","Each IP on a separate line."
+"First visit redirect only","First visit redirect only"
+"<strong style=""color:red"">Warning!</strong> If you select ""No"" visitors will be not able to change Store View / currency.","<strong style=""color:red"">Warning!</strong> If you select ""No"" visitors will be not able to change Store View / currency."
+"Redirect Between Websites","Redirect Between Websites"
+"Country to Store View Redirect","Country to Store View Redirect"
+"Enable Country --> Store View","Enable Country --> Store View"
+"Please switch 'Current Configuration Scope' to a necessary store view to select affected countries.","Please switch 'Current Configuration Scope' to a necessary store view to select affected countries."
+"Affected Countries","Affected Countries"
+"Country to Currency Switch","Country to Currency Switch"
+"Enable Country --> Currency","Enable Country --> Currency"
+"Country to Currency Mapping","Country to Currency Mapping"
+"Country to URL Redirect","Country to URL Redirect"
+"Enable Country --> URL","Enable Country --> URL"
+"Country to URL Mapping","Country to URL Mapping"

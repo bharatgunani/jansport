@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Magento\Catalog\Controller\Category\View">
+        <plugin name="amasty_shopby_page_view" type="\Amasty\ShopbySeo\Plugin\CategoryViewPlugin" sortOrder="1"/>
+    </type>
+    <type name="\Amasty\ShopbyRoot\Controller\Index\Index">
+        <plugin name="amasty_shopby_page_view" type="\Amasty\ShopbySeo\Plugin\CategoryViewPlugin" sortOrder="1"/>
+    </type>
+    <type name="\Magento\Framework\Url">
+        <plugin name="amasty_shopby_url" type="\Amasty\ShopbySeo\Plugin\UrlPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="amasty_seo_router" xsi:type="array">
+                    <item name="class" xsi:type="string">\Amasty\ShopbySeo\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">22</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

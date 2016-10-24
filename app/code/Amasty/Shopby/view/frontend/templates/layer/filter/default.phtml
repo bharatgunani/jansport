@@ -1,0 +1,44 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+?>
+<?php
+/** @var \Amasty\Shopby\Model\FilterSetting $filterSetting */
+?>
+<ol class="items">
+    <?php foreach ($filterItems as $filterItem): ?>
+        <li class="item">
+            <?php if ($filterItem->getCount() > 0): ?>
+                <?php $checked =  $this->checkedFilter($filterItem) ? ' checked' : ''; ?>
+
+                <a class="am_shopby_filter_item_<?php echo $filterItem->getValue()?>" href="<?php echo $block->escapeUrl($filterItem->getUrl()) ?>">
+                    <?php if ($filterSetting->isMultiselect()): ?>
+                        <input type="checkbox" <?php echo $checked ?> />
+                    <?php endif; ?>
+                    <?php echo $filterItem->getLabel() ?>
+                    <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
+                        <span class="count"><?php echo $filterItem->getCount()?><span class="filter-count-label">
+                            <?php if ($filterItem->getCount() == 1):?> <?php echo __('item')?><?php else:?> <?php echo __('items') ?><?php endif;?></span></span>
+                    <?php endif; ?>
+                </a>
+            <?php else:?>
+                <?php echo $filterItem->getLabel() ?>
+                <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
+                    <span class="count"><?php echo $filterItem->getCount()?><span class="filter-count-label">
+                        <?php if ($filterItem->getCount() == 1):?><?php echo __('item')?><?php else:?><?php echo __('items') ?><?php endif;?></span></span>
+                <?php endif; ?>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+            {
+                ".am_shopby_filter_item_<?php echo $filterItem->getValue()?>": {
+                    "amShopbyFilterItemDefault": {}
+                }
+            }
+            </script>
+        </li>
+    <?php endforeach ?>
+</ol>
+

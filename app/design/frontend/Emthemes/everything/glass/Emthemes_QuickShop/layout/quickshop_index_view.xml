@@ -168,5 +168,8 @@
 			<block class="Magento\CatalogInventory\Block\Qtyincrements" name="product.info.extrahint.qtyincrements" template="qtyincrements.phtml"/>
 		</referenceContainer>
 		<referenceContainer name="quickshop_modal" remove="true" /> 
+		
+		<!-- code by rbj -->
+		<referenceContainer name="store.settings.wrapper" remove="true" />
 	</body>
 </page>

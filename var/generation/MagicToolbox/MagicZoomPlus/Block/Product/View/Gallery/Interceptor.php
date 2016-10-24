@@ -8,10 +8,10 @@ class Interceptor extends \MagicToolbox\MagicZoomPlus\Block\Product\View\Gallery
 {
     use \Magento\Framework\Interception\Interceptor;
 
-    public function __construct(\Magento\Catalog\Block\Product\Context $context, \Magento\Framework\Stdlib\ArrayUtils $arrayUtils, \Magento\Framework\Json\EncoderInterface $jsonEncoder, \MagicToolbox\MagicZoomPlus\Helper\Data $magicToolboxHelper, array $data = array())
+    public function __construct(\Magento\Catalog\Block\Product\Context $context, \Magento\Framework\Stdlib\ArrayUtils $arrayUtils, \Magento\Framework\Json\EncoderInterface $jsonEncoder, \MagicToolbox\MagicZoomPlus\Helper\Data $magicToolboxHelper, \MagicToolbox\MagicZoomPlus\Helper\Image $imageHelper, array $data = array())
     {
         $this->___init();
-        parent::__construct($context, $arrayUtils, $jsonEncoder, $magicToolboxHelper, $data);
+        parent::__construct($context, $arrayUtils, $jsonEncoder, $magicToolboxHelper, $imageHelper, $data);
     }
 
     /**
@@ -82,11 +82,11 @@ class Interceptor extends \MagicToolbox\MagicZoomPlus\Block\Product\View\Gallery
     /**
      * {@inheritdoc}
      */
-    public function getThumbSwitcherInitAttribute()
+    public function getThumbSwitcherInitAttribute($id = null)
     {
         $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getThumbSwitcherInitAttribute');
         if (!$pluginInfo) {
-            return parent::getThumbSwitcherInitAttribute();
+            return parent::getThumbSwitcherInitAttribute($id);
         } else {
             return $this->___callPlugins('getThumbSwitcherInitAttribute', func_get_args(), $pluginInfo);
         }

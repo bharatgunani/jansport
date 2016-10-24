@@ -48,7 +48,7 @@ class Media extends \Magento\Swatches\Controller\Ajax\Media
 
         if ($this->variantProductId) {
             $productMedia['variantProductId'] = $this->variantProductId;
-        } else if ($product) {
+        } elseif ($product) {
             $productMedia['variantProductId'] = $product->getId();
         }
 

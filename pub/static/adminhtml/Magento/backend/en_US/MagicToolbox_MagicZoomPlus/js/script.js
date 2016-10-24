@@ -34,10 +34,20 @@ define(['jquery'], function($){
                     value = [value];
                 }
                 for (var profileIndex in profiles) {
-                    if (profiles[profileIndex] == 'default') continue;
+                    if (profiles[profileIndex] == 'default') {
+                        continue;
+                    }
                     var curName = name.replace(/(magictoolbox\[[^\]]+\])\[default\](\[[^\]]+\])/, '$1['+profiles[profileIndex]+']$2');
                     $('[name=\''+curName+'\']:disabled').val(value);
                 }
+            });
+        },
+        initAdvancedRadios: function(){
+            $('.mt-advanced-radios input[type=radio]').bind('change', function(){
+                var element = $(this);
+                var id = element.attr('id');
+                element.parent().parent().find('.mt-option-note').addClass('advanced-radios-hidden-note');
+                $('#'+id+'-note').removeClass('advanced-radios-hidden-note');
             });
         }
     }

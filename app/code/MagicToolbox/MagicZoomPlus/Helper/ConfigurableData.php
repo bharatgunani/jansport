@@ -48,7 +48,7 @@ class ConfigurableData extends \Magento\ConfigurableProduct\Helper\Data
 
     /**
      * @param \Magento\Catalog\Helper\Image $imageHelper
-     * @param \MagicToolbox\MagicZoomPlus\Helper\Data $magicToolboxHelper,
+     * @param \MagicToolbox\MagicZoomPlus\Helper\Data $magicToolboxHelper
      * @param \Magento\Framework\Registry $registry
      */
     public function __construct(
@@ -84,7 +84,6 @@ class ConfigurableData extends \Magento\ConfigurableProduct\Helper\Data
         $isEnabled = false;
 
         $data = $this->coreRegistry->registry('magictoolbox');
-
         if ($data && $data['current'] != 'product.info.media.image') {
 
             foreach ($data['blocks'] as $key => $block) {
@@ -102,12 +101,27 @@ class ConfigurableData extends \Magento\ConfigurableProduct\Helper\Data
                     $productId = $currentProduct->getId();
                     $this->galleryData[$productId] = $galleryBlock->renderGalleryHtml($currentProduct)->getRenderedHtml($productId);
                 }
-                foreach ($allowedProducts as $product) {
+                $allProducts = $currentProduct->getTypeInstance()->getUsedProducts($currentProduct, null);
+                foreach ($allProducts as $product) {
                     $productId = $product->getId();
                     $this->galleryData[$productId] = $galleryBlock->renderGalleryHtml($product, true)->getRenderedHtml($productId);
                 }
                 $this->isEffectEnable = true;
             }
+        }
+
+        $data = $this->coreRegistry->registry('magictoolbox_category');
+        if ($data && $data['current-renderer'] == 'configurable.magiczoomplus') {
+            $this->useOriginalGallery = false;
+            $productId = $currentProduct->getId();
+            $this->galleryData[$productId] = $this->magicToolboxHelper->getHtmlData($currentProduct, false, ['image', 'small_image', 'thumbnail']);
+
+            $allProducts = $currentProduct->getTypeInstance()->getUsedProducts($currentProduct, null);
+            foreach ($allProducts as $product) {
+                $productId = $product->getId();
+                $this->galleryData[$productId] = $this->magicToolboxHelper->getHtmlData($product, true, ['image']);
+            }
+            $this->isEffectEnable = true;
         }
 
         $options = parent::getOptions($currentProduct, $allowedProducts);
@@ -133,7 +147,7 @@ class ConfigurableData extends \Magento\ConfigurableProduct\Helper\Data
                         $image['isMain'] = false;
                     }
                     array_unshift($images, [
-                        'magic360' => 'productMagic360-'.$productId,
+                        'magic360' => 'Magic360-product-'.$productId,
                         'thumb' => $magic360Icon,
                         'html' => '<div class="fotorama__select">'.$this->galleryData[$productId].'</div>',
                         'caption' => '',
@@ -151,7 +165,7 @@ class ConfigurableData extends \Magento\ConfigurableProduct\Helper\Data
             foreach ($this->galleryData as $productId => $html) {
                 if (!empty($html)) {
                     $productImages[$productId][] = [
-                        'magic360' => 'productMagic360-'.$productId,
+                        'magic360' => 'Magic360-product-'.$productId,
                         'thumb' => $magic360Icon,
                         'html' => '<div class="fotorama__select">'.$this->galleryData[$productId].'</div>',
                         'caption' => '',

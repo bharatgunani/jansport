@@ -26,5 +26,6 @@
             <block class="Magento\Swatches\Block\Product\Renderer\Configurable" name="product.info.options.swatches" as="swatch_options" before="-" />
         </referenceBlock>
 		<!-- END SWATCHES -->
+		
     </body>
 </page>

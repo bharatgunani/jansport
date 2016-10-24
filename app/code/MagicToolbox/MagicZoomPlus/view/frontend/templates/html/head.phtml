@@ -14,9 +14,19 @@ $cssPath = dirname($cssUrl);
 $tool = $block->magicToolboxHelper->getToolObj();
 $tool->params->resetProfile();
 
-echo $tool->getHeadersTemplate($jsPath, $cssPath);
+$headers = $tool->getHeadersTemplate($jsPath, $cssPath);
 
 if ($block->doDisplayMagicScrollHeaders() && ($scroll = $block->magicToolboxHelper->getScrollObj())) {
     $scroll->params->resetProfile();
-    echo "\n".$scroll->getHeadersTemplate($jsPath, $cssPath, false);
+    $headers .= "\n".$scroll->getHeadersTemplate($jsPath, $cssPath, false);
 }
+
+//NOTE: fix to support 'Minify JavaScript/CSS Files' options
+if(preg_match('#\.min\.css$#', $cssUrl)) {
+    $headers = preg_replace('#\.css\b#', '.min.css', $headers);
+}
+if(preg_match('#\.min\.js$#', $jsUrl)) {
+    $headers = preg_replace('#\.js\b#', '.min.js', $headers);
+}
+
+echo $headers;

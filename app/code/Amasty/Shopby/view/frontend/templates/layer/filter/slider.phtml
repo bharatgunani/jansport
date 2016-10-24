@@ -1,0 +1,40 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+?>
+<?php
+$item = array_shift($filterItems);
+?>
+<ol class="items">
+    <li>
+        <div id="am_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>">
+            <div id="am_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>_slider"></div>
+            <div id="am_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>_display" style="text-align: center"></div>
+        </div>
+
+        <script type="text/x-magento-init">
+		<?php 
+			if($item['from'] == $item['min'])
+			{
+				$item['from'] = 0;	
+			}
+		?>
+            {
+                "#am_shopby_filter_<?=$filterSetting->getFilterCode(); ?>": {
+                    "amShopbyFilterSlider": {
+                            "template":"<?=$item['template']?>",
+                            "step":"<?=$item['step']?>",
+                            "from":<?=$item['from'];?>,
+                            "to":<?=$item['to'];?>,
+                            "min":0,
+                            "max":<?=$item['max'];?>,
+                            "url": "<?=$block->getSliderUrlTemplate(); ?>"
+                        }
+                }
+            }
+            </script>
+    </li>
+</ol>

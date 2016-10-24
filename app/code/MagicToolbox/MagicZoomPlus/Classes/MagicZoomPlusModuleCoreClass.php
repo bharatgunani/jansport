@@ -67,7 +67,7 @@ class MagicZoomPlusModuleCoreClass
             $cssPath = $jsPath;
         }
         $headers = [];
-        $headers[] = '<!-- Magic Zoom Plus Magento 2 module version v1.2.1 [v1.6.21:v5.1.12] -->';
+        $headers[] = '<!-- Magic Zoom Plus Magento 2 module version v1.5.6 [v1.6.34:v5.1.16] -->';
         $headers[] = '<script type="text/javascript">window["mgctlbx$Pltm"] = "Magento 2";</script>';
         $headers[] = '<link type="text/css" href="'.$cssPath.'/magiczoomplus.css" rel="stylesheet" media="screen" />';
         $headers[] = '<link type="text/css" href="'.$cssPath.'/magiczoomplus.module.css" rel="stylesheet" media="screen" />';
@@ -206,7 +206,8 @@ class MagicZoomPlusModuleCoreClass
             //NOTICE: temporary disabled because of issue with zoom images (when the picture size is not big enough)
             //$dataImage2x = ' data-zoom-image-2x="'.$img.'" data-image-2x="'.$thumb2x.'" ';
             $dataImage2x = ' data-image-2x="'.$thumb2x.'" ';
-            $thumb2x = ' srcset="'.$thumb2x.' 2x"';
+            //$thumb2x = ' srcset="'.$thumb2x.' 2x"';
+            $thumb2x = ' srcset="'.$thumb.' 1x, '.$thumb2x.' 2x"';
         } else {
             $dataImage2x = '';
         }
@@ -279,7 +280,8 @@ class MagicZoomPlusModuleCoreClass
         }
 
         if (!empty($thumb2x)) {
-            $thumb2x = ' srcset="'.$thumb2x.' 2x"';
+            //$thumb2x = ' srcset="'.$thumb2x.' 2x"';
+            $thumb2x = ' srcset="'.$thumb.' 1x, '.$thumb2x.' 2x"';
         }
 
         if (!empty($medium2x)) {
@@ -316,6 +318,7 @@ class MagicZoomPlusModuleCoreClass
             "transitionEffect"=>["id"=>"transitionEffect","advanced"=>"1","group"=>"Multiple images","order"=>"20","default"=>"Yes","label"=>"Use transition effect when switching images","description"=>"Whether to enable dissolve effect when switching between images.","type"=>"array","subType"=>"radio","values"=>["Yes","No"],"scope"=>"magiczoomplus"],
             "lazyZoom"=>["id"=>"lazyZoom","group"=>"Miscellaneous","order"=>"10","default"=>"No","label"=>"Lazy load of zoom image","description"=>"Whether to load large image on demand (on first activation).","type"=>"array","subType"=>"radio","values"=>["Yes","No"],"scope"=>"magiczoomplus"],
             "rightClick"=>["id"=>"rightClick","group"=>"Miscellaneous","order"=>"20","default"=>"No","label"=>"Right-click menu on image","type"=>"array","subType"=>"radio","values"=>["Yes","No"],"scope"=>"magiczoomplus","desktop-only"=>""],
+            "link-to-product-page"=>["id"=>"link-to-product-page","group"=>"Miscellaneous","order"=>"30","default"=>"Yes","label"=>"Link enlarged image to the product page","type"=>"array","subType"=>"select","values"=>["Yes","No"],"scope"=>"module"],
             "show-message"=>["id"=>"show-message","group"=>"Miscellaneous","order"=>"370","default"=>"No","label"=>"Show message under images","type"=>"array","subType"=>"radio","values"=>["Yes","No"],"scope"=>"module"],
             "message"=>["id"=>"message","group"=>"Miscellaneous","order"=>"380","default"=>"Move your mouse over image or click to enlarge","label"=>"Enter message to appear under images","type"=>"text","scope"=>"module"],
             "zoomMode"=>["id"=>"zoomMode","group"=>"Zoom mode","order"=>"10","default"=>"zoom","label"=>"Zoom mode","description"=>"How to zoom image. off - disable zoom.","type"=>"array","subType"=>"radio","values"=>["zoom","magnifier","preview","off"],"scope"=>"magiczoomplus","desktop-only"=>"preview"],

@@ -10,4 +10,7 @@
             <argument name="magicscroll" xsi:type="object">MagicToolbox\MagicScrollModuleCoreClass</argument>
         </arguments>
     </type>
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="MagicZoomPlusListProductPlugin" type="MagicToolbox\MagicZoomPlus\Plugin\Product\ListProduct" sortOrder="4" disabled="false" />
+    </type>
 </config>

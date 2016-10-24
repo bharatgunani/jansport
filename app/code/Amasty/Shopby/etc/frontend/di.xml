@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\LayeredNavigation\Block\Navigation\FilterRenderer"     type="Amasty\Shopby\Block\Navigation\FilterRenderer"/>
+    <preference for="Magento\Swatches\Block\LayeredNavigation\RenderLayered"     type="Amasty\Shopby\Block\Navigation\SwatchRenderer"/>
+    <preference for="Magento\Catalog\Block\Product\ProductList\Toolbar"     type="Amasty\Shopby\Block\Product\ProductList\Toolbar"/>
+
+    <virtualType name="Amasty\Shopby\Model\Layer\Filter\ItemFactory" type="Magento\Catalog\Model\Layer\Filter\ItemFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Item</argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Shopby\Model\Layer\Filter\Attribute">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">Amasty\Shopby\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Shopby\Model\Layer\Filter\Price">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">Amasty\Shopby\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Shopby\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Shopby\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="categoryFilterList" type="Magento\Catalog\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="attribute" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Attribute</item>
+                <item name="price" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Decimal</item>
+                <item name="category" xsi:type="string">Magento\CatalogSearch\Model\Layer\Filter\Category</item>
+                <!--
+                <item name="category" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Category</item>
+
+                 <item name="decimal" xsi:type="string">Magento\CatalogSearch\Model\Layer\Filter\Decimal</item>
+                 -->
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="searchFilterList" type="Magento\Catalog\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="attribute" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Attribute</item>
+                <item name="price" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Decimal</item>
+                <item name="category" xsi:type="string">Magento\CatalogSearch\Model\Layer\Filter\Category</item>
+                <!--
+                 <item name="price" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Price</item>
+                <item name="category" xsi:type="string">Amasty\Shopby\Model\Layer\Filter\Category</item>
+                <item name="decimal" xsi:type="string">Magento\CatalogSearch\Model\Layer\Filter\Decimal</item>
+                -->
+            </argument>
+        </arguments>
+    </virtualType>
+
+
+    <type name="Magento\Catalog\Controller\Category\View">
+        <plugin name="Amasty_Shopby::ajaxInject" type="Amasty\Shopby\Plugin\CategoryViewAjax" />
+    </type>
+    <type name="Amasty\ShopbyRoot\Controller\Index\Index">
+        <plugin name="Amasty_Shopby::ajaxShopbyInject" type="Amasty\Shopby\Plugin\ShopbyViewAjax" />
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="Amasty_Shopby::wrapProductList" type="Amasty\Shopby\Plugin\ProductListWrapper" />
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\ProductList\Toolbar">
+        <plugin name="Amasty_Shopby::removeAjaxParamFromToolbar" type="Amasty\Shopby\Plugin\CatalogToolbarPlugin" />
+    </type>
+
+    <type name="Magento\Theme\Block\Html\Pager">
+        <plugin name="Amasty_Shopby::removeAjaxParamFromPager" type="Amasty\Shopby\Plugin\PagerPlugin" />
+    </type>
+
+    <type name="Magento\LayeredNavigation\Block\Navigation\State">
+        <plugin name="Amasty_Shopby::removeAjaxParamFromState" type="Amasty\Shopby\Plugin\StatePlugin" />
+    </type>
+
+</config>

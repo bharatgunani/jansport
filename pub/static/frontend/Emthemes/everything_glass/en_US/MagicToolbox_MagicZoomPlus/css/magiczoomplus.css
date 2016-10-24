@@ -1,7 +1,7 @@
 /*
 
 
-   Magic Zoom Plus v5.1.12 
+   Magic Zoom Plus v5.1.16
    Copyright 2016 Magic Toolbox
    Buy a license: https://www.magictoolbox.com/magiczoomplus/
    License agreement: https://www.magictoolbox.com/license/
@@ -64,8 +64,6 @@
 figure.mz-figure {
     overflow: hidden;
     margin: 0 !important;
-    -webkit-perspective: 300px;
-            perspective: 300px;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
 }

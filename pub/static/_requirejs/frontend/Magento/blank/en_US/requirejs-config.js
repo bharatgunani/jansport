@@ -1,6 +1,27 @@
 (function(require){
 (function() {
 /**
+ * @author    Amasty Team
+ * @copyright Copyright (c) Amasty Ltd. ( http://www.amasty.com/ )
+ * @package   Amasty_Shopby
+ */
+
+var config = {
+    map: {
+        '*': {
+            amShopbyFilterAbstract: 'Amasty_Shopby/js/amShopby',
+            amShopbyFilterItemDefault: 'Amasty_Shopby/js/amShopby',
+            amShopbyFilterDropdown: 'Amasty_Shopby/js/amShopby',
+            amShopbyFilterSlider: 'Amasty_Shopby/js/amShopby',
+            amShopbyAjax: 'Amasty_Shopby/js/amShopbyAjax'
+        }
+    }
+};
+
+require.config(config);
+})();
+(function() {
+/**
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
@@ -643,11 +664,21 @@ require.config(config);
 (function() {
 
 var config = {
+    config: {
+        mixins: {
+            'Magento_Swatches/js/swatch-renderer': {
+                'MagicToolbox_MagicZoomPlus/js/swatch-renderer': true
+            },
+            /* NOTE: for Magento v2.0.x */
+            'Magento_Swatches/js/SwatchRenderer': {
+                'MagicToolbox_MagicZoomPlus/js/swatch-renderer': true
+            }
+        }
+    },
     map: {
         '*': {
             magicToolboxThumbSwitcher: 'MagicToolbox_MagicZoomPlus/js/thumb-switcher',
-            configurable:              'MagicToolbox_MagicZoomPlus/js/configurable',
-            swatchRenderer:            'MagicToolbox_MagicZoomPlus/js/SwatchRenderer'
+            configurable:              'MagicToolbox_MagicZoomPlus/js/configurable'
         }
     }
 };

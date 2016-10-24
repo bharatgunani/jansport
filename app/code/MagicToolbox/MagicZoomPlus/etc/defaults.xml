@@ -3,10 +3,10 @@
     <param platform="0" profile="default" name="include-headers-on-all-pages" value="No" status="2" />
     <param platform="0" profile="default" name="thumb-max-width" value="550" status="2" />
     <param platform="0" profile="default" name="thumb-max-height" value="550" status="2" />
-    <param platform="0" profile="default" name="zoomWidth" value="200" status="2" />
-    <param platform="1" profile="default" name="zoomWidth" value="200" status="2" />
-    <param platform="0" profile="default" name="zoomHeight" value="200" status="2" />
-    <param platform="1" profile="default" name="zoomHeight" value="200" status="2" />
+    <param platform="0" profile="default" name="zoomWidth" value="auto" status="2" />
+    <param platform="1" profile="default" name="zoomWidth" value="auto" status="2" />
+    <param platform="0" profile="default" name="zoomHeight" value="auto" status="2" />
+    <param platform="1" profile="default" name="zoomHeight" value="auto" status="2" />
     <param platform="0" profile="default" name="zoomPosition" value="right" status="2" />
     <param platform="1" profile="default" name="zoomPosition" value="right" status="2" />
     <param platform="0" profile="default" name="square-images" value="No" status="2" />
@@ -22,6 +22,7 @@
     <param platform="1" profile="default" name="lazyZoom" value="No" status="2" />
     <param platform="0" profile="default" name="rightClick" value="No" status="2" />
     <param platform="1" profile="default" name="rightClick" value="No" status="2" />
+    <param platform="0" profile="default" name="link-to-product-page" value="Yes" status="2" />
     <param platform="0" profile="default" name="show-message" value="No" status="2" />
     <param platform="0" profile="default" name="message" value="Move your mouse over image or click to enlarge" status="2" />
     <param platform="0" profile="default" name="zoomMode" value="zoom" status="2" />
@@ -32,8 +33,8 @@
     <param platform="1" profile="default" name="upscale" value="Yes" status="2" />
     <param platform="0" profile="default" name="smoothing" value="Yes" status="2" />
     <param platform="1" profile="default" name="smoothing" value="Yes" status="2" />
-    <param platform="0" profile="default" name="variableZoom" value="Yes" status="2" />
-    <param platform="1" profile="default" name="variableZoom" value="Yes" status="2" />
+    <param platform="0" profile="default" name="variableZoom" value="No" status="2" />
+    <param platform="1" profile="default" name="variableZoom" value="No" status="2" />
     <param platform="0" profile="default" name="zoomCaption" value="off" status="2" />
     <param platform="1" profile="default" name="zoomCaption" value="off" status="2" />
     <param platform="0" profile="default" name="expand" value="window" status="2" />
@@ -71,10 +72,10 @@
     <param platform="0" profile="product" name="magicscroll" value="No" status="2" />
     <param platform="0" profile="product" name="thumb-max-width" value="700" status="1" />
     <param platform="0" profile="product" name="thumb-max-height" value="560" status="1" />
-    <param platform="0" profile="product" name="zoomWidth" value="200" status="0" />
-    <param platform="1" profile="product" name="zoomWidth" value="200" status="0" />
-    <param platform="0" profile="product" name="zoomHeight" value="200" status="0" />
-    <param platform="1" profile="product" name="zoomHeight" value="200" status="0" />
+    <param platform="0" profile="product" name="zoomWidth" value="auto" status="0" />
+    <param platform="1" profile="product" name="zoomWidth" value="auto" status="0" />
+    <param platform="0" profile="product" name="zoomHeight" value="auto" status="0" />
+    <param platform="1" profile="product" name="zoomHeight" value="auto" status="0" />
     <param platform="0" profile="product" name="zoomPosition" value="right" status="0" />
     <param platform="1" profile="product" name="zoomPosition" value="right" status="0" />
     <param platform="0" profile="product" name="square-images" value="No" status="0" />
@@ -100,8 +101,8 @@
     <param platform="1" profile="product" name="upscale" value="Yes" status="0" />
     <param platform="0" profile="product" name="smoothing" value="Yes" status="0" />
     <param platform="1" profile="product" name="smoothing" value="Yes" status="0" />
-    <param platform="0" profile="product" name="variableZoom" value="Yes" status="0" />
-    <param platform="1" profile="product" name="variableZoom" value="Yes" status="0" />
+    <param platform="0" profile="product" name="variableZoom" value="No" status="0" />
+    <param platform="1" profile="product" name="variableZoom" value="No" status="0" />
     <param platform="0" profile="product" name="zoomCaption" value="off" status="0" />
     <param platform="1" profile="product" name="zoomCaption" value="off" status="0" />
     <param platform="0" profile="product" name="expand" value="window" status="0" />
@@ -148,4 +149,65 @@
     <param platform="0" profile="product" name="scrollOnWheel" value="auto" status="2" />
     <param platform="0" profile="product" name="lazy-load" value="No" status="2" />
     <param platform="0" profile="product" name="scroll-extra-styles" value="" status="2" />
+    <param platform="0" profile="category" name="enable-effect" value="No" status="2" />
+    <param platform="0" profile="category" name="thumb-max-width" value="240" status="1" />
+    <param platform="0" profile="category" name="thumb-max-height" value="300" status="1" />
+    <param platform="0" profile="category" name="zoomWidth" value="auto" status="0" />
+    <param platform="1" profile="category" name="zoomWidth" value="auto" status="0" />
+    <param platform="0" profile="category" name="zoomHeight" value="auto" status="0" />
+    <param platform="1" profile="category" name="zoomHeight" value="auto" status="0" />
+    <param platform="0" profile="category" name="zoomPosition" value="right" status="0" />
+    <param platform="1" profile="category" name="zoomPosition" value="right" status="0" />
+    <param platform="0" profile="category" name="square-images" value="No" status="0" />
+    <param platform="0" profile="category" name="zoomDistance" value="15" status="0" />
+    <param platform="1" profile="category" name="zoomDistance" value="15" status="0" />
+    <param platform="0" profile="category" name="lazyZoom" value="No" status="0" />
+    <param platform="1" profile="category" name="lazyZoom" value="No" status="0" />
+    <param platform="0" profile="category" name="rightClick" value="No" status="0" />
+    <param platform="1" profile="category" name="rightClick" value="No" status="0" />
+    <param platform="0" profile="category" name="link-to-product-page" value="Yes" status="0" />
+    <param platform="0" profile="category" name="show-message" value="No" status="0" />
+    <param platform="0" profile="category" name="message" value="Move your mouse over image or click to enlarge" status="0" />
+    <param platform="0" profile="category" name="zoomMode" value="zoom" status="0" />
+    <param platform="1" profile="category" name="zoomMode" value="zoom" status="0" />
+    <param platform="0" profile="category" name="zoomOn" value="hover" status="0" />
+    <param platform="1" profile="category" name="zoomOn" value="hover" status="0" />
+    <param platform="0" profile="category" name="upscale" value="Yes" status="0" />
+    <param platform="1" profile="category" name="upscale" value="Yes" status="0" />
+    <param platform="0" profile="category" name="smoothing" value="Yes" status="0" />
+    <param platform="1" profile="category" name="smoothing" value="Yes" status="0" />
+    <param platform="0" profile="category" name="variableZoom" value="No" status="0" />
+    <param platform="1" profile="category" name="variableZoom" value="No" status="0" />
+    <param platform="0" profile="category" name="zoomCaption" value="off" status="0" />
+    <param platform="1" profile="category" name="zoomCaption" value="off" status="0" />
+    <param platform="0" profile="category" name="expand" value="window" status="0" />
+    <param platform="1" profile="category" name="expand" value="window" status="0" />
+    <param platform="0" profile="category" name="expandZoomMode" value="zoom" status="0" />
+    <param platform="1" profile="category" name="expandZoomMode" value="zoom" status="0" />
+    <param platform="0" profile="category" name="expandZoomOn" value="click" status="0" />
+    <param platform="1" profile="category" name="expandZoomOn" value="click" status="0" />
+    <param platform="0" profile="category" name="expandCaption" value="Yes" status="0" />
+    <param platform="1" profile="category" name="expandCaption" value="Yes" status="0" />
+    <param platform="0" profile="category" name="closeOnClickOutside" value="Yes" status="0" />
+    <param platform="1" profile="category" name="closeOnClickOutside" value="Yes" status="0" />
+    <param platform="0" profile="category" name="cssClass" value="blurred" status="0" />
+    <param platform="1" profile="category" name="cssClass" value="blurred" status="0" />
+    <param platform="0" profile="category" name="hint" value="once" status="0" />
+    <param platform="1" profile="category" name="hint" value="once" status="0" />
+    <param platform="0" profile="category" name="textHoverZoomHint" value="Hover to zoom" status="0" />
+    <param platform="1" profile="category" name="textHoverZoomHint" value="Hover to zoom" status="0" />
+    <param platform="0" profile="category" name="textClickZoomHint" value="Click to zoom" status="0" />
+    <param platform="1" profile="category" name="textClickZoomHint" value="Click to zoom" status="0" />
+    <param platform="0" profile="category" name="textExpandHint" value="Click to expand" status="0" />
+    <param platform="1" profile="category" name="textExpandHint" value="Click to expand" status="0" />
+    <param platform="0" profile="category" name="textBtnClose" value="Close" status="0" />
+    <param platform="1" profile="category" name="textBtnClose" value="Close" status="0" />
+    <param platform="0" profile="category" name="textBtnNext" value="Next" status="0" />
+    <param platform="1" profile="category" name="textBtnNext" value="Next" status="0" />
+    <param platform="0" profile="category" name="textBtnPrev" value="Previous" status="0" />
+    <param platform="1" profile="category" name="textBtnPrev" value="Previous" status="0" />
+    <param platform="0" profile="category" name="zoomModeForMobile" value="zoom" status="0" />
+    <param platform="0" profile="category" name="textHoverZoomHintForMobile" value="Touch to zoom" status="0" />
+    <param platform="0" profile="category" name="textClickZoomHintForMobile" value="Double tap to zoom" status="0" />
+    <param platform="0" profile="category" name="textExpandHintForMobile" value="Tap to expand" status="0" />
 </defaults>

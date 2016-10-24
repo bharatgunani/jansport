@@ -16,7 +16,8 @@ define([
                 currentProductId: null,
                 galleryData: [],
                 tools: {},
-                thumbSwitcherOptions: {}
+                thumbSwitcherOptions: {},
+                mtContainerSelector: 'div.MagicToolboxContainer'
             }
         },
 
@@ -38,32 +39,32 @@ define([
             this.options.mtConfig.galleryData = this.options.spConfig.magictoolbox.galleryData;
             this.options.mtConfig.tools = {
                 'Magic360': {
-                    'idTemplate': 'product{tool}-{id}',
+                    'idTemplate': '{tool}-product-{id}',
                     'objName': 'Magic360',
                     'undefined': true
                 },
                 'MagicSlideshow': {
-                    'idTemplate': 'product{tool}-{id}',
+                    'idTemplate': '{tool}-product-{id}',
                     'objName': 'MagicSlideshow',
                     'undefined': true
                 },
                 'MagicScroll': {
-                    'idTemplate': 'product{tool}-{id}',
+                    'idTemplate': '{tool}-product-{id}',
                     'objName': 'MagicScroll',
                     'undefined': true
                 },
                 'MagicZoomPlus': {
-                    'idTemplate': '{tool}Image{id}',
+                    'idTemplate': '{tool}Image-product-{id}',
                     'objName': 'MagicZoom',
                     'undefined': true
                 },
                 'MagicZoom': {
-                    'idTemplate': '{tool}Image{id}',
+                    'idTemplate': '{tool}Image-product-{id}',
                     'objName': 'MagicZoom',
                     'undefined': true
                 },
                 'MagicThumb': {
-                    'idTemplate': '{tool}Image{id}',
+                    'idTemplate': '{tool}Image-product-{id}',
                     'objName': 'MagicThumb',
                     'undefined': true
                 }
@@ -73,16 +74,9 @@ define([
             }
 
             //NOTE: get thumb switcher options
-            var container = $('div.product.media div.MagicToolboxContainer');
+            var container = $(this.options.mtConfig.mtContainerSelector);
             if (container.length && container.magicToolboxThumbSwitcher) {
                 this.options.mtConfig.thumbSwitcherOptions = container.magicToolboxThumbSwitcher('getOptions');
-                //NOTE: cut off unnecessary options
-                for (var optionName in this.options.mtConfig.thumbSwitcherOptions) {
-                    if (optionName.match(/^tool|productId|switchMethod$/)) {
-                        continue;
-                    }
-                    delete this.options.mtConfig.thumbSwitcherOptions[optionName];
-                }
             }
         },
 
@@ -120,7 +114,9 @@ define([
 
             //NOTE: stop tools
             for (var tool in tools) {
-                if (tools[tool].undefined) continue;
+                if (tools[tool].undefined) {
+                    continue;
+                }
                 var id = tools[tool].idTemplate.replace('{tool}', tool).replace('{id}', this.options.mtConfig.currentProductId);
                 if (document.getElementById(id)) {
                     window[tools[tool].objName].stop(id);
@@ -135,7 +131,7 @@ define([
             }
 
             //NOTE: replace gallery
-            $('div.product.media div.MagicToolboxContainer').replaceWith(galleryData[productId]);
+            $(this.options.mtConfig.mtContainerSelector).replaceWith(galleryData[productId]);
 
             //NOTE: start MagiScroll on selectors
             id = 'MagicToolboxSelectors'+productId;
@@ -145,7 +141,7 @@ define([
             }
 
             //NOTE: initialize thumb switcher widget
-            var container = $('div.product.media div.MagicToolboxContainer');
+            var container = $(this.options.mtConfig.mtContainerSelector);
             if (container.length) {
                 this.options.mtConfig.thumbSwitcherOptions.productId = productId;
                 if (container.magicToolboxThumbSwitcher) {
@@ -165,7 +161,9 @@ define([
 
             //NOTE: start tools
             for (var tool in tools) {
-                if (tools[tool].undefined) continue;
+                if (tools[tool].undefined) {
+                    continue;
+                }
                 var id = tools[tool].idTemplate.replace('{tool}', tool).replace('{id}', this.options.mtConfig.currentProductId);
                 if (document.getElementById(id)) {
                     window[tools[tool].objName].start(id);

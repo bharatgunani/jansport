@@ -31,7 +31,8 @@ class Profiles extends \Magento\Backend\Block\Widget\Tabs
         $activeTab = 'product';
         $profiles = [
             'default' => 'Defaults',
-            'product' => 'Product page'
+            'product' => 'Product page',
+            'category' => 'Category page'
         ];
 
         foreach ($profiles as $id => $title) {

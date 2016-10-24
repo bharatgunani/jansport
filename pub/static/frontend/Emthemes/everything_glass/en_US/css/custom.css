@@ -412,6 +412,9 @@ width:100% !important;
 #customer-reviews div p span
 {	display: inline-block; float: none !important; vertical-align: middle;
 }
+.filter-options-title
+{	font-size: 20px;  
+}
 @media screen and (min-device-width: 1100px) and (max-device-width: 1367px) 
 {	.minicart-items-wrapper
 	{	max-height: 400px; overflow-y:auto; 

@@ -1,6 +1,27 @@
 (function(require){
 (function() {
 /**
+ * @author    Amasty Team
+ * @copyright Copyright (c) Amasty Ltd. ( http://www.amasty.com/ )
+ * @package   Amasty_Shopby
+ */
+
+var config = {
+    map: {
+        '*': {
+            amShopbyFilterAbstract: 'Amasty_Shopby/js/amShopby',
+            amShopbyFilterItemDefault: 'Amasty_Shopby/js/amShopby',
+            amShopbyFilterDropdown: 'Amasty_Shopby/js/amShopby',
+            amShopbyFilterSlider: 'Amasty_Shopby/js/amShopby',
+            amShopbyAjax: 'Amasty_Shopby/js/amShopbyAjax'
+        }
+    }
+};
+
+require.config(config);
+})();
+(function() {
+/**
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
@@ -638,20 +659,6 @@ var config = {
         }
     }
 };
-require.config(config);
-})();
-(function() {
-
-var config = {
-    map: {
-        '*': {
-            magicToolboxThumbSwitcher: 'MagicToolbox_MagicZoomPlus/js/thumb-switcher',
-            configurable:              'MagicToolbox_MagicZoomPlus/js/configurable',
-            swatchRenderer:            'MagicToolbox_MagicZoomPlus/js/SwatchRenderer'
-        }
-    }
-};
-
 require.config(config);
 })();
 (function() {

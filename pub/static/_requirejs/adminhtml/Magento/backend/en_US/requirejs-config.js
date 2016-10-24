@@ -422,18 +422,6 @@ var config = {
 require.config(config);
 })();
 (function() {
-
-var config = {
-    map: {
-        '*': {
-            magiczoomplus: 'MagicToolbox_MagicZoomPlus/js/script'
-        }
-    }
-};
-
-require.config(config);
-})();
-(function() {
 var config = {
     map: {
         '*': {

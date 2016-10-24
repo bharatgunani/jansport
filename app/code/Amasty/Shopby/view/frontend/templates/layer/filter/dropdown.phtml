@@ -1,0 +1,32 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+?>
+<ol class="items">
+    <li>
+        <select class="am_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>">
+            <option value="<?php echo $block->escapeUrl($this->getClearUrl()) ?>">&nbsp;</option>
+            <?php foreach ($filterItems as $filterItem):
+                $disabled = ($filterItem->getCount() == 0) ? ' disabled' : "";
+                $selected = ($this->checkedFilter($filterItem)) ? ' selected' : "";
+                $url = $block->escapeUrl($filterItem->getUrl());
+                $label = $filterItem->getLabel();
+                if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()) {
+                    $label .= ' <span class="count">(' . $filterItem->getCount() . ')</span>';
+                }
+                ?>
+                <option value="<?php echo $url ?>" <?php echo $disabled . $selected ?>><?php echo $label ?></option>
+            <?php endforeach ?>
+            <script type="text/x-magento-init">
+            {
+                ".am_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>": {
+                    "amShopbyFilterDropdown": {"currentValue":<?php echo 1 ?>}
+                }
+            }
+            </script>
+        </select>
+    </li>
+</ol>

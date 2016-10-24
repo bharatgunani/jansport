@@ -1,0 +1,14 @@
+Never,Never
+"Single Selection Only","Single Selection Only"
+Always,Always
+SEO,SEO
+"Generate SEO URL","Generate SEO URL"
+"Allow Google to INDEX the Category Page with the Filter Applied","Allow Google to INDEX the Category Page with the Filter Applied"
+"Allow Google to FOLLOW Links on the Category Page with the Filter Applied","Allow Google to FOLLOW Links on the Category Page with the Filter Applied"
+"Improved Layered Navigation: SEO","Improved Layered Navigation: SEO"
+"SEO URLs","SEO URLs"
+Enable,Enable
+"URL will look ""category/autumn.html"" instead of ""category.html?season=114"". See per-attribute settings for fine-tuning.","URL will look ""category/autumn.html"" instead of ""category.html?season=114"". See per-attribute settings for fine-tuning."
+"Robots Tag Control","Robots Tag Control"
+"Allow the Module to Modify Robots Meta Tag","Allow the Module to Modify Robots Meta Tag"
+"Use ""No"" for compatibility with other SEO extensions.","Use ""No"" for compatibility with other SEO extensions."

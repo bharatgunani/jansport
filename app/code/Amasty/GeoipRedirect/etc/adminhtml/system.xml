@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_GeoipRedirect
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amgeoipredirect" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>GeoIp Redirect</label>
+            <tab>amasty</tab>
+            <resource>Amasty_Geoip::amgeoipredirect</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable GeoIP Redirect</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[General setting affecting all rules]]></comment>
+                </field>
+            </group>
+            <group id="restriction" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Restriction</label>
+                <field id="apply_logic" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Apply Logic To</label>
+                    <source_model>Amasty\GeoipRedirect\Model\Source\Logic</source_model>
+                </field>
+                <field id="accepted_urls" translate="label comment" type="textarea" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Accepted URLs</label>
+                    <depends>
+                        <field id="apply_logic">1</field>
+                    </depends>
+                    <comment><![CDATA[Please specify relative URLs (like /about-us/). Each URL on a separate line.]]></comment>
+                </field>
+                <field id="excepted_urls" translate="label comment" type="textarea" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Excepted URLs</label>
+                    <depends>
+                        <field id="apply_logic">2</field>
+                    </depends>
+                    <comment><![CDATA[Please specify relative URLs (like /about-us/). Each URL on a separate line.]]></comment>
+                </field>
+                <field id="user_agents_ignore" translate="label comment" type="textarea" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>User Agents to Ignore</label>
+                </field>
+                <field id="ip_restriction" translate="label comment" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Restriction by Ip</label>
+                    <comment><![CDATA[Each IP on a separate line.]]></comment>
+                </field>
+                <field id="first_visit_redirect" translate="label comment" type="select" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>First visit redirect only</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[<strong style="color:red">Warning!</strong> If you select "No" visitors will be not able to change Store View / currency.]]></comment>
+                </field>
+                <field id="redirect_between_websites" translate="label comment" type="select" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Redirect Between Websites</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="country_store" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Country to Store View Redirect</label>
+                <field id="enable_store" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Country --> Store View</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Please switch 'Current Configuration Scope' to a necessary store view to select affected countries.]]></comment>
+                </field>
+                <field id="affected_countries" translate="label comment" type="multiselect" sortOrder="2" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Affected Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                </field>
+            </group>
+            <group id="country_currency" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Country to Currency Switch</label>
+                <field id="enable_currency" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Country --> Currency</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="currency_mapping" translate="label comment" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Country to Currency Mapping</label>
+                    <frontend_model>Amasty\GeoipRedirect\Block\Adminhtml\Form\Field\CountryCurrency</frontend_model>
+                    <backend_model>Amasty\GeoipRedirect\Model\System\Config\Backend\Currency</backend_model>
+                </field>
+            </group>
+            <group id="country_url" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Country to URL Redirect</label>
+                <field id="enable_url" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Country --> URL</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="url_mapping" translate="label comment" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Country to URL Mapping</label>
+                    <frontend_model>Amasty\GeoipRedirect\Block\Adminhtml\Form\Field\CountryUrl</frontend_model>
+                    <backend_model>Amasty\GeoipRedirect\Model\System\Config\Backend\Url</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

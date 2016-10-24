@@ -92,13 +92,12 @@ class Configurable extends \Magento\Swatches\Block\Product\Renderer\Configurable
      */
     public function getMediaCallback()
     {
-		//echo 1111;exit;
         $data = $this->helper->getRegistry()->registry('magictoolbox');
         $url = self::MEDIA_CALLBACK_ACTION;
         if ($data && $data['current'] != 'product.info.media.image') {
             $url = self::MAGICTOOLBOX_MEDIA_CALLBACK_ACTION;
         }
-        return $url;
+        return $this->getUrl($url, ['_secure' => $this->getRequest()->isSecure()]);
     }
 
     /**
