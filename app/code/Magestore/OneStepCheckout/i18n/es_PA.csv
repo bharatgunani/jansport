@@ -1,0 +1,72 @@
+Edit,Editar
+Save in address book,Guardar en la libreta de direcciones
+You can create an account after checkout.,Puede crear una cuenta después de la salida.
+You already have an account with us. Sign in or continue as guest.,Usted ya tiene una cuenta con nosotros. Inicia sesión o continuar como invitado.
+Forgot Your Password?,Olvidaste tu contraseña?
+Email Address,Dirección de correo electrónico
+Enter coupon code here,Introduce el código de cupón aquí
+Apply,Aplicar
+Cancel,Cancelar
+Apply Discount,aplicar descuento
+* Required Fields,* Campos requeridos
+Shipping Methods,Métodos de envío
+Remove,Retirar
+My billing and shipping address are the same,Mi dirección de facturación y de envío son los mismos
+Cancel,Cancelar
+Update,Actualizar
+Date to delivery:,Fecha de entrega:
+Time to delivery:,Pasar a la acción:
+Choose...,Escoger...
+Add a gift message to my order,Añadir un mensaje de regalo a mi pedido
+To:,To:
+From:,De:
+Message:,Mensaje:
+Gift wrap,Papel de regalo
+Payment,Pago
+Order Review,Revisión del pedido
+Product,Producto
+Qty,Cantidad
+Subtotal,Total parcial
+Continue to PayPal,Continuar a PayPal
+Place Order,Realizar pedido
+"Please wait, processing your order...","Por favor espere, el procesamiento de su pedido ..."
+Leave your comment,Deje su comentario
+Sign Up for Our Newsletter,Suscríbase a nuestro Boletín
+Forgot your password?,Olvidaste tu contraseña?
+Please enter your email below and we will send you a new password.,"Por favor, introduzca su correo electrónico y le enviaremos una nueva contraseña."
+We have already sent a new password to your email address.,Ya hemos enviado una nueva contraseña a su dirección de correo electrónico.
+Email address,Dirección de correo electrónico
+Return to login,Volver a inicio
+Login,Iniciar sesión
+Create a new account,Crea una cuenta nueva
+Please enter the following information to create a new account.,"Por favor, introduzca la siguiente información para crear una nueva cuenta."
+Create a new account,Crea una cuenta nueva
+First Name,Nombre de pila
+Last Name,Apellido
+Password Strength,seguridad de la contraseña
+No Password,Sin contraseña
+Password,Contraseña
+Confirm Password,Confirmar contraseña
+Register,Registro
+Phone Number,Número de teléfono
+Street Address,Dirección
+Country,País
+City,Ciudad
+Zip/Postal Code,Postal / Código Postal
+State/Province,Estado / Provincia
+Company,Empresa
+Step 1: Install GeoIP Library,Paso 1: Instalar la biblioteca GeoIP
+"Please log in to your SSH. Use cd command to your Magento root folder. After that, enter the command:","Por favor, ingrese a su SSH. Utilice el comando cd a la carpeta raíz de Magento. Después de eso, introduzca el comando:"
+"If your Magento need the authentication, please log in to your Magento connect and go to ","Si su Magento necesita la autenticación, por favor, ingrese a su Magento y vaya a conectar"
+"After that, please generate the public key and the private key. Finally, copy them and fill them to Magento authentication.","Después de eso, por favor genere la clave pública y la clave privada. Por último, copiarlos y llenarlos con la autenticación de Magento."
+Step 2: Download GeoIP Data file,Paso 2: Descarga de archivos de datos GeoIP
+"After extracting the file, you will receive GeoLite2-City.mmdb file.","Después de extraer el archivo, recibirá el archivo GeoLite2-City.mmdb."
+Then please log in to your FTP and upload this file to ,"Entonces, por favor ingrese a su FTP y subir este archivo a"
+"Your Geo Ip is not installed! If you want to use Geo IP feature, please follow","Su Geo IP no está instalado! Si desea utilizar la función de GeoIP, siga"
+this guide,esta guía
+this link.,este enlace.
+Configure positions of fields in Billing and Shipping Address section. You can display fields into 2 columns (eg: First name + Last name) or 1 full column (eg: Address + Null),Configurar las posiciones de los campos en la sección de facturación y dirección de envío. Puede mostrar campos en 2 columnas (por ejemplo: Nombre + apellido) o 1 columna completa (por ejemplo: Dirección + Null)
+Field name already exists!,Nombre de campo ya existe!
+Security access code (Buildings/gated communities),código de acceso de seguridad (Edificios / comunidades cerradas)
+Credit Card (Visa - Mastercard),Tarjeta de Crédito
+Paguelofacil,Tarjeta de Crédito

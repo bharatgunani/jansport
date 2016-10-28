@@ -1,0 +1,181 @@
+<?php
+/**
+ * Copyright © 2015 CommerceExtensions. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="import-export-products">
+    <?php if (!$block->getIsReadonly()): ?>
+    <div class="import-products">
+        <?php if ($block->getUseContainer()): ?>
+        <form id="import-form" action="<?php echo $block->getUrl('product/data/importPost') ?>" method="post" enctype="multipart/form-data">
+        <?php endif; ?>
+            <?php echo $block->getBlockHtml('formkey')?>
+            <fieldset class="fieldset">
+                <legend class="legend"><span><?php echo __('Import Products') ?></span></legend>
+				<label class="label admin__field-label" for="root_catalog_id"><span>Root Catalog ID</span></label>
+				<div class="control">
+					<input id="basic_behavior_import_field_separator" name="root_catalog_id" value="" title="Root Catalog ID" class="basic_behavior input-text admin__control-text" type="text" size="20">
+				</div>
+				<br/>
+				<div class="admin__field-control control">
+					<span style="float: left; width: 200px"><label class="label admin__field-label" for="update_products_only"><span>Update Products Only</span></label></span>
+					<select id="update_products_only" name="update_products_only" title="Update Products Only" class="select admin__control-select">
+						<option value="false">No</option>
+						<option value="true">Yes</option>
+					</select>
+				</div>
+				<div class="admin__field-control control">
+				    <span style="float: left; width: 200px"><label class="label admin__field-label" for="import_images_by_url"><span>Import Images By URL</span></label></span>
+					<select id="import_images_by_url" name="import_images_by_url" title="Import Images By URL" class="select admin__control-select">
+						<option value="false">No</option>
+						<option value="true">Yes</option>
+					</select>
+				</div>
+				<div class="admin__field-control control">
+				    <span style="float: left; width: 200px"><label class="label admin__field-label" for="reimport_images"><span>Reimport Images</span></label></span>
+					<select id="reimport_images" name="reimport_images" title="Reimport Images" class="select admin__control-select">
+						<option value="false">No</option>
+						<option value="true">Yes</option>
+					</select>
+				</div>
+				<div class="admin__field-control control">
+					<span style="float: left; width: 200px"><label class="label admin__field-label" for="deleteall_andreimport_images"><span>Delete All And Reimport Images</span></label></span>
+					<select id="deleteall_andreimport_images" name="deleteall_andreimport_images" title="Delete All And Reimport Images" class="select admin__control-select">
+						<option value="false">No</option>
+						<option value="true">Yes</option>
+					</select>
+				</div>
+				<div class="admin__field-control control">
+					<span style="float: left; width: 200px"><label class="label admin__field-label" for="append_tier_prices"><span>Append Tier Prices</span></label></span>
+					<select id="append_tier_prices" name="append_tier_prices" title="Append Tier Prices" class="select admin__control-select">
+						<option value="false">No</option>
+						<option value="true">Yes</option>
+					</select>
+				</div>
+				
+				<div class="admin__field-control control">
+					<span style="float: left; width: 200px"><label class="label admin__field-label" for="append_categories"><span>Append Categories</span></label></span>
+					<select id="append_categories" name="append_categories" title="Append Categories" class="select admin__control-select">
+						<option value="false">No</option>
+						<option value="true">Yes</option>
+					</select>
+				</div>
+            	<div class="admin__field-control control">
+                	<input type="file" name="import_rates_file" class="input-file required-entry"/>
+				</div>
+            	<div class="admin__field-control control">
+               		 <?php echo $block->getButtonHtml('Import Products', '', 'import-submit') ?>
+				</div>
+            </fieldset>
+        <?php if ($block->getUseContainer()): ?>
+        </form>
+        <?php endif; ?>
+        <script>
+require(['jquery', "mage/mage", "loadingPopup"], function(jQuery){
+
+    jQuery('#import-form').mage('form').mage('validation');
+    (function ($) {
+        $('.import-submit').click(function(){
+            if($(':input[name="import_rates_file"]').val()) {
+                $('body').loadingPopup({
+                    timeout: false
+                });
+
+                $(this.form).submit();
+            }
+        });
+    })(jQuery);
+
+});
+</script>
+    </div>
+    <?php endif; ?>
+    <div class="export-products <?php if ($block->getIsReadonly()): ?>box-left<?php else: ?>box-right<?php endif; ?>">
+        <?php if ($block->getUseContainer()): ?>
+        <form id="export_form" action="<?php echo $block->getUrl('product/data/exportPost') ?>" method="post" enctype="multipart/form-data">
+        <?php endif; ?>
+            <?php echo $block->getBlockHtml('formkey')?>
+            <fieldset class="fieldset">
+                <legend class="legend"><span><?php echo __('Export Products') ?></span></legend>
+				<div class="admin__field field field-products">
+            		<!-- <div class="admin__field-control control">
+                    	<label class="label admin__field-label" for="export_by_manufacturer"><span>Export By Manufacturer</span></label>
+               			<select id="export_by_manufacturer" name="export_by_manufacturer" title="Export By Manufacturer" class="select admin__control-select">
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select>
+                    </div> -->
+                    <span style="float: left; width: 200px"><label class="label admin__field-label" for="product_id_from"><span>Export Range Product ID From</span></label></span>
+					<div class="control">
+						<input id="basic_behavior_import_field_separator" name="product_id_from" value="" title="Product ID From" class="basic_behavior input-text admin__control-text" type="text" size="20"> (leave blank for all products)
+					</div>
+					<br/>
+                    <span style="float: left; width: 200px"><label class="label admin__field-label" for="product_id_to"><span>Export Range Product ID To</span></label></span>
+					<div class="control">
+						<input id="basic_behavior_import_field_separator" name="product_id_to" value="" title="Product ID To" class="basic_behavior input-text admin__control-text" type="text" size="20"> (leave blank for all products)
+					</div>
+					<br/>
+            		<div class="admin__field-control control">
+                    	<span style="float: left; width: 200px"><label class="label admin__field-label" for="export_grouped_position"><span>Export Grouped Position</span></label></span>
+               			<select id="export_grouped_position" name="export_grouped_position" title="Export Grouped Position" class="select admin__control-select">
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select>
+                    </div>
+            		<div class="admin__field-control control">
+                    	<span style="float: left; width: 200px"><label class="label admin__field-label" for="export_related_position"><span>Export Related Position</span></label></span>
+               			<select id="export_related_position" name="export_related_position" title="Export Related Position" class="select admin__control-select">
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select>
+                    </div>
+            		<div class="admin__field-control control">
+                    	<span style="float: left; width: 200px"><label class="label admin__field-label" for="export_crossell_position"><span>Export Cross-sell Position</span></label></span>
+               			<select id="export_crossell_position" name="export_crossell_position" title="Export Cross-sell Position" class="select admin__control-select">
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select>
+                    </div>
+            		<div class="admin__field-control control">
+                    	<span style="float: left; width: 200px"><label class="label admin__field-label" for="export_upsell_position"><span>Export Up-sell Position</span></label></span>
+               			<select id="export_upsell_position" name="export_upsell_position" title="Export Up-sell Position" class="select admin__control-select">
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select>
+                    </div>
+            		<div class="admin__field-control control">
+                    	<span style="float: left; width: 200px"><label class="label admin__field-label" for="export_category_paths"><span>Export Category Paths</span></label></span>
+               			<select id="export_category_paths" name="export_category_paths" title="Export Category Paths" class="select admin__control-select">
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select>
+                    </div>
+            		<div class="admin__field-control control">
+                   		<span style="float: left; width: 200px"><label class="label admin__field-label" for="export_full_image_paths"><span>Export Full Image URL Paths</span></label></span>
+               			<select id="export_full_image_paths" name="export_full_image_paths" title="Export Full Image URL Paths" class="select admin__control-select">
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select>
+                    </div>
+					<!-- 
+            		<div class="admin__field-control control">
+                   		<label class="label admin__field-label" for="export_multi_store"><span>Export Multi Store Views</span></label>
+               			<select id="export_multi_store" name="export_multi_store" title="Export Multi Store Views" class="select admin__control-select">
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select>
+                    </div> -->
+            		<div class="admin__field-control control">
+               		 <?php echo $block->getButtonHtml('Export Products', "this.form.submit()") ?>
+                     </div>
+                </div>
+            </fieldset>
+        <?php if ($block->getUseContainer()): ?>
+        </form>
+        <?php endif; ?>
+    </div>
+</div>

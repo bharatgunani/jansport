@@ -1,0 +1,25 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**  @var $block \Magento\Checkout\Block\Cart */
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+	/** @var \Magento\Framework\Locale\Resolver $resolver */
+	$resolver = $om->get('Magento\Framework\Locale\Resolver');
+	$lcoale =  $resolver->getLocale();
+?>
+<div class="cart-empty">
+    <?php echo $block->getChildHtml('checkout_cart_empty_widget'); ?>
+	<?php if($lcoale != 'en_US'){ ?>
+    <p><?php  echo __('No tiene artículos en su carrito de compras.') ?></p>
+    <p><?php /* @escapeNotVerified */ echo __('Hacer clic <a href="%1">aquí</a> para seguir comprando.',
+            $block->escapeUrl($block->getContinueShoppingUrl())) ?></p>
+	<?php }else { ?>
+	<p><?php  echo __('You have no items in your shopping cart.') ?></p>
+    <p><?php /* @escapeNotVerified */ echo __('Click <a href="%1">here</a> to continue shopping.',
+            $block->escapeUrl($block->getContinueShoppingUrl())) ?></p>
+	<?php } ?>
+    <?php echo $block->getChildHtml('shopping.cart.table.after'); ?>
+</div>

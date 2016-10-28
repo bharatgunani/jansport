@@ -11,7 +11,7 @@
         </head>
     <body>
        <!-- header area -->
-        <move element="header-wrapper" destination="header.bottom" />
+        <move element="header-wrapper" destination="header.bottom" /> 
         <referenceContainer name="header.container">
               <container name="header.panel.wrapper" htmlTag="div" htmlClass="em-header-top em-fixed-top" />              
         </referenceContainer>
@@ -42,12 +42,53 @@
             <container name="header.bottom" htmlClass="header menu wrapper" htmlTag="div" after="logo"/>
             <container name="store.settings.wrapper" htmlClass="em-lan-cur-link-search" htmlTag="div" after="header.bottom">
                 <block class="Magento\Store\Block\Switcher" name="store_language" as="store_language" template="switch/languages.phtml"/>
-				<!--  rbj code -->
-				<container name="accountlink" htmlClass="accountlink" htmlTag="ul">
-						<block class="Magento\Customer\Block\Account\AuthorizationLink" name="authorization-link"
-                   template="account/link/authorization.phtml"/>
-				</container>
-				   
+                <!--  rbj code new code start for mobile menu -->
+                <container name="storelocator-link-1" htmlClass="header links" htmlTag="ul">
+                    <block class="Magestore\Storelocator\Block\Link" name="storelocator-top-link" before="authorization-link">
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">Store Locator</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Customer\Block\Account\AuthorizationLink" name="authorization-link"
+                           template="account/link/authorization.phtml"/>
+                </container>
+<!--                <container name="accountlink" htmlClass="header links" htmlTag="ul">
+                    <block class="Magento\Customer\Block\Account\AuthorizationLink" name="authorization-link"
+                           template="account/link/authorization.phtml"/>
+                </container>-->
+                <container name="registration-links" htmlClass="header links" htmlTag="ul">
+                    <block class="Magento\Customer\Block\Account\RegisterLink" name="register-link" template="account/link/registration.phtml" >
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">Register</argument>				
+                            <argument name="title" xsi:type="string" translate="true">Register</argument>				
+                        </arguments>
+	            
+                    </block>
+                </container>
+                <container name="link-wishlist" htmlClass="header links" htmlTag="ul">
+                    <block class="Magento\Wishlist\Block\Link" name="wish-list-link-1">
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">Wishlist111</argument>				
+                            <argument name="title" xsi:type="string" translate="true">Wishlist111</argument>				
+                        </arguments>
+                    </block>
+                </container>
+                <container name="compare-products-link" htmlClass="header links" htmlTag="ul">
+                    <block class="Magento\Framework\View\Element\Template" name="catalog.compare.link" after="wish-list-link-1" template="Magento_Catalog::product/compare/link.phtml">
+                        <arguments>
+                            <argument name="jsLayout" xsi:type="array">
+                                <item name="components" xsi:type="array">
+                                    <item name="compareProducts" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_Catalog/js/view/compare-products</item>
+                                    </item>
+                                </item>
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>	   
+                <!--  end rbj code new code start for mobile menu -->
+                
+                
             </container>
         </referenceContainer>
         <referenceContainer name="header-wrapper">
@@ -91,7 +132,7 @@
             <referenceBlock name="footer_links" remove="true" />
         </referenceContainer>
         <move element="footer" destination="footer_bottom"/>
-		<move element="top.links" destination="header.panel.wrapper" />
+        <move element="top.links" destination="header.panel.wrapper" />
         <!-- <move element="copyright" destination="footer.area.1" after="-" /> -->
 		
     </body>

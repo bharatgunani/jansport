@@ -634,17 +634,6 @@ var config = {
 require.config(config);
 })();
 (function() {
-var config = {
-    map: {
-        '*': {
-			Flyingeffect: 'Emthemes_FlyingEffectCart/js/flyingeffect',
-			catalogAddToCart: 'Emthemes_FlyingEffectCart/js/catalog-add-to-cart',
-        }
-    }
-};
-require.config(config);
-})();
-(function() {
 /**
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
@@ -659,6 +648,101 @@ var config = {
         }
     }
 };
+require.config(config);
+})();
+(function() {
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Storelocator
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+var config = {
+    map: {
+        '*': {
+            'magestore/googlemap' : 'Magestore_Storelocator/js/googlemap',
+            'magestore/pagination' : 'Magestore_Storelocator/js/pagination',
+            'magestore/tag' : 'Magestore_Storelocator/js/tag',
+            'magestore/liststore' : 'Magestore_Storelocator/js/liststore',
+            'magestore/direction' : 'Magestore_Storelocator/js/direction',
+            'magestore/searchbox' : 'Magestore_Storelocator/js/searchbox',
+            'magestore/viewpage/map' : 'Magestore_Storelocator/js/viewpage/map'
+        }
+    },
+    paths: {
+    }
+};
+
+require.config(config);
+})();
+(function() {
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Storelocator
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+var config = {
+    map: {
+       '*': {
+           'magestore/map-loader' : 'Magestore_Storelocator/js/store/map/map-loader',
+           'magestore/region-updater' : 'Magestore_Storelocator/js/store/region-updater',
+       }
+    },
+    paths: {
+    },
+};
+
+require.config(config);
+})();
+(function() {
+
+var config = {
+    config: {
+        mixins: {
+            'Magento_Swatches/js/swatch-renderer': {
+                'MagicToolbox_MagicZoomPlus/js/swatch-renderer': true
+            },
+            /* NOTE: for Magento v2.0.x */
+            'Magento_Swatches/js/SwatchRenderer': {
+                'MagicToolbox_MagicZoomPlus/js/swatch-renderer': true
+            }
+        }
+    },
+    map: {
+        '*': {
+            magicToolboxThumbSwitcher: 'MagicToolbox_MagicZoomPlus/js/thumb-switcher',
+            configurable:              'MagicToolbox_MagicZoomPlus/js/configurable'
+        }
+    }
+};
+
 require.config(config);
 })();
 (function() {
@@ -751,6 +835,21 @@ var config = {
 };
  
 
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+var config = {
+    map: {
+        '*': {
+            sidr: 'Magento_Checkout/js/sidr',	
+        }
+    }
+};
 require.config(config);
 })();
 

@@ -5,7 +5,8 @@
 define([
     'jquery',
     'mage/translate',
-    'jquery/ui'
+    'jquery/ui',
+    'sidr'
 ], function($, $t) {
     "use strict";
 

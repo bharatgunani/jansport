@@ -14,5 +14,7 @@
 	<css src="css/owlcarousel/owl.carousel.css" media="all"/>
 	<css src="css/owlcarousel/owl.theme.default.css" media="all"/>
 	<css src="css/custom.css" media="all"/>		
+	<!--<script src="js/sidr.js" type="text/javascript"/>--> 
+	<link src="Magento_Theme::js/sidr.js"/> 
     </head>
 </page>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Adminhtml::admin">
+                <resource id="Excellence_Hello::hello" title="Hello" sortOrder="20">
+                    <resource id="Excellence_Hello::hello_world" title="World" sortOrder="10">
+                        <resource id="Excellence_Hello::hello_world_test1" title="Test1" sortOrder="10">
+                         
+                        </resource>
+                    </resource>
+                </resource>
+                <!-- below part of our system configuration settings -->
+                <resource id="Magento_Adminhtml::stores">
+                    <resource id="Magento_Adminhtml::stores_settings">
+                        <resource id="Magento_Adminhtml::config">
+                            <resource id="Excellence_First::test_config" title="Hello World Section" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

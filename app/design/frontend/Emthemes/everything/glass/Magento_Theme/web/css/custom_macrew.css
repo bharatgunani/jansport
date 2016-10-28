@@ -142,14 +142,7 @@ body p
 	{
 		color:#a1a1a1 !important;	
 	}
-	.product-item-details .swatch-option
-	{
-		width:21%;
-	}
-	.swatch-more
-	{
-		width:21%;
-	}
+
 	.dropmenu-template .dropmenu-content .store-view p.h5, .dropmenu-template .dropmenu-content .em-row ul li {
 		padding: 0px 0px 8px 20px;
 		text-align: left;
@@ -423,3 +416,7 @@ letter-spacing:2px;
 {
 	margin:0;
 }
+.minicart-items-wrapper {
+    max-height: 500px !important;
+    overflow-y: auto;
+    height: 500px !important; }

@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Storelocator
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/** @var \Magestore\Storelocator\Block\Wrapper $block */
+?>
+<script type="text/javascript">
+    var initGoogleMap = function() {
+        require(['jquery', 'Magestore_Storelocator/js/googlemap'], function($){
+            $(document).ready(function ($) {
+                $('.googlemap').GoogleMap({
+                    urlLoadStore: '<?php echo $block->getUrl('storelocator/index/loadstore') ?>',
+                    paginationWrapper: '.pagination-wrapper',
+                    liststoreContainer: '.list-store-container',
+                    storePopupTemplate: '.popup-store-template',
+                    listTag: '.list-tag-ul',
+                    searchBox: '.mgs-search-box',
+                    loader: '.overlay-bg',
+                    defaultRaidus: '<?php echo $block->getSystemConfig()->getDefaultRadius() ?>',
+                    distanceUnit: '<?php echo $block->getSystemConfig()->getDistanceUnit() ?>',
+                    circleCenterIcon: '<?php echo $block->getViewFileUrl('circlecenter.png') ?>',
+                    mediaUrlImage: '<?php echo $block->getMediaUrlImage() ?>'
+                });
+            });
+        });
+    }
+</script>
+<script src="//maps.googleapis.com/maps/api/js?sensor=false&callback=initGoogleMap&libraries=places,geometry" ></script>
+<script src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" ></script>
+<div class="storelocator-wrapper col-full">
+    <h2 class="title-page"><?php echo __('Store Locator') ?></h2>
+    <?php echo $block->getChildHtml('storelocator.searchbox'); ?>
+    <div class="boxes-content">
+        <?php echo $block->getChildHtml('storelocator.mapbox'); ?>
+        <?php echo $block->getChildHtml('storelocator.liststorebox'); ?>
+    </div>
+    <div class="overlay-bg">
+        <img src="<?php echo $block->getViewFileUrl('Magestore_Storelocator::images/ajax-loader.gif') ?>" alt="overlay" />
+    </div>
+</div>

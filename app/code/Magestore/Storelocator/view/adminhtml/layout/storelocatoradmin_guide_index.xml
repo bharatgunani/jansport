@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Storelocator
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Store Locator Guide</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magestore\Storelocator\Block\Adminhtml\Guide" name="storelocator_guide">
+                <block class="Magestore\Storelocator\Block\Adminhtml\Guide\Form" name="form">
+                    <block class="Magestore\Storelocator\Block\Adminhtml\Guide\Renderer" name="guide.general" template="Magestore_Storelocator::guide/general.phtml"/>
+                    <block class="Magestore\Storelocator\Block\Adminhtml\Guide\Renderer" name="guide.google" template="Magestore_Storelocator::guide/google.phtml"/>
+                    <block class="Magestore\Storelocator\Block\Adminhtml\Guide\Renderer" name="guide.facebook" template="Magestore_Storelocator::guide/facebook.phtml"/>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

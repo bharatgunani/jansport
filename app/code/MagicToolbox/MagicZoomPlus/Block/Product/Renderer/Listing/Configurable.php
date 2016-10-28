@@ -106,7 +106,8 @@ class Configurable extends \Magento\Swatches\Block\Product\Renderer\Listing\Conf
         $data = $this->helper->getRegistry()->registry('magictoolbox_category');
         $url = self::MEDIA_CALLBACK_ACTION;
         if ($data && $data['current-renderer'] == 'configurable.magiczoomplus') {
-            $url = self::MAGICTOOLBOX_MEDIA_CALLBACK_ACTION;
+            //$url = self::MAGICTOOLBOX_MEDIA_CALLBACK_ACTION;
+            $url = 'https://www.mochilasjansport.com/jansport/'.self::MAGICTOOLBOX_MEDIA_CALLBACK_ACTION;
         }
         return $url;
     }

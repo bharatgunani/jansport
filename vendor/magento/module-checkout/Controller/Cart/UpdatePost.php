@@ -39,7 +39,9 @@ class UpdatePost extends \Magento\Checkout\Controller\Cart
                 );
                 foreach ($cartData as $index => $data) {
                     if (isset($data['qty'])) {
-                        $cartData[$index]['qty'] = $filter->filter(trim($data['qty']));
+						//custom qty for spanish changed by rakesh
+                        //$cartData[$index]['qty'] = $filter->filter(trim($data['qty']));
+						$cartData[$index]['qty'] = trim($data['qty']);
                     }
                 }
                 if (!$this->cart->getCustomerSession()->getCustomerId() && $this->cart->getQuote()->getCustomerId()) {

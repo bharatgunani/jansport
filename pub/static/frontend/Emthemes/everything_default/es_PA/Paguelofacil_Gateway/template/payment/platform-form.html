@@ -9,7 +9,7 @@
                name="payment[method]"
                class="radio"
                data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
-        <label data-bind="attr: {'for': getCode()}" class="label"> Paguelofacil </label>
+        <label data-bind="attr: {'for': getCode()}" class="label">Credit Card (Visa - Mastercard)</label>
     </div>
     <div class="payment-method-content">
         <!-- ko foreach: getRegion('messages') -->

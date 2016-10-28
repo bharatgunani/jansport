@@ -205,6 +205,12 @@
                 <width>156</width>
                 <height>156</height>
             </image>
+            <!-- New changes By navin   -->
+            <image id="swatch_image" type="swatch_image">
+                <width>51</width>
+                <height>51</height>
+            </image>
+            <!-- New changes By navin end  -->
 
         </images>
     </media>

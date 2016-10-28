@@ -1,0 +1,25 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
+
+$collection = $productCollection->create()
+        ->addAttributeToSelect('*')
+        ->load();
+
+foreach ($collection as $product) {
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
+    /* Remove Images From Product */
+    $productId = $product->getID();//1802; // Id of product
+    //echo 'id=='.$productId;
+    $product = $objectManager->create('Magento\Catalog\Model\Product')->load($productId);
+    $productRepository = $objectManager->create('Magento\Catalog\Api\ProductRepositoryInterface');
+    $existingMediaGalleryEntries = $product->getMediaGalleryEntries();
+    foreach ($existingMediaGalleryEntries as $key => $entry) {
+        unset($existingMediaGalleryEntries[$key]);
+    }
+    $product->setMediaGalleryEntries($existingMediaGalleryEntries);
+    $productRepository->save($product);
+}
+?>

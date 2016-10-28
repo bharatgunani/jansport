@@ -20,7 +20,7 @@ define([
         options: {
             active: false,
             disabled: false,
-            collapsible: true,
+            collapsible: false,
             header: "[data-role=title]",
             content: "[data-role=content]",
             trigger: "[data-role=trigger]",

@@ -1,0 +1,8 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch">
+        <observer name="excellence_hello_test_observer" instance="Excellence\Hello\Observer\Predispatch" />
+    </event>
+    <event name="customer_customer_authenticated">
+        <observer name="excellence_hello_customer_customer_authenticated" instance="Excellence\Hello\Observer\Customer\Authenticated" />
+    </event>
+</config>

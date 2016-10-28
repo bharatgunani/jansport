@@ -333,17 +333,21 @@ $_pageLayout = $_settingHelper->getPageConfig();
                         <?php
                             $_productNameStripped = $block->stripTags($_product->getName(), null, true);
                         ?>
-                        <strong class="product name product-item-name">
+                        <div class="prod">
+                          <strong class="product name product-item-name">
                             <a class="product-item-link"
                                href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>">
                                 <?php /* @escapeNotVerified */ echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
                             </a>
-                        </strong>
-                        
-                        <?php endif; ?>
+                          </strong>
+                          <?php endif; ?>
                         <?php //if($showReview): ?>
                               <?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
                         <?php //endif; ?>
+                        </div>
+                        
+                        
+                        
                         <?php if($showPrice): ?>                        
                               <?php /* @escapeNotVerified */ echo $block->getProductPrice($_product) ?>                        
                               <?php echo $block->getProductDetailsHtml($_product); ?>

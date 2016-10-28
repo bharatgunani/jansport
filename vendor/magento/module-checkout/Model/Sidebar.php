@@ -112,8 +112,10 @@ class Sidebar
      * @return $this
      */
     public function updateQuoteItem($itemId, $itemQty)
-    {
-        $itemData = [$itemId => ['qty' => $this->normalize($itemQty)]];
+    {		
+		//custom qty for spanish changed by rakesh
+        //$itemData = [$itemId => ['qty' => $this->normalize($itemQty)]];
+		$itemData = [$itemId => ['qty' => $itemQty]];
         $this->cart->updateItems($itemData)->save();
         return $this;
     }
