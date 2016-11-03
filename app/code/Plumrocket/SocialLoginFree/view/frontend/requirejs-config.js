@@ -17,7 +17,9 @@
 var config = {
     map: {
         '*': {
-        	'pslogin': 'Plumrocket_SocialLoginFree/js/pslogin'
+        	'pslogin': 'Plumrocket_SocialLoginFree/js/pslogin',
+        	'pslogin-sharepopup': 'Plumrocket_SocialLoginFree/js/sharepopup',
+        	'pslogin-photo': 'Plumrocket_SocialLoginFree/js/photo'
         }
     }
 };

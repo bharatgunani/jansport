@@ -21,20 +21,22 @@ class Share extends \Magento\Framework\View\Element\Template
 {
     protected $_objectManager = null;
 
-	protected $_share = [
-							'facebook',
-							'twitter',
-							'google_plusone_share' => 'Google+',
-							'linkedin' => 'LinkedIn',
-							'pinterest',
-							'amazonwishlist' => 'Amazon',
-							'vk' => 'Vkontakte',
-							'odnoklassniki_ru' => 'Odnoklassniki',
-							'mymailru' => 'Mail',
-							'blogger',
-							'delicious',
-							'wordpress',
-						];
+    protected $_buttonTypes = [
+                            'facebook',
+                            'twitter',
+                            'google_plusone_share' => 'Google+',
+                            'linkedin' => 'LinkedIn',
+                            'pinterest',
+                            'amazonwishlist' => 'Amazon',
+                            'vk' => 'Vkontakte',
+                            'odnoklassniki_ru' => 'Odnoklassniki',
+                            'mymailru' => 'Mail',
+                            'blogger',
+                            'delicious',
+                            'wordpress',
+                            'email',
+                            'addthis' => 'AddThis'
+                        ];
 
     public function _construct()
     {
@@ -50,37 +52,37 @@ class Share extends \Magento\Framework\View\Element\Template
 
     public function showPopup()
     {
-        return $this->getHelper()->showPopup() && $this->getHelper()->shareEnabled();
+        //return $this->getHelper()->showPopup() && $this->getHelper()->shareEnabled();
+        return $this->getHelper()->shareEnabled();
+    }
+
+    public function getButtonTypes()
+    {
+        if (!$this->hasData('button_types')) {
+            $this->setData('button_types', $this->_buttonTypes);
+        }
+        return $this->getData('button_types');
     }
 
     public function getButtons()
     {
-    	$buttons = [];
+        $buttons = [];
+        foreach ($this->getButtonTypes() as $key1 => $key2) {
+            $key = (!is_numeric($key1)) ? $key1 : $key2;
+            $title = ucfirst($key2);
 
-    	$url = urlencode($this->getPageUrl());
-    	$title = urlencode($this->getTitle());
+            $buttons[] = ['key' => $key, 'title' => $title];
+        }
 
-    	foreach ($this->_share as $key1 => $key2) {
-    		$key = (!is_numeric($key1)) ? $key1 : $key2;
-    		$name = ucfirst($key2);
-
-    		$buttons[] = [
-                'href' => "https://api.addthis.com/oexchange/0.8/forward/{$key}/offer?url={$url}&ct=1&pco=tbxnj-1.0",
-    			// 'href' => "https://api.addthis.com/oexchange/0.8/forward/{$key}/offer?url={$url}&title={$title}&ct=1&pco=tbxnj-1.0",
-    			'image' => "https://cache.addthiscdn.com/icons/v2/thumbs/32x32/{$key}.png",
-    			'name' => $name,
-    		];
-    	}
-
-    	return $buttons;
+        return $buttons;
     }
 
     public function getPageUrl()
     {
-    	$pageUrl = null;
-    	$shareData = $this->getHelper()->getShareData();
-    	
-    	switch($shareData['page']) {
+        $pageUrl = null;
+        $shareData = $this->getHelper()->getShareData();
+
+        switch($shareData['page']) {
 
             case '__custom__':
                 $pageUrl = $shareData['page_link'];
@@ -95,7 +97,7 @@ class Share extends \Magento\Framework\View\Element\Template
                 }else{
                     $pageUrl = $this->_objectManager->get('Magento\Store\Model\Store')->getBaseUrl();
                 }
-            	break;
+                break;
 
             default:
                 if(is_numeric($shareData['page'])) {
@@ -111,15 +113,29 @@ class Share extends \Magento\Framework\View\Element\Template
 
     public function getTitle()
     {
-    	$shareData = $this->getHelper()->getShareData();
-    	return $shareData['title'];
+        $shareData = $this->getHelper()->getShareData();
+        return $shareData['title'];
     }
 
     public function getDescription()
     {
         $process = $this->_objectManager->get('Magento\Cms\Model\Template\FilterProvider')->getPageFilter();
         $shareData = $this->getHelper()->getShareData();
-    	return $process->filter($shareData['description']);
+        return $process->filter($shareData['description']);
+    }
+
+    public function getJsLayout()
+    {
+        if ($this->jsLayout) {
+            $config = &$this->jsLayout['components']['pslogin-sharepopup']['config'];
+            $config['title'] = $this->getTitle();
+            $config['description'] = $this->getDescription();
+            $config['url'] = $this->getPageUrl();
+            $config['buttons'] = $this->getButtons();
+        }
+
+        return parent::getJsLayout();
+
     }
 
 }

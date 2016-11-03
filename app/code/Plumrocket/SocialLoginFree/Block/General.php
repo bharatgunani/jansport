@@ -19,31 +19,29 @@ namespace Plumrocket\SocialLoginFree\Block;
 
 class General extends \Magento\Framework\View\Element\Template
 {
+    protected $_objectManager;
+    protected $_dataHelper;
+
+    protected function _construct()
+    {
+        parent::_construct();
+
+        $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->_dataHelper = $this->_objectManager->get('Plumrocket\SocialLoginFree\Helper\Data');
+        }
+
 	protected function _toHtml()
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $helper = $objectManager->get('Plumrocket\SocialLoginFree\Helper\Data');
-        if(!$helper->moduleEnabled()) {
+        if(!$this->_dataHelper->moduleEnabled()) {
             return;
         }
 
-        $moduleName = $this->getRequest()->getModuleName();
-
-        // Set current store.
-        if($moduleName != 'pslogin') {
-            $currentStoreId = $objectManager->get('Magento\Store\Model\StoreManager')->getStore()->getId();
-            $helper->refererStore($currentStoreId);
-        }
-
-        // Set referer.
-        if(!$objectManager->get('Magento\Customer\Model\Session')->isLoggedIn()) {
-            $skipModules = $helper->getRefererLinkSkipModules();
-            if($this->getRequest()->getActionName() != 'noRoute' && !in_array($moduleName, $skipModules)) {
-                $referer = $objectManager->get('Magento\Framework\Url\Helper\Data')->getCurrentBase64Url();
-                $helper->refererLink($referer);
-            }
-        }
-        
         return parent::_toHtml();
+    }
+
+    public function getSkipModules()
+    {
+        $skipModules = $this->_dataHelper->getRefererLinkSkipModules();
+        return json_encode($skipModules);
     }
 }

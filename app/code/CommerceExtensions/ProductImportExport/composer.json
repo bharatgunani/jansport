@@ -1,30 +1,22 @@
 {
     "name": "commerceextensions/productimportexport",
-	"type": "magento2-module",
+    "type": "magento2-module",
     "require": {
         "php": "~5.5.0|~5.6.0",
         "magento/module-store": "1.0.0-beta",
         "magento/module-catalog": "1.0.0-beta",
         "magento/module-catalog-inventory": "1.0.0-beta",
-        "magento/module-ui": "self.version",
-        "magento/magento-composer-installer": "*"
+        "magento/module-ui": "self.version"
     },
     "suggest": {
       "magento/module-webapi": "1.0.0-beta"
     },
+    "version": "1.0.1",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
     ],
-    "extra": {
-        "map": [
-            [
-                "module",
-                "CommerceExtensions/ProductImportExport"
-            ]
-        ]
-    },
-	"autoload": {
+    "autoload": {
     "psr-4": { "CommerceExtensions\\ProductImportExport\\": "" },
     "files": [ "registration.php" ]
 }

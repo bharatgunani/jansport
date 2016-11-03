@@ -36,7 +36,7 @@
                         <?php if(!$this->showFullButtons() && !empty($button['image']['icon'])) : ?>
                             <img class="pslogin-button-icon-image" src="<?php echo $this->escapeHtml($button['image']['icon']); ?>" />
                         <?php endif; ?>
-                        
+
                         <?php if(empty($button['image']['login']) || empty($button['image']['icon'])) : ?>
                             <span class="pslogin-button-auto <?php echo !empty($button['image']['login'])? 'pslogin-has-button-image' : ''; ?> <?php echo !empty($button['image']['icon'])? 'pslogin-has-button-icon-image' : ''; ?>">
                                 <span class="pslogin-button-icon">

@@ -74,7 +74,7 @@ class RegistrationSuccessObserver implements ObserverInterface
         }
 
         // Show share-popup.
-        $this->_helper->showPopup(true);
+        $this->_helper->showPopup();
 
         // Set redirect url.
         $redirectUrl = $this->_helper->getRedirectUrl('register');

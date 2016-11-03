@@ -30,9 +30,8 @@ abstract class AbstractAccount extends \Magento\Framework\App\Action\Action
                 'windowClose' => true
             ]));
         }else{
-            $this->getResponse()->setBody('<script type="text/javascript">window.close();</script>');
+            $this->getResponse()->setBody($this->_jsWrap('window.close();'));
         }
-        // $this->getResponse()->setBody('<script type="text/javascript">if(window.name == "pslogin_popup") { window.close(); }</script>');
     }
 
     protected function _dispatchRegisterSuccess($customer)
@@ -58,11 +57,9 @@ abstract class AbstractAccount extends \Magento\Framework\App\Action\Action
         return $this->_objectManager->get('Plumrocket\SocialLoginFree\Helper\Data');
     }
 
-    /*protected function _redirectUrl($url)
+    protected function _jsWrap($js)
     {
-        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)
-            ->setUrl($url);
-        return $resultRedirect;
-    }*/
+        return '<html><head></head><body><script type="text/javascript">'.$js.'</script></body></html>';
+    }
 
 }

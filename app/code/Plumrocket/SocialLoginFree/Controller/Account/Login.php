@@ -96,7 +96,7 @@ class Login extends \Plumrocket\SocialLoginFree\Controller\AbstractAccount
             // $url = $this->_objectManager->get('Magento\Customer\Model\Url')->getForgotPasswordUrl();
             $message = __('Customer with email (%1) already exists in the database. If you are sure that it is your email address, please <a href="%2">click here</a> to retrieve your password and access your account.', $model->getUserData('email'), $url);
             $this->messageManager->addNotice($message);
-            
+
             $redirectUrl = $this->_getHelper()->getRedirectUrl();
         }else{
             # Registration customer.
@@ -108,16 +108,16 @@ class Login extends \Plumrocket\SocialLoginFree\Controller\AbstractAccount
                 }else{
                     $this->messageManager->addSuccess(__('Customer registration successful. Your password was send to the email: %1', $model->getUserData('email')));
                 }
-                
+
                 if($errors = $model->getErrors()) {
                     foreach ($errors as $error) {
                         $this->messageManager->addNotice($error);
                     }
                 }
-                
+
                 // Dispatch event.
                 $this->_dispatchRegisterSuccess($model->getCustomer());
-                
+
                 // Remember customer.
                 $model->setCustomerIdByUserId($customerId);
 
@@ -125,7 +125,7 @@ class Login extends \Plumrocket\SocialLoginFree\Controller\AbstractAccount
                 $model->postToMail();
 
                 // Show share-popup.
-                $this->_getHelper()->showPopup(true);
+                $this->_getHelper()->showPopup();
 
                 $redirectUrl = $this->_getHelper()->getRedirectUrl('register');
             }else{
@@ -157,19 +157,28 @@ class Login extends \Plumrocket\SocialLoginFree\Controller\AbstractAccount
             }
 
             // Loged in.
-            $session->loginById($customerId);
+            if ($session->loginById($customerId)) {
+                $session->regenerateId();
+            }
 
             // Unset referer link.
             $this->_getHelper()->refererLink(null);
         }
 
-        if($this->getRequest()->isXmlHttpRequest()) {
+        if ($this->getRequest()->isXmlHttpRequest()) {
             $this->getResponse()->clearHeaders()->setHeader('Content-type', 'application/json', true);
             $this->getResponse()->setBody(json_encode([
                 'redirectUrl' => $redirectUrl
             ]));
-        }else{
-            $this->getResponse()->setBody('<script type="text/javascript">if(window.opener && window.opener.location &&  !window.opener.closed) { window.close(); window.opener.location.href = "'.$redirectUrl.'"; }else{ window.location.href = "'.$redirectUrl.'"; }</script>');
+        } else {
+            $jsAction = '
+                var pslDocument = window.opener ? window.opener.document : document;
+                pslDocument.getElementById("pslogin-login-referer").value = "'.htmlspecialchars(base64_encode($redirectUrl)).'";
+                pslDocument.getElementById("pslogin-login-submit").click();
+            ';
+
+            $body = $this->_jsWrap('if(window.opener && window.opener.location &&  !window.opener.closed) { window.close(); }; '.$jsAction.';');
+            $this->getResponse()->setBody($body);
         }
     }
 

@@ -486,3 +486,11 @@ $_pageLayout = $_settingHelper->getPageConfig();
       </script>
 <?php endif; ?>
 
+
+<script type="application/javascript">
+  require(['jquery'], function($){
+  jQuery(document).ready(function(){
+      jQuery('.swatch-attribute').parent().addClass('color-main');
+  });
+  });
+</script>

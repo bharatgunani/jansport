@@ -17,7 +17,7 @@
                 <number_items_slider_screen_size_1000>5</number_items_slider_screen_size_1000>
                 <margin>10</margin>
                 <autoWidth>0</autoWidth>
-                <nav>1</nav>
+                <nav>0</nav>
                 <navText>[&#x27;next&#x27;,&#x27;prev&#x27;]</navText>
                 <dots>0</dots>
                 <lazyLoad>1</lazyLoad>

@@ -16,6 +16,14 @@
             <?php echo $block->getBlockHtml('formkey')?>
             <fieldset class="fieldset">
                 <legend class="legend"><span><?php echo __('Import Products') ?></span></legend>
+				<label class="label admin__field-label" for="import_delimiter"><span>Import CSV Delimiter Value</span></label>
+				<div class="control">
+					<input id="basic_behavior_import_delimiter" name="import_delimiter" value="," title="Import Delimiter" class="basic_behavior input-text admin__control-text" type="text" size="1">
+				</div>
+				<label class="label admin__field-label" for="import_enclose"><span>Import CSV Enclose Value</span></label>
+				<div class="control">
+					<input id="basic_behavior_import_enclose" name="import_enclose" value='"' title="Import Enclose" class="basic_behavior input-text admin__control-text" type="text" size="1">
+				</div>
 				<label class="label admin__field-label" for="root_catalog_id"><span>Root Catalog ID</span></label>
 				<div class="control">
 					<input id="basic_behavior_import_field_separator" name="root_catalog_id" value="" title="Root Catalog ID" class="basic_behavior input-text admin__control-text" type="text" size="20">
@@ -109,6 +117,17 @@ require(['jquery', "mage/mage", "loadingPopup"], function(jQuery){
 							<option value="true">Yes</option>
 						</select>
                     </div> -->
+					
+					<div class="admin__field field field-orderimportexport">
+						<label class="label admin__field-label" for="export_delimiter"><span>Export CSV Delimiter Value</span></label>
+						<div class="control">
+							<input id="basic_behavior_export_delimiter" name="export_delimiter" value="," title="Export Delimiter" class="basic_behavior input-text admin__control-text" type="text" size="1">
+						</div>
+						<label class="label admin__field-label" for="export_delimiter"><span>Export CSV Enclose Value</span></label>
+						<div class="control">
+							<input id="basic_behavior_export_enclose" name="export_enclose" value='"' title="Export Enclose" class="basic_behavior input-text admin__control-text" type="text" size="1">
+						</div>
+					</div>
                     <span style="float: left; width: 200px"><label class="label admin__field-label" for="product_id_from"><span>Export Range Product ID From</span></label></span>
 					<div class="control">
 						<input id="basic_behavior_import_field_separator" name="product_id_from" value="" title="Product ID From" class="basic_behavior input-text admin__control-text" type="text" size="20"> (leave blank for all products)
@@ -176,6 +195,115 @@ require(['jquery', "mage/mage", "loadingPopup"], function(jQuery){
             </fieldset>
         <?php if ($block->getUseContainer()): ?>
         </form>
+		
+	</div>
+		
+	<div class="CRON JOB <?php if ($block->getIsReadonly()): ?>box-left<?php else: ?>box-right<?php endif; ?>">
+		<?php if ($block->getUseContainer()): ?>
+		
+		 <form id="cron_form" action="<?php echo $block->getUrl('product/data/CronJob') ?>" method="POST" enctype="multipart/form-data">
+			<?php endif; ?>
+				
+					
+			<fieldset class="fieldset">	
+			
+				 <legend class="legend"><span><?php echo __('CRON JOB') ?></span></legend>
+				 <br/>
+				 
+				 
+				 
+				 <div class="control">
+                   		<span style="float: left; width: 100px"><label class="Profile_type" for="Profile_type"><span>Profile Type</span></label></span>
+               			<select id="Profile_type" name="Profile_type" title="Profile Type" class="select admin__control-select">
+							<option value="Import_Products">Import Products</option>
+							<option value="Export_Products">Export Products</option>
+						</select>
+                    </div>
+				 <br/>
+				 <br/>
+				 <br/>
+				 
+				 <div class="control">
+                   		<span style="float: left; width: 100px"><label class="Profile_type" for="Profile_type"><span>Schedule</span></label></span>
+               			<select id="Schedule_id" name="Schedule" title="Schedule" class="select admin__control-select">
+							<option value="Hourly">Hourly</option>
+							<option value="Every_24hrs">Every 24hrs</option>
+							<option value="Weekly">Weekly</option>
+						</select>
+                    </div> 
+				 
+				 <br/>
+				 <br/>
+				 <br/>
+				 <br/>
+				<label class="Import File Location" for="import_file_location"><span>Import File Location</span></label>
+				<br/>
+				<br/>
+
+				<span style="float: left; width: 100px"><label class="label admin__field-label" for="File_name"><span>File name</span></label></span>
+				<div class="control">
+				<input id="File_name" name="File_name" value="" title="File_name" class="basic_behavior input-text admin__control-text" type="text" size="20"> 
+				</div>
+				
+				<br/>
+				
+				<span style="float: left; width: 100px"><label class="label admin__field-label" for="File_name"><span>File path</span></label></span>
+				<div class="control">
+				<input id="File_path" name="File_path" value="" title="File_path" class="basic_behavior input-text admin__control-text" type="text" size="20"> 
+				</div>
+				
+				<br/>
+				
+				<label class="Export File Location" ><span>Export File Location</span></label>
+				<br/>
+				<br/>
+				<div class="control">
+					<input id="export_file_location" name="Export_File_Location" value=""  class="basic_behavior input-text admin__control-text" type="text" size="20">
+				</div>
+				<br/>
+				<br/>
+				<input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+				<div class="admin__field-control control">
+						<input type="button" value="Save" onClick="submitAllDocumentForms()" />
+			
+				</div>
+				
+			</fieldset>
+		 </form>
+		
+	</div>
         <?php endif; ?>
-    </div>
+
+
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+/* Collect all forms in document to one and post it */
+function submitAllDocumentForms() {
+
+    var arrDocForms = document.getElementsByTagName('form');
+    var formCollector = document.createElement("form");
+    with(formCollector)
+    {
+        method = "post";
+        action = "<?php echo $block->getUrl('product/data/CronJob') ?>";
+        name = "formCollector";
+        id = "formCollector";
+    }
+    for(var ix = 0 ; ix < arrDocForms.length ; ix++) {
+        appendFormVals2Form(arrDocForms[ix], formCollector);
+    }
+    document.body.appendChild(formCollector);
+    formCollector.submit();
+}
+
+/* Function: add all elements from frmCollectFrom and append them to
+             frmCollector before returning frmCollector*/
+function appendFormVals2Form(frmCollectFrom, frmCollector) {
+    var frm = frmCollectFrom.elements;
+	var nElems = frm.length;
+    for(var ix = nElems - 1; ix >= 0 ; ix--)
+         frmCollector.appendChild(frm[ix]);
+    return frmCollector;
+}
+</SCRIPT>
+    
 </div>

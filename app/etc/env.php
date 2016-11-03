@@ -35,7 +35,7 @@ return array (
     ),
   ),
   'x-frame-options' => 'SAMEORIGIN',
-  'MAGE_MODE' => 'default',
+  'MAGE_MODE' => 'developer',
   'cache_types' => 
   array (
     'config' => 1,
@@ -51,6 +51,7 @@ return array (
     'config_integration_api' => 1,
     'translate' => 1,
     'config_webservice' => 1,
+    'compiled_config' => 1,
   ),
   'install' => 
   array (

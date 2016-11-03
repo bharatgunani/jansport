@@ -18,23 +18,34 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Plumrocket_SocialLoginFree::pslogin.css" />
-        <css src="Plumrocket_SocialLoginFree::pslogin-custom.css" />
+        <css src="Plumrocket_SocialLoginFree::css/pslogin.css" />
+        <css src="Plumrocket_SocialLoginFree::css/pslogin-custom.css" />
     </head>
     <body>
         <referenceContainer name="after.body.start">
-            <block class="Plumrocket\SocialLoginFree\Block\Share" name="pslogin.customer.form.register.sharepopup" as="pslogin_sharepopup" cacheable="false" before="-">
+            <block class="Plumrocket\SocialLoginFree\Block\Share" name="pslogin.customer.form.register.sharepopup" as="pslogin_sharepopup" before="-">
                 <action ifconfig="psloginfree/general/enable" method="setTemplate">
                     <argument name="template" xsi:type="string">Plumrocket_SocialLoginFree::customer/form/register/sharepopup.phtml</argument>
                 </action>
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="pslogin-sharepopup" xsi:type="array">
+                                <item name="component" xsi:type="string">pslogin-sharepopup</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Plumrocket_SocialLoginFree/sharepopup</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
             </block>
-            <block class="Magento\Framework\View\Element\Template" name="pslogin.js">
+            <block class="Plumrocket\SocialLoginFree\Block\General" name="pslogin.general">
                 <action ifconfig="psloginfree/general/enable" method="setTemplate">
-                    <argument name="template" xsi:type="string">Plumrocket_SocialLoginFree::js.phtml</argument>
+                    <argument name="template" xsi:type="string">Plumrocket_SocialLoginFree::general.phtml</argument>
                 </action>
             </block>
-            <block class="Plumrocket\SocialLoginFree\Block\General" name="pslogin_general" />
-        </referenceContainer>
+            </referenceContainer>
         <referenceContainer name="page.messages">
             <block class="Plumrocket\SocialLoginFree\Block\Messages" name="pslogin.messages" />
         </referenceContainer>
@@ -43,8 +54,16 @@
                 <action ifconfig="psloginfree/general/enable" method="setTemplate">
                     <argument name="template" xsi:type="string">Plumrocket_SocialLoginFree::theme/html/header/photo.phtml</argument>
                 </action>
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="pslogin-photo" xsi:type="array">
+                                <item name="component" xsi:type="string">pslogin-photo</item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
             </block>
-            <!-- <move element="pslogin_photo" destination="header.links" before="customer"/> -->
         </referenceBlock>
 
         <!-- Customer Authentication-popup -->
@@ -70,31 +89,5 @@
                 </arguments>
             </referenceBlock>
         </referenceContainer>
-		
-		
-		<referenceBlock name="top.links">
-                   
-            <block class="Magento\Customer\Block\Account\RegisterLink" name="register-link" template="account/link/registration.phtml" >
-	            <arguments>
-		            <argument name="label" xsi:type="string" translate="true">Register</argument>				
-		            <argument name="title" xsi:type="string" translate="true">Register</argument>				
-	            </arguments>
-	            
-		</block>
-                <referenceBlock name="my-account-link" display="false" />
-            
-            <block class="Magento\Customer\Block\Account\AuthorizationLink" name="authorization-link"
-                   template="account/link/authorization.phtml" before="register-link"/>
-        </referenceBlock>
-        <block class="Magento\Theme\Block\Html\Header" name="header" as="header">
-            <arguments>
-                <argument name="show_part" xsi:type="string">welcome</argument>
-            </arguments>
-        </block> 
-		
-		 <referenceBlock name="authorization-link">
-                <block class="Magento\Customer\Block\Form\Login" name="dropdown_login" template="form/dropdown_login.phtml" />
-                <block class="Magento\Customer\Block\Form\Login" name="link_popup_login" template="Plumrocket_SocialLoginFree::customer/form/login/link_popup_login.phtml" />
-        </referenceBlock>     
     </body>
 </page>

@@ -56,18 +56,15 @@ class VirtualProduct{
 		return $imageArray;
 	}
 	
-	public function VirtualProductData($params,$ProcuctData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute){
+	public function VirtualProductData($newProduct,$SetProductData,$params,$ProcuctData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute){
 	
 	//UPDATE PRODUCT ONLY [START]
 	$allowUpdateOnly = false;
-	if($productIdupdate = $this->Product->loadByAttribute('sku', $ProcuctData['sku'])) {
-		#$SetProductData = $this->Product->loadByAttribute('sku', $ProcuctData['sku']);
-		$SetProductData = $productIdupdate;
-	} else {
+	if(!$SetProductData || empty($SetProductData)) {
 		$SetProductData = $this->_objectManager->create();
-		if($params['update_products_only'] == "true") {
-			$allowUpdateOnly = true;
-		} 
+	}
+	if($params['update_products_only'] == "true") {
+		$allowUpdateOnly = true;
 	}
 	//UPDATE PRODUCT ONLY [END]
 	
@@ -109,7 +106,7 @@ class VirtualProduct{
 		
 		$SetProductData->addData($ProductAttributeData);
 		
-		if($params['reimport_images'] == "true") { 
+		if($newProduct || $params['reimport_images'] == "true") { 
 			//media images
 			$_productImages = array(
 				'media_gallery'       => (isset($ProductImageGallery['gallery'])) ? $ProductImageGallery['gallery'] : '',
@@ -202,5 +199,3 @@ class VirtualProduct{
 		
 	}
 }
-
-?>

@@ -115,7 +115,7 @@ $_pageLayout = $_settingHelper->getPageConfig();
             <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
             <?php foreach ($_productCollection as $_product): ?>
                 <li class="item product product-item">
-                <div class="product-item-info" data-container="product-grid">
+                <div class="product-item-info aaaa" data-container="product-grid">
                     
 			  <div class="product-shop-top">
 				<?php if($_helper->isModuleOutputEnabled('Emthemes_ProductLabels')): ?>
@@ -484,3 +484,10 @@ $_pageLayout = $_settingHelper->getPageConfig();
       </script>
 <?php endif; ?>
 
+<script type="application/javascript">
+  require(['jquery'], function($){
+  jQuery(document).ready(function(){
+      jQuery('.swatch-attribute').parent().addClass('test');
+  });
+  });
+</script>

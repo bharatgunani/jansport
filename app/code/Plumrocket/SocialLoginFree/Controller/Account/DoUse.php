@@ -19,7 +19,6 @@ namespace Plumrocket\SocialLoginFree\Controller\Account;
 
 class DoUse extends \Plumrocket\SocialLoginFree\Controller\AbstractAccount
 {
-    
     public function execute()
     {
         $session = $this->_getSession();
@@ -46,7 +45,18 @@ class DoUse extends \Plumrocket\SocialLoginFree\Controller\AbstractAccount
         }else{
             $this->_getHelper()->apiCall(null);
         }
-        
+
+        // Set current store.
+        $currentStoreId = $this->_objectManager->get('Magento\Store\Model\StoreManager')->getStore()->getId();
+        if ($currentStoreId) {
+            $this->_getHelper()->refererStore($currentStoreId);
+        }
+
+        // Set redirect url.
+        if ($referer = $this->_getHelper()->getCookieRefererLink()) {
+            $this->_getHelper()->refererLink($referer);
+        }
+
         switch($model->getProtocol()) {
 
             case 'OAuth':
@@ -62,7 +72,5 @@ class DoUse extends \Plumrocket\SocialLoginFree\Controller\AbstractAccount
             default:
                 return $this->_windowClose();
         }
-        
     }
-
 }

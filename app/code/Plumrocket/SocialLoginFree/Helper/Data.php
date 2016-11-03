@@ -27,11 +27,11 @@ class Data extends Main
     const TIME_TO_EDIT = 300;
     const DEBUG_MODE = false;
 
-	protected $_configSectionId = 'psloginfree';
+    protected $_configSectionId = 'psloginfree';
     protected $_buttons = null;
     protected $_buttonsPrepared = null;
 
-	public function moduleEnabled()
+    public function moduleEnabled()
     {
         return (bool)$this->getConfig($this->_configSectionId.'/general/enable');
     }
@@ -103,18 +103,22 @@ class Data extends Main
         return (bool)$this->getButtons();
     }
 
-    public function getPhotoPath($checkIsEnabled = true)
+    public function getPhotoPath($checkIsEnabled = true, $customerId = null)
     {
         if($checkIsEnabled && !$this->photoEnabled()) {
             return false;
         }
 
-        $session = $this->_objectManager->get('Magento\Customer\Model\Session');
-        if(!$session->isLoggedIn()) {
-            return false;
-        }
+        if ($customerId === null) {
+            $session = $this->_objectManager->get('Magento\Customer\Model\Session');
+            if(!$session->isLoggedIn()) {
+                return false;
+            }
 
-        if(!$customerId = $session->getCustomerId()) {
+            if(!$customerId = $session->getCustomerId()) {
+                return false;
+            }
+        } elseif (!is_numeric($customerId) || $customerId <= 0) {
             return false;
         }
 
@@ -163,7 +167,7 @@ class Data extends Main
                 $defaultStoreId = $website
                     ->getDefaultGroup()
                     ->getDefaultStoreId();
-                
+
                 if ($defaultStoreId) {
                     break;
                 }
@@ -222,7 +226,7 @@ class Data extends Main
     {
         if (null === $this->_buttons) {
             $types = $this->getTypes(false);
-            
+
             $this->_buttons = [];
             foreach ($types as $type) {
                 $type = $this->_objectManager->get('Plumrocket\SocialLoginFree\Model\\'. ucfirst($type));
@@ -301,6 +305,13 @@ class Data extends Main
         return $prevValueByCustomer;
     }
 
+    public function getCookieRefererLink()
+    {
+        // $referer = $this->_objectManager->get('Magento\Framework\Stdlib\Cookie\PhpCookieManager')
+        return $cookieReferer = $this->_objectManager->get('Magento\Framework\Stdlib\CookieManagerInterface')
+            ->getCookie(self::REFERER_QUERY_PARAM_NAME);
+    }
+
     public function refererStore($value = false)
     {
         // Customer session.
@@ -318,21 +329,21 @@ class Data extends Main
 
     public function getRefererLinkSkipModules()
     {
-        return ['customer', /*'checkout',*/ 'pslogin'];
+        return ['customer/account', /*'checkout',*/ 'pslogin/account'];
     }
 
-    public function showPopup($flag = null)
+    public function showPopup()
     {
-        $session = $this->_objectManager->get('Magento\Customer\Model\Session');
-        $show = $session->getData(self::SHOW_POPUP_PARAM_NAME);
+        $cookieManager = $this->_objectManager->get('Magento\Framework\Stdlib\CookieManagerInterface');
+        $publicCookieMetadata = $this->_objectManager->create(
+            'Magento\Framework\Stdlib\Cookie\PublicCookieMetadata',
+            ['metadata' => []]
+        );
+        $publicCookieMetadata
+            ->setDuration(600)
+            ->setPath('/');
 
-        if($flag) {
-            $session->setData(self::SHOW_POPUP_PARAM_NAME, true);
-        }else{
-            $session->unsetData(self::SHOW_POPUP_PARAM_NAME);
-        }
-
-        return $show;
+        $cookieManager->setPublicCookie(self::SHOW_POPUP_PARAM_NAME, 1, $publicCookieMetadata);
     }
 
     public function apiCall($params = null)
@@ -356,19 +367,30 @@ class Data extends Main
         switch($redirect[$after]) {
 
             case '__referer__':
-                if(!$referer = $this->_getRequest()->getParam(\Magento\Customer\Model\Url::REFERER_QUERY_PARAM_NAME)) {
-                    $referer = $this->refererLink();
+                $links = [];
+                if ($referer = $this->_getRequest()->getParam(\Magento\Customer\Model\Url::REFERER_QUERY_PARAM_NAME)) {
+                    $links[] = $this->urlDecoder->decode($referer);
                 }
 
-                if ($referer) {
+                /*if ($referer = $this->getCookieRefererLink()) {
+                    $links[] = $referer;
+                }*/
+
+                if ($referer = $this->refererLink()) {
+                    $links[] = $referer;
+                }
+
+                foreach ($links as $url) {
                     // Rebuild referer URL to handle the case when SID was changed
                     $referer = $this->_objectManager->get('Magento\Framework\Url')
-                        ->getRebuiltUrl($this->urlDecoder->decode($referer));
+                        ->getRebuiltUrl($url);
 
                     if ($this->isUrlInternal($referer)) {
                         $redirectUrl = $referer;
+                        break;
                     }
                 }
+
                 break;
 
             case '__custom__':
@@ -429,7 +451,7 @@ class Data extends Main
             $viewFile = 'Magento_Checkout/js/view/authentication';
         }
 
-        return $viewFile; 
+        return $viewFile;
     }
 
     public function getCheckoutJsViewFormElementEmail()
@@ -440,7 +462,7 @@ class Data extends Main
             $viewFile = 'Magento_Checkout/js/view/form/element/email';
         }
 
-        return $viewFile; 
+        return $viewFile;
     }
 
     public function getCustomerJsViewAuthenticationPopup()
@@ -451,7 +473,7 @@ class Data extends Main
             $viewFile = 'Magento_Customer/js/view/authentication-popup';
         }
 
-        return $viewFile; 
+        return $viewFile;
     }
 
     public function getDebugMode()

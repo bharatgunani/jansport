@@ -66,20 +66,15 @@ class ConfigurableProduct{
 		return $imageArray;
 	}
 	
-	public function ConfigurableProductData($params,$ProcuctData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute){
+	public function ConfigurableProductData($newProduct,$SetProductData,$params,$ProcuctData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute){
 	
 	//UPDATE PRODUCT ONLY [START]
 	$allowUpdateOnly = false;
-	if($productIdupdate = $this->Product->loadByAttribute('sku', $ProcuctData['sku'])) {
-		#$SetProductData = $this->Product->loadByAttribute('sku', $ProcuctData['sku']);
-		$SetProductData = $productIdupdate;
-		$new = false;
-	} else {
+	if(!$SetProductData || empty($SetProductData)) {
 		$SetProductData = $this->_objectManager->create();
-		$new = true;
-		if($params['update_products_only'] == "true") {
-			$allowUpdateOnly = true;
-		} 
+	}
+	if($params['update_products_only'] == "true") {
+		$allowUpdateOnly = true;
 	}
 	//UPDATE PRODUCT ONLY [END]
 	
@@ -121,7 +116,7 @@ class ConfigurableProduct{
 		
 		$SetProductData->addData($ProductAttributeData);
 		
-		if($params['reimport_images'] == "true") { 
+		if($newProduct || $params['reimport_images'] == "true") { 
 			//media images
 			$_productImages = array(
 				'media_gallery'       => (isset($ProductImageGallery['gallery'])) ? $ProductImageGallery['gallery'] : '',
@@ -279,5 +274,3 @@ class ConfigurableProduct{
 
 
 }
-
-?>

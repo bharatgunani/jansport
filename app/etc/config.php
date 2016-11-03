@@ -128,6 +128,7 @@ return array (
     'Paguelofacil_Gateway' => 1,
     'Plumrocket_Base' => 1,
     'Plumrocket_SocialLoginFree' => 1,
+    'Solwin_Contactwidget' => 1,
     'Webinc_Review' => 1,
   ),
 );

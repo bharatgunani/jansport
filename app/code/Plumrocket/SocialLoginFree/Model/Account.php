@@ -75,7 +75,7 @@ class Account extends \Magento\Framework\Model\AbstractModel
     public function getCustomerIdByUserId()
     {
         $customerId = $this->_getCustomerIdByUserId();
-        if(!$customerId && $this->_helper->isGlobalScope()) {
+        if (!$customerId && $this->_helper->isGlobalScope()) {
             $customerId = $this->_getCustomerIdByUserId(true);
         }
 
@@ -86,27 +86,27 @@ class Account extends \Magento\Framework\Model\AbstractModel
     {
         $customerId = 0;
 
-        if($this->getUserData('user_id')) {
+        if ($this->getUserData('user_id')) {
             $collection = $this->getCollection()
                 ->join(['ce' => 'customer_entity'], 'ce.entity_id = main_table.customer_id', null)
                 ->addFieldToFilter('main_table.type', $this->_type)
                 ->addFieldToFilter('main_table.user_id', $this->getUserData('user_id'))
                 ->setPageSize(1);
 
-            if($useGlobalScope == false) {
+            if ($useGlobalScope == false) {
                 $collection->addFieldToFilter('ce.website_id', $this->_websiteId);
             }
 
             $customerId = $collection->getFirstItem()->getData('customer_id');
         }
-        
+
         return $customerId;
     }
 
     public function getCustomerIdByEmail()
     {
         $customerId = $this->_getCustomerIdByEmail();
-        if(!$customerId && $this->_helper->isGlobalScope()) {
+        if (!$customerId && $this->_helper->isGlobalScope()) {
             $customerId = $this->_getCustomerIdByEmail(true);
         }
         return $customerId;
@@ -116,12 +116,12 @@ class Account extends \Magento\Framework\Model\AbstractModel
     {
         $customerId = 0;
 
-        if(is_string($this->getUserData('email'))) {
+        if (is_string($this->getUserData('email'))) {
             $collection = $this->_objectManager->get('Magento\Customer\Model\Customer')->getCollection()
                 ->addFieldToFilter('email', $this->getUserData('email'))
                 ->setPageSize(1);
 
-            if($useGlobalScope == false) {
+            if ($useGlobalScope == false) {
                 $collection->addFieldToFilter('website_id', $this->_websiteId);
             }
 
@@ -136,7 +136,7 @@ class Account extends \Magento\Framework\Model\AbstractModel
         $customerId = 0;
         $errors = [];
         $customer = $this->_objectManager->get('Magento\Customer\Model\Customer')->setId(null);
-        
+
         try{
             $customer->setData($this->getUserData())
                 ->setConfirmation($this->getUserData('password'))
@@ -144,17 +144,19 @@ class Account extends \Magento\Framework\Model\AbstractModel
                 ->setData('is_active', 1)
                 ->getGroupId();
 
-            if(!$this->_helper->isFakeMail( $this->getUserData('email') )) {
-                $customer->setIsSubscribed(1);
-            }
-
             $errors = $this->_validateErrors($customer);
 
             // If email is not valid, always error.
             $correctEmail = \Zend_Validate::is($this->getUserData('email'), 'EmailAddress');
 
-            if( (empty($errors) || $this->_helper->validateIgnore()) && $correctEmail) {
+            if ( (empty($errors) || $this->_helper->validateIgnore()) && $correctEmail) {
                 $customerId = $customer->save()->getId();
+
+                if (! $this->_helper->isFakeMail($this->getUserData('email'))
+                    && $this->_helper->getConfig($this->_helper->getConfigSectionId() . '/general/enable_subscription')
+                ) {
+                    $this->_objectManager->create('Magento\Newsletter\Model\Subscriber')->subscribeCustomerById($customerId);
+                }
 
                 // Set email confirmation;
                 $customer->setConfirmation(null)->save();
@@ -175,16 +177,16 @@ class Account extends \Magento\Framework\Model\AbstractModel
     protected function _validateErrors($customer)
     {
         $errors = [];
-        
+
         // Date of birth.
         $entityType = $this->_objectManager->get('Magento\Eav\Model\Config')->getEntityType('customer');
         $attribute = $this->_objectManager->get('Magento\Customer\Model\Attribute')->loadByCode($entityType, 'dob');
 
-        if($attribute->getIsRequired() && $this->getUserData('dob') && !\Zend_Validate::is($this->getUserData('dob'), 'Date')) {
+        if ($attribute->getIsRequired() && $this->getUserData('dob') && !\Zend_Validate::is($this->getUserData('dob'), 'Date')) {
             $errors[] = __('The Date of Birth is not correct.');
         }
 
-        if(true !== ($customerErrors = $customer->validate())) {
+        if (true !== ($customerErrors = $customer->validate())) {
             $errors = array_merge($customerErrors, $errors);
         }
 
@@ -198,7 +200,7 @@ class Account extends \Magento\Framework\Model\AbstractModel
 
     public function setUserData($key, $value = null)
     {
-        if(is_array($key)) {
+        if (is_array($key)) {
             $this->_userData = array_merge($this->_userData, $key);
         }else{
             $this->_userData[$key] = $value;
@@ -208,7 +210,7 @@ class Account extends \Magento\Framework\Model\AbstractModel
 
     public function getUserData($key = null)
     {
-        if($key !== null) {
+        if ($key !== null) {
             return isset($this->_userData[$key]) ? $this->_userData[$key] : null;
         }
         return $this->_userData;
@@ -221,31 +223,47 @@ class Account extends \Magento\Framework\Model\AbstractModel
             $_data[$customerField] = ($userField && isset($data[$userField])) ? $data[$userField] : null;
         }
 
-        $_data['firstname'] = $_data['firstname']?: '-';
-        $_data['lastname'] = $_data['lastname']?: '-';
+        $firstname = '-';
+        $lastname = '-';
 
         // Generate email.
-        if(empty($_data['email']) && $this->_helper->validateIgnore()) {
+        if (empty($_data['email']) && $this->_helper->validateIgnore()) {
             $_data['email'] = $this->_getRandomEmail();
+        } elseif (! empty($_data['email'])) {
+            $email = trim(strstr($_data['email'], '@', true));
+            if ($email) {
+                $email = preg_split('#[.\-]+#ui', $email, 2);
+
+                $firstname = $lastname = ucfirst($email[0]);
+                if (! empty($email[1])) {
+                    $lastname = ucfirst($email[1]);
+                }
+            }
         }
 
+        $_data['firstname'] = $_data['firstname'] ?: $firstname;
+        $_data['lastname'] = $_data['lastname'] ?: $lastname;
+
         // Prepare date of birth.
-        if(!empty($_data['dob'])) {
+        if (! empty($_data['dob'])) {
             $_data['dob'] = call_user_func_array([$this, '_prepareDob'], array_merge([$_data['dob']], $this->_dob));
-        }else{
+        } else {
             $_data['dob'] = '0000-00-00';
         }
 
         // Convert gender.
-        if(!empty($_data['gender'])) {
-            $options = $this->_objectManager->get('Magento\Customer\Model\Customer')->getAttribute('gender')->getSource()->getAllOptions(false);
-
-            switch($_data['gender']) {
-                case $this->_gender[0]: $_data['gender'] = $options[0]['value']; break;
-                case $this->_gender[1]: $_data['gender'] = $options[1]['value']; break;
-                default: $_data['gender'] = 0;
+        if (! empty($_data['gender'])) {
+            $genderAttribute = $this->_objectManager->get('Magento\Eav\Model\Config')->getAttribute('customer', 'gender');
+            if ($genderAttribute && $options = $genderAttribute->getSource()->getAllOptions(false)) {
+                switch($_data['gender']) {
+                    case $this->_gender[0]: $_data['gender'] = $options[0]['value']; break;
+                    case $this->_gender[1]: $_data['gender'] = $options[1]['value']; break;
+                    default: $_data['gender'] = 0;
+                }
+            } else {
+                $_data['gender'] = 0;
             }
-        }else{
+        } else {
             $_data['gender'] = 0;
         }
 
@@ -269,8 +287,8 @@ class Account extends \Magento\Framework\Model\AbstractModel
         ];
 
         $result[$p1] = $date[0];
-        if(isset($date[1])) $result[$p2] = $date[1];
-        if(isset($date[2])) $result[$p3] = $date[2];
+        if (isset($date[1])) $result[$p2] = $date[1];
+        if (isset($date[2])) $result[$p3] = $date[2];
 
         return implode('-', array_values($result));
     }
@@ -296,7 +314,7 @@ class Account extends \Magento\Framework\Model\AbstractModel
         $upload = false;
 
         $fileUrl = $this->getUserData('photo');
-        if(empty($fileUrl) || !is_numeric($customerId) || $customerId < 1) {
+        if (empty($fileUrl) || !is_numeric($customerId) || $customerId < 1) {
             return;
         }
 
@@ -305,9 +323,9 @@ class Account extends \Magento\Framework\Model\AbstractModel
 
         try{
             $io->mkdir($this->_photoDir);
-            if($file = $this->_loadFile($fileUrl)) {
-                if(file_put_contents($tmpPath, $file) > 0) {
-                    
+            if ($file = $this->_loadFile($fileUrl)) {
+                if (file_put_contents($tmpPath, $file) > 0) {
+
                     $image = $this->_objectManager->create('Magento\Framework\Image', ['fileName' => $tmpPath]);
                     $image->resize($this->_photoSize);
 
@@ -319,7 +337,7 @@ class Account extends \Magento\Framework\Model\AbstractModel
             }
         }catch(\Exception $e) {}
 
-        if($io->fileExists($tmpPath)) {
+        if ($io->fileExists($tmpPath)) {
             $io->rm($tmpPath);
         }
 
@@ -364,10 +382,10 @@ class Account extends \Magento\Framework\Model\AbstractModel
             return $body;
         }
     }
-    
+
     public function postToMail()
     {
-        if(!$this->_helper->isFakeMail( $this->getUserData('email') )) {
+        if (!$this->_helper->isFakeMail( $this->getUserData('email') )) {
             $storeId = $this->_objectManager->get('Magento\Store\Model\StoreManager')->getStore()->getId();
             $this->_objectManager->get('Magento\Customer\Model\Customer')->sendNewAccountEmail('registered', '', $storeId);
         }
@@ -382,10 +400,10 @@ class Account extends \Magento\Framework\Model\AbstractModel
         $store = $this->_objectManager->get('Magento\Store\Model\Store');
 
         // if (Mage::getSingleton('plumbase/observer')->customer() == Mage::getSingleton('plumbase/product')->currentCustomer()) {
-            if($this->getProtocol() == 'OAuth' && (empty($this->_applicationId) || empty($this->_secret))) {
+            if ($this->getProtocol() == 'OAuth' && (empty($this->_applicationId) || empty($this->_secret))) {
                 $uri = null;
             }else{
-                $uri = $store->getUrl('pslogin/account/douse', ['type' => $this->_type]);
+                $uri = $store->getUrl('pslogin/account/douse', ['type' => $this->_type, 'refresh' => time()]);
             }
         // }
 
@@ -418,9 +436,9 @@ class Account extends \Magento\Framework\Model\AbstractModel
 
     public function getProviderLink()
     {
-        if(empty($this->_applicationId) || empty($this->_secret)) {
+        if (empty($this->_applicationId) || empty($this->_secret)) {
             $uri = null;
-        }elseif(is_array($this->_buttonLinkParams)) {
+        }elseif (is_array($this->_buttonLinkParams)) {
             $uri = $this->_url .'?'. urldecode(http_build_query($this->_buttonLinkParams));
         }else{
             $uri = $this->_buttonLinkParams;
@@ -448,13 +466,13 @@ class Account extends \Magento\Framework\Model\AbstractModel
     {
         $result = null;
         $paramsStr = is_array($params)? urlencode(http_build_query($params)) : urlencode($params);
-        if($paramsStr) {
+        if ($paramsStr) {
             $url .= '?'. urldecode($paramsStr);
         }
-        
+
         $curl = is_resource($curlResource)? $curlResource : curl_init();
 
-        if($method == 'POST') {
+        if ($method == 'POST') {
             // POST.
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_POST, 1);
@@ -474,5 +492,4 @@ class Account extends \Magento\Framework\Model\AbstractModel
 
         return $result;
     }
-
 }

@@ -26,7 +26,7 @@
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General</label>
                 <attribute type="expanded">1</attribute>
-                
+
                 <field id="version" type="text" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <frontend_model>Plumrocket\SocialLoginFree\Block\Adminhtml\System\Config\Form\Version</frontend_model>
                 </field>
@@ -54,40 +54,45 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Many (but not all) social networks share only limited user profile/personal information. If this option is enabled, all required fields in magento that are missing will be pre-filled with temporary data to speed-up the registration process. If this option is set to "No" - the user will be sent to the registration form to enter missing info.</comment>
                 </field>
-                <field id="enable_photo" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="enable_subscription" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscribe Customer To Email Newsletter</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Automatically sign up customer to the Newsletter Subscribers list during the registration</comment>
+                </field>
+                <field id="enable_photo" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Customer Photo</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Display customer photo from social network in your website header. Please see our online documentation for manual installation instructions if the photo is not shown.</comment>
                 </field>
-                <field id="redirect_for_login" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="redirect_for_login" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Login Success Page</label>
                     <source_model>Plumrocket\SocialLoginFree\Model\Config\Source\Redirectto</source_model>
                     <comment>User will be redirected to this page after each successful login</comment>
                 </field>
-                <field id="redirect_for_login_link" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="redirect_for_login_link" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Login Custom Success Page URL</label>
                     <comment>Please enter the full URL of the page, including the domain name, to which you will be redirecting.</comment>
                     <depends>
                         <field id="redirect_for_login">__custom__</field>
                     </depends>
                 </field>
-                <field id="redirect_for_register" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="redirect_for_register" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Registration Success Page</label>
                     <source_model>Plumrocket\SocialLoginFree\Model\Config\Source\Redirectto</source_model>
                     <comment>User will be redirected to this page after successful registration</comment>
                 </field>
-                <field id="redirect_for_register_link" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="redirect_for_register_link" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Registration Custom Success Page URL</label>
                     <comment>Please enter the full URL of the page, including the domain name, to which you will be redirecting.</comment>
                     <depends>
                         <field id="redirect_for_register">__custom__</field>
                     </depends>
                 </field>
-                <field id="sortable_drag_and_drop" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="sortable_drag_and_drop" translate="label comment" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Social Buttons Sorting</label>
                     <frontend_model>Plumrocket\SocialLoginFree\Block\Adminhtml\System\Config\Form\Sortable</frontend_model>
                 </field>
-                <field id="sortable" translate="label comment" type="hidden" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="sortable" translate="label comment" type="hidden" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
                     <comment>Visible buttons will be displayed by default. Hidden buttons will be listed under "show more" section in the front-end.</comment>
                 </field>
             </group>
@@ -138,28 +143,33 @@
                     <label>App Secret</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
-                <field id="icon_btn" translate="label comment" type="image" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="enable_birthday" translate="label comment" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ask for Birthday</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Request customer's birthday date from Facebook</comment>
+                </field>
+                <field id="icon_btn" translate="label comment" type="image" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Small Icon Button</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">pslogin</upload_dir>
                     <base_url type="media" scope_info="1">pslogin</base_url>
                 </field>
-                <field id="login_btn" translate="label comment" type="image" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="login_btn" translate="label comment" type="image" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Login Button</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">pslogin</upload_dir>
                     <base_url type="media" scope_info="1">pslogin</base_url>
                 </field>
-                <field id="register_btn" translate="label comment" type="image" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="register_btn" translate="label comment" type="image" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Registration Button</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">pslogin</upload_dir>
                     <base_url type="media" scope_info="1">pslogin</base_url>
                 </field>
-                <field id="login_btn_text" translate="label comment" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="login_btn_text" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Login Button Text</label>
                 </field>
-                <field id="register_btn_text" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="register_btn_text" translate="label comment" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Registration Button Text</label>
                 </field>
             </group>

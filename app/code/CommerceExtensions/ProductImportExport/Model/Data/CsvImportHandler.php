@@ -32,6 +32,12 @@ class CsvImportHandler
 	
 	protected $_eavConfig;
 	
+	protected $objectManager;
+	
+	protected $Product;
+	
+	protected $Category;
+	
     protected $_imageFields = ['image','swatch_image','small_image','thumbnail','media_gallery','gallery','gallery_label'];
 	
     public function __construct(
@@ -42,6 +48,7 @@ class CsvImportHandler
         \Magento\Framework\Locale\FormatInterface $localeFormat,
 		\Magento\Framework\Stdlib\DateTime\DateTime $date,
 		\Magento\Eav\Model\Entity\Attribute\Set $AttributeSet,
+		\Magento\Framework\ObjectManagerInterface $objectManager,
 		\CommerceExtensions\ProductImportExport\Model\Data\Import\SimpleProduct $SimpleProduct,
 		\CommerceExtensions\ProductImportExport\Model\Data\Import\BundleProduct $BundleProduct,
 		\CommerceExtensions\ProductImportExport\Model\Data\Import\VirtualProduct $VirtualProduct,
@@ -49,6 +56,7 @@ class CsvImportHandler
 		\CommerceExtensions\ProductImportExport\Model\Data\Import\GroupedProduct $GroupedProduct,
 		\CommerceExtensions\ProductImportExport\Model\Data\Import\DownloadableProduct $DownloadableProduct,
 		\Magento\Catalog\Model\Product $Product,
+		\Magento\Catalog\Model\Category $Category,
 		\Magento\Store\Model\Website $Website,
         \Magento\Eav\Model\Config $eavConfig
     ) {
@@ -60,13 +68,15 @@ class CsvImportHandler
 		 $this->_attributeFactory = $AttributeSet;
          $this->localeFormat = $localeFormat;
 		 $this->date = $date;
+         $this->_objectManager = $objectManager;
 		 $this->SimpleProduct = $SimpleProduct;
 		 $this->BundleProduct = $BundleProduct;
 		 $this->VirtualProduct = $VirtualProduct;
 		 $this->ConfigurableProduct = $ConfigurableProduct;
 		 $this->GroupedProduct = $GroupedProduct;
 		 $this->DownloadableProduct = $DownloadableProduct;
-		 $this->_objectManager = $Product;
+		 $this->_ProductModel = $Product;
+		 $this->_CategoryModel = $Category;
 		 $this->website = $Website;
          $this->_eavConfig = $eavConfig;
 		 
@@ -139,13 +149,17 @@ class CsvImportHandler
 		#keeps existing category_ids and adds new ones to them
 		if(isset($product['category_ids'])) {
 			if($params['append_categories'] == "true") { 
-				$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-				$product1 = $objectManager->create('Magento\Catalog\Model\Product')->loadByAttribute('sku', $product['sku']);
-				$productModel = $objectManager->create('Magento\Catalog\Model\Product')->load($product1->getId());
-				$cats = $productModel->getCategoryIds();
-				$catsarray = explode(",",$product['category_ids']);
-				$finalcatsimport = array_merge($cats, $catsarray);
-				$product['category_ids'] = $finalcatsimport;
+				$product1 = $this->_ProductModel->loadByAttribute('sku', $product['sku']);
+				if (!empty($product1)) {
+					$productModel = $this->_ProductModel->load($product1->getId());
+					$cats = $productModel->getCategoryIds();
+					$catsarray = explode(",",$product['category_ids']);
+					$finalcatsimport = array_merge($cats, $catsarray);
+					$product['category_ids'] = $finalcatsimport;
+				} else {
+					$catsarray = explode(",",$product['category_ids']);
+					$product['category_ids'] = $catsarray;
+				}
 			} else {
 				$catsarray = explode(",",$product['category_ids']);
 				$product['category_ids'] = $catsarray;
@@ -157,13 +171,17 @@ class CsvImportHandler
 		
 		if(isset($product['categories'])) {
 			if($params['append_categories'] == "true") { 
-				$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-				$product1 = $objectManager->create('Magento\Catalog\Model\Product')->loadByAttribute('sku', $product['sku']);
-				$productModel = $objectManager->create('Magento\Catalog\Model\Product')->load($product1->getId());
-				$cats = $productModel->getCategoryIds();
-				$catsarray = explode(",",$ProductData['categories']);
-				$finalcatsimport = array_merge($cats, $catsarray);
-				$product['category_ids'] = $finalcatsimport;
+				$product1 = $this->_ProductModel->loadByAttribute('sku', $product['sku']);
+				if (!empty($product1)) {
+					$productModel = $this->_ProductModel->load($product1->getId());
+					$cats = $productModel->getCategoryIds();
+					$catsarray = explode(",",$ProductData['categories']);
+					$finalcatsimport = array_merge($cats, $catsarray);
+					$product['category_ids'] = $finalcatsimport;
+				} else {
+					$catsarray = explode(",",$ProductData['categories']);
+					$product['category_ids'] = $catsarray;
+				}
 			} else {
 				$catsarray = explode(",",$ProductData['categories']);
 				$product['category_ids'] = $catsarray;
@@ -171,15 +189,26 @@ class CsvImportHandler
 		}
 		
 		$ProductAttributeData = $this->ProductAttributeData($product);
-		if($params['reimport_images'] == "true") { 
+		
+		//Checks if it is new Product
+		if($productIdupdate = $this->_ProductModel->loadByAttribute('sku', $product['sku'])) {
+			$newProduct = false;
+			$SetProductData = $productIdupdate;
+		} else {
+			$newProduct = true;
+			$SetProductData = "";
+		}
+	
+		if($newProduct || $params['reimport_images'] == "true") { 
 			$ProductImageGallery = $this->ProductImageGallery($product, $params);
 		} else {
 			$ProductImageGallery = array();
 		}
+		
 		$ProductStockdata = $this->ProductStockdata($product);
 		$ProductSupperAttribute = $this->ProductSupperAttribute($product, $params);
 		$ProductCustomOption = $this->ProductCustomOption($product);
-		$this->CreateProductWithrequiredField($prodtype,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute,$ProductCustomOption);
+		$this->CreateProductWithrequiredField($newProduct,$SetProductData,$prodtype,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute,$ProductCustomOption);
 	}
 
     protected function _filterData(array $RawDataHeader, array $RawData)
@@ -218,6 +247,10 @@ class CsvImportHandler
 	}
 	
 	public function readCsvFile($PfilePath, $params){
+		
+		if($params['import_delimiter'] != "") { $this->csvProcessor->setDelimiter($params['import_delimiter']); }
+		if($params['import_enclose'] != "") { $this->csvProcessor->setEnclosure($params['import_enclose']); }
+		
 		$RawProductData = $this->csvProcessor->getData($PfilePath);
         // first row of file represents headers
         $fileFields = $RawProductData[0];
@@ -228,21 +261,21 @@ class CsvImportHandler
 		}
 	}
 	
-	public function CreateProductWithrequiredField($prodtype,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute,$ProductCustomOption){
+	public function CreateProductWithrequiredField($newProduct,$SetProductData,$prodtype,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute,$ProductCustomOption){
 	
-		if($prodtype == "simple"){
-			$this->SimpleProduct->SimpleProductData($params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute,$ProductCustomOption);
-		}elseif($prodtype == "bundle"){
-			$this->BundleProduct->BundleProductData($params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
-		}elseif($prodtype == "virtual"){
-			$this->VirtualProduct->VirtualProductData($params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
-		}elseif($prodtype == "configurable"){
-			$this->ConfigurableProduct->ConfigurableProductData($params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
-		}elseif($prodtype == "grouped"){
-			$this->GroupedProduct->GroupedProductData($params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
-		}elseif($prodtype == "downloadable"){
-			$this->DownloadableProduct->DownloadableProductData($params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
-		}else{
+		if($prodtype == "simple") {
+		  $this->SimpleProduct->SimpleProductData($newProduct,$SetProductData,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute,$ProductCustomOption);
+		} elseif ($prodtype == "bundle") {
+		  $this->BundleProduct->BundleProductData($newProduct,$SetProductData,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
+		} elseif ($prodtype == "virtual") {
+		 $this->VirtualProduct->VirtualProductData($newProduct,$SetProductData,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
+		} elseif ($prodtype == "configurable") {
+		 $this->ConfigurableProduct->ConfigurableProductData($newProduct,$SetProductData,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
+		} elseif ($prodtype == "grouped") {
+		 $this->GroupedProduct->GroupedProductData($newProduct,$SetProductData,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
+		} elseif ($prodtype == "downloadable") {
+		 $this->DownloadableProduct->DownloadableProductData($newProduct,$SetProductData,$params,$ProductData,$ProductAttributeData,$ProductImageGallery,$ProductStockdata,$ProductSupperAttribute);
+		} else {
 			//Not Imported Products
 		}
 	}
@@ -470,8 +503,7 @@ class CsvImportHandler
 	public function ProductImageGallery($product, $params){
 	
 		if($params['deleteall_andreimport_images'] == "true") { 
-		 	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-			$productRepository = $objectManager->create('Magento\Catalog\Api\ProductRepositoryInterface');
+			$productRepository = $this->_objectManager->get('Magento\Catalog\Api\ProductRepositoryInterface');
 			#$galleryProcessor = $objectManager->create('Magento\Catalog\Model\Product\Gallery\GalleryManagement');
 			$productModel = $productRepository->get($product['sku']);
 			#$product1 = $objectManager->create('Magento\Catalog\Model\Product')->loadByAttribute('sku', $product['sku']);
@@ -651,7 +683,9 @@ class CsvImportHandler
 														fwrite($fp, $rawdata);
 														fclose($fp);
 										}
-										catch (Exception $e) { echo "ERROR: " . $e; }
+										catch (\Exception $e) { 
+           									throw new \Magento\Framework\Exception\LocalizedException(__("IMAGE IMPORT ERROR: " . $e->getMessage()), $e);
+										}
 										
 										if($file!="") {
 											$finalgalleryfiles .= $file .",";
@@ -686,7 +720,9 @@ class CsvImportHandler
 											fwrite($fp, $rawdata);
 											fclose($fp);
 							}
-							catch (Exception $e) { echo "ERROR: " . $e; }
+							catch (\Exception $e) { 
+           									throw new \Magento\Framework\Exception\LocalizedException(__("IMAGE IMPORT ERROR: " . $e->getMessage()), $e);
+							}
 							
 							if($file!="") {
 								$ProductImageGallery[$mediaAttributeCode] = $file;
@@ -768,7 +804,7 @@ class CsvImportHandler
 	
  		if($params['append_tier_prices'] != "true") { 
 			 //get current product tier prices
-			#$productModel = $this->_objectManager->loadByAttribute('sku', $product_sku);
+			#$productModel = $this->_ProductModel->loadByAttribute('sku', $product_sku);
 			#$existing_tps = $productModel->getTierPrice();
 			$existing_tps = array();
 		} else {
@@ -787,7 +823,7 @@ class CsvImportHandler
 		$tierpricecount=0;   
 		  
 		foreach($incoming_tierps as $tier_str){
-								//echo "t: " . $tier_str;
+		
 			if (empty($tier_str)) continue;
 			
 			$tmp = array();
@@ -824,6 +860,7 @@ class CsvImportHandler
 	
 	
    protected $_categoryCache = array();
+   
    protected function addCategories($categories, $storeId, $params)
     {
 		// $rootId = $store->getRootCategoryId();

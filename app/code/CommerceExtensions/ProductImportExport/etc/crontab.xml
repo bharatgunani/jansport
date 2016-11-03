@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default"> <!-- Doesn't need to be unique -->
+        <job name="import_products" instance="CommerceExtensions\ProductImportExport\Controller\Adminhtml\Data\CronJob" method="execute">
+          <!--   <schedule>*/2 * * * *</schedule> -->
+         <config_path>crontab/default/jobs/CommerceExtensions/ProductImportExport/import_products/schedule/cron_expr</config_path>
+		<!-- 	<config_path>namespace/module/schedule/cron_expr</config_path> -->
+        </job>
+		
+		<job name="export_products" instance="CommerceExtensions\ProductImportExport\Controller\Adminhtml\Data\ExportPost" method="execute">
+        <config_path>crontab/default/jobs/CommerceExtensions/ProductImportExport/export_products/schedule/cron_expr</config_path>
+		</job>
+		
+    </group>
+</config>

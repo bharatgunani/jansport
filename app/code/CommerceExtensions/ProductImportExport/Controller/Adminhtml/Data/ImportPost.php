@@ -16,11 +16,12 @@ class ImportPost extends \CommerceExtensions\ProductImportExport\Controller\Admi
      */
     public function execute()
     {
-        if ($this->getRequest()->isPost() && !empty($_FILES['import_rates_file'])) {
+        if ($this->getRequest()->isPost() && $this->_objectManager->create('Magento\MediaStorage\Model\File\Uploader', ['fileId' => 'import_rates_file'])) {
 			try {
 					$params = $this->getRequest()->getParams();
 					$importHandler = $this->_objectManager->create('CommerceExtensions\ProductImportExport\Model\Data\CsvImportHandler');  
-					$readData = $importHandler->UploadCsvOfproduct($_FILES['import_rates_file']);
+					#$readData = $importHandler->UploadCsvOfproduct($_FILES['import_rates_file']);
+					$readData = $importHandler->UploadCsvOfproduct($this->getRequest()->getFiles('import_rates_file'));
 					$filepath = $readData['path'].'/'.$readData['file'];
 					$importHandler->readCsvFile($filepath, $params);
 					
