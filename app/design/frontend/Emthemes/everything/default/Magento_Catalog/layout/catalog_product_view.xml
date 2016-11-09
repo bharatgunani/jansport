@@ -23,7 +23,6 @@
         <move element="product.info.overview" destination="product.info.main" after="product.info.stock.sku" />
         
         <referenceBlock name="product.info.addto" remove="true" />
-
         <referenceBlock name="product.info.overview">
                 <arguments>
                         <argument name="at_label" translate="true" xsi:type="string">Quick Overview</argument>

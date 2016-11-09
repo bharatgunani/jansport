@@ -417,6 +417,6 @@ letter-spacing:2px;
 	margin:0;
 }
 .minicart-items-wrapper {
-    max-height: 500px !important;
+    max-height: 450px !important;
     overflow-y: auto;
-    height: 500px !important; }
+    height: 450px !important; }

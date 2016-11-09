@@ -38,18 +38,6 @@ require([
 			psLogin($this.data('href'), $this.data('width'), $this.data('height'));
 			return false;
 		});
-		
-
-		// Share.
-		pjQuery('.prpop-close-btn').on('click', function() {
-			pjQuery('.pslogin-addedoverlay, .pslogin-pop-up-form').hide();
-			pjQuery('html').css('overflow', 'auto');
-			return false;
-		});
-
-		if(pjQuery('.pslogin-pop-up-form').is(':visible')) {
-			pjQuery('html').css('overflow', 'hidden');
-		}
 
 		// Fake email message.
 		pjQuery('.pslogin-fake-email-message .close-message').on('click', function() {
@@ -59,7 +47,7 @@ require([
 	});
 
 
-	function psLogin(href,width,height)
+	window.psLogin = function(href,width,height)
 	{
 		var win = null;
 		if (!width) {

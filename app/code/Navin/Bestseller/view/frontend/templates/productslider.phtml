@@ -128,13 +128,39 @@ $helper = $this->helper('Navin\Bestseller\Helper\Data');
 			<?php echo $block->getPagerHtml() ?>
         </div>
 	<?php endif; ?>
+                <?php $_sliderItem=5; ?>
 	<script>
 	require([
 		'jquery',
 		'Navin_Bestseller/js/owl.carousel',
 		'Navin_Bestseller/js/owl.carousel.min'
 	], function ($) {
-		$('#navin-product-slider-<?php echo $productsliderId;?>').owlCarousel(<?php echo ($block->getAllOptions())?>);
+		//$('#navin-product-slider-<?php echo $productsliderId;?>').owlCarousel(<?php echo ($block->getAllOptions())?>);
+                
+                $('#navin-product-slider-<?php echo $productsliderId;?>').owlCarousel({
+                
+                  responsiveClass:true,
+                  rewindNav : true,
+                  loop: true,
+                  items: <?php echo $_sliderItem ?>,
+                      responsive:{
+                          0:{
+                              items: 2,
+                          },
+                          480:{
+                              items:<?php echo $_sliderItem - 2 ?>,
+                          },
+                          768:{
+                              items:<?php echo $_sliderItem - 1 ?>,                              
+                          },
+                          1024:{
+                              items:<?php echo $_sliderItem ?>,
+                          }
+                      }
+                });         
+                
+                
+                
 	});
 </script>
 <?php //endif; ?>

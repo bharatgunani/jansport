@@ -747,3 +747,6 @@ width:100% !important;
 .owl-carousel .owl-nav.disabled, .owl-carousel .owl-dots.disabled {
     display: block !important;
 }
+.work-with-us input {
+    max-width: 420px;
+}

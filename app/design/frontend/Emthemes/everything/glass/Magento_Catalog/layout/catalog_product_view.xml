@@ -9,13 +9,15 @@
     <body>
         <move element="page.main.title" destination="product.info.main" before="-" />
         <referenceContainer name="content.top">
-                <container name="em-review-email" htmlTag="div" htmlClass="em-review-email" after="-" />
+            <container name="em-review-email" htmlTag="div" htmlClass="em-review-email" after="-" />
         </referenceContainer>
         
         <move element="product.info.review" destination="product.info.main" after="page.main.title" />
+        <!--<move element="product.info.review" destination="product.info.main" after="-" />-->
+        <!--<move element="product.info.mailto" destination="product.info.main" after="product.info.feature" />-->
        
         <referenceContainer name="product.info.main">
-                	<container name="product_view_block_custom" label="Product View Static Block Custom" htmlTag="div" htmlClass="em-wrapper-ads" before="-" />
+            <container name="product_view_block_custom" label="Product View Static Block Custom" htmlTag="div" htmlClass="em-wrapper-ads" before="-" />
                 
         </referenceContainer>
         <move element="product.info.stock.sku" destination="product.info.main" after="product_view_block_custom"/>
@@ -23,19 +25,21 @@
         <move element="product.info.overview" destination="product.info.main" after="product.info.stock.sku" />
         
         <referenceBlock name="product.info.addto" remove="true" />
-		<referenceBlock name="product.info.sku" remove="true"/>
-		<referenceBlock name="product.info.mailto" remove="true" />
-		<referenceBlock name="product.info.overview" remove="true" />
-		<!-- code by rakesh -->
-		<referenceBlock name="product.attributes">
-			<arguments>
-                  <argument translate="true" name="title" xsi:type="string">Specifications</argument>
-            </arguments>
-		</referenceBlock>
-		<referenceBlock name="catalog.product.related" remove="true" />
-		<referenceBlock name="product.info.upsell" remove="true" />
+        <referenceBlock name="product.info.sku" remove="true"/>
+        <referenceBlock name="product.info.mailto" remove="true" />
+        <referenceBlock name="product.info.overview" remove="true" />
+        <!-- code by rakesh -->
         
-		<referenceContainer name="product.info.social">
+        
+        <referenceBlock name="product.attributes">
+            <arguments>
+                <argument translate="true" name="title" xsi:type="string">Specifications</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="catalog.product.related" remove="true" />
+        <referenceBlock name="product.info.upsell" remove="true" />
+        
+        <referenceContainer name="product.info.social">
             <block class="Magento\Catalog\Block\Product\View" name="product.social.buttons" template="product/view/social_buttons.phtml" after="-"/>
         </referenceContainer>
     </body>

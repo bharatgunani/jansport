@@ -50,7 +50,13 @@ $currPageUrl = $helper->getCurrentUrls();
             <div class="field desired-position required">
                 <label class="label" for="Desired Position"><span><?php /* @escapeNotVerified */ echo __('Desired Position') ?></span></label>
                 <div class="control">
-                    <select id="desired_position" name="desired_position">
+                    <input name="desired_position" id="desired_position" title="<?php /* @escapeNotVerified */ echo __('Desired Position') ?>" class="input-text" type="text" data-validate="{required:true}"/>
+                </div>
+            </div>
+            <div class="field desired-position required">
+                <label class="label" for="Department"><span><?php /* @escapeNotVerified */ echo __('Department') ?></span></label>
+                <div class="control">
+                    <select id="department" name="department">
                         <option value="position1">position 1</option>
                         <option value="position2">position 2</option>
                     </select>
